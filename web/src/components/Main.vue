@@ -17,22 +17,22 @@
         class="rounded-full h-7"
       />
       <div class="flex">
-        <i class='cursor-pointer has-tooltip mx-2' href='https://github.com/icekang' target='_blank' rel='noopener noreferrer'>
+        <a class='cursor-pointer has-tooltip mx-2' href='https://github.com/icekang' target='_blank' rel='noopener noreferrer'>
           <span class='tooltip rounded shadow-lg p-1 bg-yellow text-black -mt-8'>My GitHub Profile</span>
           <img
             class='h-7 w-7 transform hover:opacity-40 duration-700'
             src='/github-icon.png'
             alt='my github link'
           />
-        </i>
-        <i class='cursor-pointer has-tooltip mx-2' href='www.linkedin.com/in/naravich-chutisilp-03272719a' target='_blank' rel='noopener noreferrer'>
+        </a>
+        <a class='cursor-pointer has-tooltip mx-2' href='https://www.linkedin.com/in/naravich-chutisilp-03272719a' target='_blank' rel='noopener noreferrer'>
           <span class='tooltip rounded shadow-lg p-1 bg-yellow text-black -mt-8'>My LinkedIn Profile</span>
           <img
             class='h-7 w-7 transform hover:opacity-40 duration-700'
             src='/linkedin-icon.png'
             alt='my linkedin link'
           />
-        </i>
+        </a>
         <i class='cursor-pointer has-tooltip mx-2' :class="{'visible': showCredit}">
           <span :class="{'tooltip': !showCredit}" class='absolute rounded shadow-lg p-1 bg-yellow text-black -mt-20'>
             Card Design: <a class='text-green' href='https://www.youtube.com/watch?v=kFOkbINmYVU' target='_blank' rel='noopener noreferrer'>Stack Reboot</a>
