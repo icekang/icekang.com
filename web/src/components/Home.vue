@@ -14,11 +14,6 @@
         </div>
       </template>
       <template v-slot:default>
-        <img
-          src="/logo.jpg"
-          alt="icekang"
-          class="rounded-full h-7"
-        />
         <a class='cursor-pointer has-tooltip mx-2' href='https://github.com/icekang' target='_blank' rel='noopener noreferrer'>
           <span class='tooltip rounded shadow-lg p-1 bg-yellow text-black -mt-8'>My GitHub Profile</span>
           <img
