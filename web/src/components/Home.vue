@@ -34,7 +34,7 @@
           />
         </a>
         <i class='cursor-pointer has-tooltip mx-2' :class="{'visible': showCredit}">
-          <span :class="{'tooltip': !showCredit}" class='absolute rounded shadow-lg p-1 bg-yellow text-black -mt-20'>
+          <span :class="{'tooltip': !showCredit}" class='absolute rounded shadow-lg p-1 bg-yellow text-black -mt-20 -ml-64 lg:-ml-0'>
             Card Design: <a class='text-green' href='https://www.youtube.com/watch?v=kFOkbINmYVU' target='_blank' rel='noopener noreferrer'>Stack Reboot</a>
             <br>
             Tooltip: <a class='text-green' href='https://github.com/Cosbgn/tailwindcss-tooltips' target='_blank' rel='noopener noreferrer'>Cosbgn</a>
