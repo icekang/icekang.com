@@ -2,9 +2,8 @@
   <div class='bg-blue min-h-screen min-w-screen p-4'>
     <article class="prose lg:prose-xl mx-auto">
       <h1>{{`About Me`}}</h1>
-      <p v-html="html" />
-      <!-- <p>
-        Naravich Chutisilp is Thai.
+      <p>
+        <a href='/'>Naravich Chutisilp</a> is ....
       </p>
       <blockquote>
         <p>
@@ -14,15 +13,15 @@
       <p>
         But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
         springing up around the country.
-      </p> -->
+      </p>
     </article>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
-import { html } from './MarkDownSample.md'
 import Card from './Card.vue'
+
 export default defineComponent({
   props: {
   },
@@ -30,7 +29,7 @@ export default defineComponent({
     Card
   },
   setup: () => {
-    return { html }
+    return {  }
   }
 })
 </script>
