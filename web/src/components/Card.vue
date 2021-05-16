@@ -9,7 +9,9 @@
     </div>
     <div class="p-2">
       <p class="block mb-1 font-extralight text-xl">{{title}}</p>
-      <p class="text-xs tracking-tighter text-gray-600" v-html="description"></p>
+      <p class="text-xs tracking-tighter text-gray-600">
+        <slot name="description" />
+      </p>
     </div>
     <div class="flex justify-between items-center p-2">
       <slot />
@@ -28,9 +30,6 @@ export default defineComponent({
     title: {
       type: String,
     },
-    description: {
-      type: String,
-    }
   },
   setup: () => {
     return { }
