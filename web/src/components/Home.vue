@@ -8,7 +8,7 @@
         <div class='relative'>
           I am (no doubt) a human with feelins
           <br>I am a Computer Engineer
-          <br>A Founder of <a class='text-yellow' href='https://www.facebook.com/InsidetheSandbox' target='_blank' rel='noopener noreferrer'>Inside the Sandbox</a>
+          <br>A Founder of <a class='text-yellow hover:text-yellow-dark' href='https://www.facebook.com/InsidetheSandbox' target='_blank' rel='noopener noreferrer'>Inside the Sandbox</a>
           <br>An avid reader<span class='ml-1 bubble absolute cursor-pointer' @click=startBubble>📚</span>
           <br>Want to know more <a class='text-green' href='/about'>about me?</a>
         </div>
@@ -38,7 +38,7 @@
             <br>
             click the icon to make this popup stay
           </span>
-          <i class="material-icons text-lightGreen" style="font-size: 2rem" @click="showCredit = !showCredit">help_outline</i>
+          <i class="material-icons text-green-light" style="font-size: 2rem" @click="showCredit = !showCredit">help_outline</i>
         </i>
       </template>
     </Card>

@@ -5,9 +5,17 @@ module.exports = {
     extend: {
       colors: {
         blue: '#31326f',
-        yellow: '#ffc93c',
+        yellow: {
+          light: '#fffa3c',
+          DEFAULT: '#ffc93c',
+          dark: '#ff983c'
+        },
         lightGreen: '#dbf6e9',
-        green: '#9ddfd3',
+        green: {
+          light: '#dbf6e9',
+          DEFAULT: '#9ddd3',
+          dark: '#63ccb9'
+        },
         grey: '#ebe9e7'
       },
       typography: (theme) => ({
