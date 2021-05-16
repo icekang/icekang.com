@@ -10,7 +10,7 @@
           <br>I am a Computer Engineer
           <br>A Founder of <a class='text-yellow hover:text-yellow-dark' href='https://www.facebook.com/InsidetheSandbox' target='_blank' rel='noopener noreferrer'>Inside the Sandbox</a>
           <br>An avid reader<span class='ml-1 bubble absolute cursor-pointer' @click=startBubble>📚</span>
-          <br>Want to know more <a class='text-green' href='/about'>about me?</a>
+          <br>Want to know more <a class='text-green hover:text-green-dark' href='/about'>about me?</a>
         </div>
       </template>
       <template v-slot:default>
@@ -92,11 +92,12 @@ export default defineComponent({
     const showCredit = ref(false)
     onMounted(() => {
       gsap.to('.bubble', {
-        scale: 2,
+        scale: 1.3,
         duration: 1,
         repeat: -1,
         yoyo: true,
-        ease: 'expo.inOut'
+        ease: 'expo.inOut',
+        delay: 5
       })
     })
 
