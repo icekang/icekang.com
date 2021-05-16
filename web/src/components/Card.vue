@@ -13,7 +13,7 @@
         <slot name="description" />
       </p>
     </div>
-    <div class="flex justify-between items-center p-2">
+    <div class="flex justify-between items-center p-2 px-16">
       <slot />
     </div>
   </div>
