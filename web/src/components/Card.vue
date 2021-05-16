@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-96 rounded-md p-3 shadow-2xl">
+  <div class="bg-white w-3/4 md:w-96 rounded-md p-3 shadow-2xl">
     <div class="flex justify-center items-center leading-none">
       <img
         :src="image_url"
