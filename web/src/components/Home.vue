@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen grid place-items-center bg-blue font-mono">
+  <div class="min-h-screen grid place-items-center bg-blue font-mono text-center">
     <Card
       title='Hi, I am ICEKANG 😎'
       description="
@@ -7,7 +7,7 @@
       <br>I am a Computer Engineer
       <br>A Founder of <a class='text-yellow' href='https://www.facebook.com/InsidetheSandbox' target='_blank' rel='noopener noreferrer'>Inside the Sandbox</a>
       <br>An avid reader📚
-      <br>Want to know more about me?
+      <br>Want to know more <a class='text-green' href='/about'>about me?</a>
       "
       image_url="/me.jpg"
     >
@@ -50,17 +50,15 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
+import { RouterLink } from 'vue-router'
 import Card from './Card.vue'
 export default defineComponent({
-  name: 'Main',
+  name: 'Home',
   props: {
-    msg: {
-      type: String,
-      required: true
-    }
   },
   components: {
-    Card
+    Card,
+    RouterLink
   },
   setup: () => {
     const showCredit = ref(false)
