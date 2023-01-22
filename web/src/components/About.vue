@@ -5,14 +5,8 @@
       <p>
         <a href='/'>Naravich Chutisilp</a> is ....
       </p>
-      <blockquote>
-        <p>
-          What?
-        </p>
-      </blockquote>
       <p>
-        But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
-        springing up around the country.
+        I am currently studying Master in Computer Science at EPFL, Switzerland.
       </p>
     </article>
   </div>
