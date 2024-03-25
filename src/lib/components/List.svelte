@@ -53,12 +53,33 @@
 		}, []);
 
 	$: filteredItems = items.filter((item) => {
-		return tags.find((tag) => tag.selected && item.categories.includes(tag.name));
+		return tags.find((tag) => selectAll || tag.selected && item.categories.includes(tag.name));
 	});
+    let selectAll = true;
 </script>
 
 <div>
 	<div class="flex flex-row gap-4 my-2">
+        <button
+				class:bg-gray-500={!selectAll}
+				class:hover:bg-gray-700={!selectAll}
+				class:bg-blue-500={selectAll}
+				class:hover:bg-blue-700={selectAll}
+				class="text-sm text-white font-bold py-2 px-4 rounded-full"
+				on:click={() => {
+					selectAll = !selectAll;
+                    if (selectAll) {
+                        tags.forEach((tag) => {
+                            tag.selected = true;
+                        });
+                    } else {
+                        tags.forEach((tag) => {
+                            tag.selected = false;
+                        });
+                    }
+				}}>ALL</button
+			>
+        {#key selectAll}
 		{#each tags as tag}
 			<button
 				class:bg-gray-500={!tag.selected}
@@ -70,7 +91,8 @@
 					tag.selected = !tag.selected;
 				}}>{tag.name}</button
 			>
-		{/each}
+        {/each}
+        {/key}
 	</div>
 	<ul>
 		{#each filteredItems as item}
@@ -86,7 +108,7 @@
 	}
 
 	li {
-		@apply bg-red-200;
+		@apply bg-sky-300;
 		@apply text-gray-800;
 		@apply p-2;
 		@apply m-2;
@@ -94,6 +116,7 @@
 	}
 
 	li:hover {
-		background-color: #f0f0f0;
+		@apply bg-sky-400;
+        @apply text-gray-900
 	}
 </style>
