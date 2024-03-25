@@ -3,21 +3,44 @@
 	let items = [
 		{
 			name: 'Multi-Modal Self-Supervised Learning For 3D Medical Image Segmentation Of Cardio Calcified Plaques',
-			categories: [CATEGORY.COMPUTER_VISION, CATEGORY.DEEP_LEARNING]
-		},
-		{
-			name: 'TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking',
-			categories: [CATEGORY.SOFTWARE_ENGINEERING, CATEGORY.COMPUTER_VISION]
+			categories: [CATEGORY.COMPUTER_VISION]
 		},
 		{
 			name: 'AI4TB: An Efficient Edge-Device Interpretable Chest X-Ray Tuberculosis Detection',
 			categories: [
 				CATEGORY.COMPUTER_VISION,
-				CATEGORY.DEEP_LEARNING,
 				CATEGORY.MACHINE_LEARNING_ENGINEER,
 				CATEGORY.SOFTWARE_ENGINEERING
 			]
 		},
+        {
+            name: 'Aerial Risk Detection: A Deep Learning Solution to Help Insurance Underwriters Assess Sites from Aerial/Satellite Images',
+            categories: [CATEGORY.COMPUTER_VISION, CATEGORY.SOFTWARE_ENGINEERING]
+        },
+        {
+			name: 'TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking',
+			categories: [CATEGORY.SOFTWARE_ENGINEERING, CATEGORY.COMPUTER_VISION]
+		},
+        {
+            name: 'AI4Autism: An Object Detection for Autism Spectrum Disorder Diagnosis',
+            categories: [CATEGORY.NLP, CATEGORY.COMPUTER_VISION, CATEGORY.MACHINE_LEARNING_ENGINEER]
+        },
+        {
+            name: 'Data Scientist at SCB: MerlinDIY: An AutoML for non-technical users to build and utilize deep learning models',
+            categories: [CATEGORY.MACHINE_LEARNING_ENGINEER, CATEGORY.SOFTWARE_ENGINEERING]
+        },
+        {
+            name: 'Software Engineer at Taskworld: Maintaining and Developing Taskworld\'s Core Features',
+            categories: [CATEGORY.SOFTWARE_ENGINEERING]
+        },
+        {
+            name: 'Quantitative Developer at WorldQuant: A Data-Driven Dashboard for Quantitative Researchers',
+            categories: [CATEGORY.SOFTWARE_ENGINEERING]
+        },
+        {
+            name: 'Data Scientist at HOME dot TECH: An Unsupervised Learning for Real Estate Property Analysis',
+            categories: [CATEGORY.MACHINE_LEARNING]
+        }
 	];
 
 	let tags = items
