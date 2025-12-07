@@ -1,10 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 html {
-    @apply bg-gray-900;
-    @apply text-slate-50;
+    background-color: rgb(17, 24, 39);
+    color: rgb(226, 232, 240);
+    background: linear-gradient(135deg, rgb(17, 24, 39) 0%, rgb(31, 41, 55) 50%, rgb(17, 24, 39) 100%);
+    min-height: 100vh;
+}
+
+body {
+    background: transparent;
 }
 
 a {
