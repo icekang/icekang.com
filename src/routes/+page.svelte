@@ -117,6 +117,17 @@
 			]
 		},
 		{
+			title: 'Software Engineer / Co-Founder',
+			company: 'Inside the Sandbox',
+			location: 'Thailand',
+			duration: '01/2020 - 09/2021',
+			achievements: [
+				'Developed interactive storytelling websites for digital marketing campaigns via different tech stacks including ReactJS, JavaScript, Svelte, Express, Flask, Firebase, Docker, Kubernetes, etc.',
+				'One campaign attracted <strong>&gt;1M organic users</strong> within the first day after launch and was <strong>#1 Twitter trending in Thailand</strong>, leading to the first 2 commercial contracts for the company',
+				'Co-founded the company with a registered capital of <strong>THB 1M</strong>, which was earned from the commercial contracts'
+			]
+		},
+		{
 			title: 'Data Scientist Intern',
 			company: 'HOME dot TECH',
 			location: 'Thailand',
