@@ -1,5 +1,175 @@
 <script lang="ts">
 	import logo from '$lib/images/logo.jpg';
+	import Header from '$lib/components/Header.svelte';
+	import Contact from '$lib/components/Contact.svelte';
+	import ExperienceItem from '$lib/components/ExperienceItem.svelte';
+	import EducationItem from '$lib/components/EducationItem.svelte';
+	import Skills from '$lib/components/Skills.svelte';
+	import Publications from '$lib/components/Publications.svelte';
+
+	interface ContactItem {
+		label: string;
+		value: string;
+		href: string;
+		external?: boolean;
+	}
+
+	interface ExperienceData {
+		title: string;
+		company: string;
+		location: string;
+		duration: string;
+		achievements: string[];
+	}
+
+	interface EducationData {
+		title: string;
+		school: string;
+		location: string;
+		duration: string;
+		description: string;
+	}
+
+	interface SkillCategory {
+		title: string;
+		items: string;
+	}
+
+	interface Publication {
+		title: string;
+		venue: string;
+		authors: string;
+	}
+
+	const contactInfo: ContactItem[] = [
+		{ label: 'Phone', value: '+41 762162608', href: 'tel:+41762162608' },
+		{ label: 'Email', value: 'naravich.chutisilp@gmail.com', href: 'mailto:naravich.chutisilp@gmail.com' },
+		{ label: 'LinkedIn', value: 'in/icekang', href: 'https://linkedin.com/in/icekang', external: true },
+		{ label: 'GitHub', value: 'github.com/icekang', href: 'https://github.com/icekang', external: true }
+	];
+
+	const experiences: ExperienceData[] = [
+		{
+			title: 'ML Engineer, Data Scientist',
+			company: 'Tradition',
+			location: 'Switzerland',
+			duration: '11/2024 - Present',
+			achievements: [
+				'Designed, developed, and deployed a robust, real-time recommendation system for fixed-income derivatives using PyTorch, MLFlow, Optuna, and Airflow',
+				'Achieved end-to-end latency of <strong>&lt;1 minute</strong> to support rapid broker decision-making, generating <strong>&gt;USD 655K in revenue</strong>',
+				'Initiated and delivered a full-stack GitLab-integrated LLM bot for the CI/CD pipeline providing automated merge request summaries and code reviews',
+				'The LLM bot enhanced development productivity across <strong>50% of the data science team\'s projects</strong>'
+			]
+		},
+		{
+			title: 'Computer Vision Engineer, Data Scientist Intern',
+			company: 'AXA',
+			location: 'Switzerland',
+			duration: '09/2023 - 02/2024',
+			achievements: [
+				'Built a production-ready Computer Vision system using satellite imagery for automated actuarial risk identification with JavaScript and Python',
+				'Achieved <strong>&gt;80% mIoU</strong> for critical solar panel segmentation, directly leading to securing an <strong>R&D budget &gt;CHF 500k</strong>',
+				'Engineered a highly efficient and scalable MLOps pipeline for satellite imagery segmentation using PyTorch, TIMM, and Lightning',
+				'Enabled rapid processing of over <strong>700 model architecture experiments</strong> from a single configuration, significantly accelerating R&D velocity'
+			]
+		},
+		{
+			title: 'Research Assistant - 3D Computer Vision',
+			company: 'EPFL',
+			location: 'Switzerland',
+			duration: '10/2022 - 08/2023',
+			achievements: [
+				'Developed a 6-DoF pose estimation and 3D object tracking system for carpentry tool heads',
+				'Released an open-source C++ project using OpenCV and OpenGL. <em>Manuscript accepted by MDPI\'s Applied Science Journal 2024</em>',
+				'Integrated the project into Augmented Reality (AR) software employing real-time SLAM',
+				'Achieved high-precision performance with mean position and rotation errors of <strong>3.9 mm and 1.19°</strong>, respectively'
+			]
+		},
+		{
+			title: 'Data Scientist',
+			company: 'Siam Commercial Bank (SCB)',
+			location: 'Thailand',
+			duration: '01/2021 - 04/2021',
+			achievements: [
+				'Built an ML platform that accommodated financial data needs (&gt;20 sources) and &gt;5 data visualization requirements, using Azure, Spark and SQL',
+				'The platform is now used by the marketing team to find leads for loans, contributing to <strong>THB 2.4MM of their revenue</strong>'
+			]
+		},
+		{
+			title: 'Software Engineer Intern',
+			company: 'Taskworld',
+			location: 'Thailand',
+			duration: '06/2020 - 08/2020',
+			achievements: [
+				'Implemented scroll virtualization of the product application, enabling &gt;1,000 items to be rendered without lagging, using ReactJS and TypeScript',
+				'Optimized page rendering by re-structuring state in Redux store and React state, increasing rendering time by <strong>50%</strong>'
+			]
+		},
+		{
+			title: 'Software Engineer',
+			company: 'WorldQuant',
+			location: 'Thailand',
+			duration: '06/2019 - 01/2020',
+			achievements: [
+				'Built a dashboard for data visualization, helping Quantitative analysts to monitor their &gt;1K alphas along with their &gt;10 quantitative performance metrics using Python, Dash, and SQL',
+				'Solved &gt;20 GB of data syncing with multi-threading. Received a part-time offer after the internship',
+				'Automated excel report generation for the Office Manager summarizing the performance of &gt;10 employees and &gt;10 specific key metrics, using Python, Pandas, and Numpy'
+			]
+		},
+		{
+			title: 'Data Scientist Intern',
+			company: 'HOME dot TECH',
+			location: 'Thailand',
+			duration: '06/2018 - 08/2018',
+			achievements: [
+				'Analyzed the unsupervised learning clustering algorithm to understand the meaning of each cluster with Scikit-Learn',
+				'Compared similarity algorithms within the K-Means clustering project, assessing their impact on result variations'
+			]
+		}
+	];
+
+	const educationList: EducationData[] = [
+		{
+			title: 'Master\'s Thesis (3D CV & ML)',
+			school: 'MIT with Profs. Elazer Edelman (MIT) and Maria Brbic (EPFL)',
+			location: 'United States',
+			duration: '03/2024 - 10/2024',
+			description: 'Comparative study on 3D arterial plaque segmentation, benchmarking 3D Multimodal self-supervised learning (contrastive and generative SSL) against a supervised baseline. <em>In Preparation for Publication</em>'
+		},
+		{
+			title: 'MSc Computer Science',
+			school: 'EPFL',
+			location: 'Switzerland',
+			duration: '09/2021 - 09/2024',
+			description: '<strong>GPA 5.70/6.00</strong>'
+		},
+		{
+			title: 'BEng Computer Engineering',
+			school: 'Chulalongkorn University',
+			location: 'Thailand',
+			duration: '08/2017 - 05/2021',
+			description: '<strong>Valedictorian</strong> (graduated top of class: First Class Honors with Gold Medal) - <strong>GPA 3.99/4.00</strong>'
+		}
+	];
+
+	const skillsList: SkillCategory[] = [
+		{ title: 'Languages & Frameworks', items: 'Python, C++, JavaScript' },
+		{ title: 'Machine Learning', items: 'Generative AI (LLMs), PyTorch, Computer Vision, Multimodal ML' },
+		{ title: 'Infrastructure', items: 'MLOps Pipelines' }
+	];
+
+	const publicationsList: Publication[] = [
+		{
+			title: 'TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking',
+			venue: 'Applied Sciences 2024',
+			authors: 'Andrea Settimi, <strong>Naravich Chutisilp</strong>, Florian Aymanns, Julien Gamerro, Yves Weinand'
+		},
+		{
+			title: 'A Unified Model for Gaze Following and Social Gaze Prediction',
+			venue: 'IEEE International Conference on Automatic Face and Gesture Recognition 2024',
+			authors: 'Anshul Gupta, Samy Tafasca, <strong>Naravich Chutisilp</strong>, Jean-Marc Odobez'
+		}
+	];
 </script>
 
 <svelte:head>
@@ -9,322 +179,62 @@
 </svelte:head>
 
 <div class="container">
-	<!-- Header -->
-	<header class="header-section">
-		<div class="header-content">
-			<img src={logo} alt="Naravich Chutisilp" class="profile-image" />
-			<div class="header-text">
-				<h1>Naravich Chutisilp</h1>
-				<p class="subtitle">ML Engineer & Researcher</p>
-				<p class="description">Specializing in real-time ML/AI financial systems and Generative AI tools. Building scalable MLOps pipelines with expertise in Computer Vision and Multimodal Learning.</p>
-			</div>
-		</div>
-	</header>
+	<Header {logo} />
+	<Contact contacts={contactInfo} />
 
-	<!-- Contact -->
-	<section class="section">
-		<h2>Contact</h2>
-		<div class="contact-grid">
-			<div class="contact-item">
-				<span class="label">Phone:</span>
-				<a href="tel:+41762162608">+41 762162608</a>
-			</div>
-			<div class="contact-item">
-				<span class="label">Email:</span>
-				<a href="mailto:naravich.chutisilp@gmail.com">naravich.chutisilp@gmail.com</a>
-			</div>
-			<div class="contact-item">
-				<span class="label">LinkedIn:</span>
-				<a href="https://linkedin.com/in/icekang" target="_blank">in/icekang</a>
-			</div>
-			<div class="contact-item">
-				<span class="label">GitHub:</span>
-				<a href="https://github.com/icekang" target="_blank">github.com/icekang</a>
-			</div>
-		</div>
-	</section>
-
-	<!-- Work Experience -->
 	<section class="section">
 		<h2>Work Experience</h2>
-
-		<div class="experience-item">
-			<div class="experience-header">
-				<h3>ML Engineer, Data Scientist</h3>
-				<span class="company">Tradition</span>
-			</div>
-			<p class="duration">Switzerland • 11/2024 - Present</p>
-			<ul class="experience-list">
-				<li>Designed, developed, and deployed a robust, real-time recommendation system for fixed-income derivatives using PyTorch, MLFlow, Optuna, and Airflow</li>
-				<li>Achieved end-to-end latency of <strong>&lt;1 minute</strong> to support rapid broker decision-making, generating <strong>&gt;USD 655K in revenue</strong></li>
-				<li>Initiated and delivered a full-stack GitLab-integrated LLM bot for the CI/CD pipeline providing automated merge request summaries and code reviews</li>
-				<li>The LLM bot enhanced development productivity across <strong>50% of the data science team's projects</strong></li>
-			</ul>
-		</div>
-
-		<div class="experience-item">
-			<div class="experience-header">
-				<h3>Computer Vision Engineer, Data Scientist Intern</h3>
-				<span class="company">AXA</span>
-			</div>
-			<p class="duration">Switzerland • 09/2023 - 02/2024</p>
-			<ul class="experience-list">
-				<li>Built a production-ready Computer Vision system using satellite imagery for automated actuarial risk identification with JavaScript and Python</li>
-				<li>Achieved <strong>&gt;80% mIoU</strong> for critical solar panel segmentation, directly leading to securing an <strong>R&D budget &gt;CHF 500k</strong></li>
-				<li>Engineered a highly efficient and scalable MLOps pipeline for satellite imagery segmentation using PyTorch, TIMM, and Lightning</li>
-				<li>Enabled rapid processing of over <strong>700 model architecture experiments</strong> from a single configuration, significantly accelerating R&D velocity</li>
-			</ul>
-		</div>
-
-		<div class="experience-item">
-			<div class="experience-header">
-				<h3>Research Assistant - 3D Computer Vision</h3>
-				<span class="company">EPFL</span>
-			</div>
-			<p class="duration">Switzerland • 10/2022 - 08/2023</p>
-			<ul class="experience-list">
-				<li>Developed a 6-DoF pose estimation and 3D object tracking system for carpentry tool heads</li>
-				<li>Released an open-source C++ project using OpenCV and OpenGL. <em>Manuscript accepted by MDPI's Applied Science Journal 2024</em></li>
-				<li>Integrated the project into Augmented Reality (AR) software employing real-time SLAM</li>
-				<li>Achieved high-precision performance with mean position and rotation errors of <strong>3.9 mm and 1.19°</strong>, respectively</li>
-			</ul>
-		</div>
+		{#each experiences as exp}
+			<ExperienceItem experience={exp} />
+		{/each}
 	</section>
 
-	<!-- Education -->
 	<section class="section">
 		<h2>Education</h2>
-
-		<div class="education-item">
-			<div class="education-header">
-				<h3>Master's Thesis (3D CV & ML)</h3>
-				<span class="school">MIT with Profs. Elazer Edelman (MIT) and Maria Brbic (EPFL)</span>
-			</div>
-			<p class="duration">United States • 03/2024 - 10/2024</p>
-			<p class="education-desc">Comparative study on 3D arterial plaque segmentation, benchmarking 3D Multimodal self-supervised learning (contrastive and generative SSL) against a supervised baseline. <em>In Preparation for Publication</em></p>
-		</div>
-
-		<div class="education-item">
-			<div class="education-header">
-				<h3>MSc Computer Science</h3>
-				<span class="school">EPFL</span>
-			</div>
-			<p class="duration">Switzerland • 09/2021 - 09/2024</p>
-			<p class="education-desc"><strong>GPA 5.70/6.00</strong></p>
-		</div>
-
-		<div class="education-item">
-			<div class="education-header">
-				<h3>BEng Computer Engineering</h3>
-				<span class="school">Chulalongkorn University</span>
-			</div>
-			<p class="duration">Thailand • 08/2017 - 05/2021</p>
-			<p class="education-desc"><strong>Valedictorian</strong> (graduated top of class: First Class Honors with Gold Medal) - <strong>GPA 3.99/4.00</strong></p>
-		</div>
+		{#each educationList as edu}
+			<EducationItem education={edu} />
+		{/each}
 	</section>
 
-	<!-- Skills -->
-	<section class="section">
-		<h2>Key Skills</h2>
-		<div class="skills-grid">
-			<div class="skill-category">
-				<h4>Languages & Frameworks</h4>
-				<p>Python, C++, JavaScript</p>
-			</div>
-			<div class="skill-category">
-				<h4>Machine Learning</h4>
-				<p>Generative AI (LLMs), PyTorch, Computer Vision, Multimodal ML</p>
-			</div>
-			<div class="skill-category">
-				<h4>Infrastructure</h4>
-				<p>MLOps Pipelines</p>
-			</div>
-		</div>
-	</section>
-
-	<!-- Publications -->
-	<section class="section">
-		<h2>Publications</h2>
-
-		<div class="publication-item">
-			<h3>TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking</h3>
-			<p class="publication-meta"><em>Applied Sciences 2024</em></p>
-			<p class="publication-authors">Andrea Settimi, <strong>Naravich Chutisilp</strong>, Florian Aymanns, Julien Gamerro, Yves Weinand</p>
-		</div>
-
-		<div class="publication-item">
-			<h3>A Unified Model for Gaze Following and Social Gaze Prediction</h3>
-			<p class="publication-meta"><em>IEEE International Conference on Automatic Face and Gesture Recognition 2024</em></p>
-			<p class="publication-authors">Anshul Gupta, Samy Tafasca, <strong>Naravich Chutisilp</strong>, Jean-Marc Odobez</p>
-		</div>
-	</section>
+	<Skills skills={skillsList} />
+	<Publications publications={publicationsList} />
 </div>
 
 <style>
 	.container {
-		@apply max-w-4xl mx-auto px-6 py-12;
-		@apply font-sans leading-relaxed;
+		max-width: 56rem;
+		margin: 0 auto;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+		font-family: system-ui, -apple-system, sans-serif;
+		line-height: 1.625;
 	}
 
-	/* Header */
-	.header-section {
-		@apply mb-16 pb-8 border-b border-gray-700;
-	}
-
-	.header-content {
-		@apply flex gap-8 items-start;
-	}
-
-	.profile-image {
-		@apply w-32 h-32 rounded-lg object-cover flex-shrink-0;
-	}
-
-	.header-text h1 {
-		@apply text-5xl font-bold mb-2 text-gray-50;
-	}
-
-	.subtitle {
-		@apply text-xl text-blue-400 font-semibold mb-4;
-	}
-
-	.description {
-		@apply text-gray-300 max-w-2xl;
-	}
-
-	/* Sections */
 	.section {
-		@apply mb-12;
+		margin-bottom: 3rem;
 	}
 
 	.section h2 {
-		@apply text-3xl font-bold mb-6 text-gray-50 border-b border-gray-700 pb-3;
-	}
-
-	/* Contact */
-	.contact-grid {
-		@apply grid grid-cols-1 md:grid-cols-2 gap-4;
-	}
-
-	.contact-item {
-		@apply flex items-center gap-3;
-	}
-
-	.contact-item .label {
-		@apply font-semibold text-gray-400 min-w-16;
-	}
-
-	.contact-item a {
-		@apply text-blue-400 hover:text-blue-300 transition;
-	}
-
-	/* Experience */
-	.experience-item {
-		@apply mb-8 pb-6 border-b border-gray-800 last:border-b-0;
-	}
-
-	.experience-header {
-		@apply flex items-baseline gap-3 mb-2;
-	}
-
-	.experience-header h3 {
-		@apply text-xl font-bold text-gray-50;
-	}
-
-	.company {
-		@apply text-blue-400 font-semibold;
-	}
-
-	.duration {
-		@apply text-sm text-gray-400 mb-3;
-	}
-
-	.experience-list {
-		@apply list-disc list-inside space-y-2 text-gray-200;
-	}
-
-	.experience-list li {
-		@apply ml-2;
-	}
-
-	/* Education */
-	.education-item {
-		@apply mb-8 pb-6 border-b border-gray-800 last:border-b-0;
-	}
-
-	.education-header {
-		@apply flex items-baseline gap-3 mb-2;
-	}
-
-	.education-header h3 {
-		@apply text-lg font-bold text-gray-50;
-	}
-
-	.school {
-		@apply text-blue-400 font-semibold text-sm;
-	}
-
-	.education-desc {
-		@apply text-gray-300;
-	}
-
-	/* Skills */
-	.skills-grid {
-		@apply grid grid-cols-1 md:grid-cols-3 gap-6;
-	}
-
-	.skill-category {
-		@apply bg-gray-800 rounded-lg p-4;
-	}
-
-	.skill-category h4 {
-		@apply font-bold text-blue-400 mb-2;
-	}
-
-	.skill-category p {
-		@apply text-gray-300;
-	}
-
-	/* Publications */
-	.publication-item {
-		@apply mb-8 pb-6 border-b border-gray-800 last:border-b-0;
-	}
-
-	.publication-item h3 {
-		@apply text-lg font-semibold text-gray-50 mb-2;
-	}
-
-	.publication-meta {
-		@apply text-sm text-blue-400 mb-2;
-	}
-
-	.publication-authors {
-		@apply text-sm text-gray-300;
-	}
-
-	/* Links */
-	a {
-		@apply text-blue-400 hover:text-blue-300 transition;
-	}
-
-	strong {
-		@apply text-gray-100;
-	}
-
-	em {
-		@apply text-gray-400;
+		font-size: 1.875rem;
+		font-weight: bold;
+		margin-bottom: 1.5rem;
+		color: rgb(245, 245, 245);
+		border-bottom: 1px solid rgb(55, 65, 81);
+		padding-bottom: 0.75rem;
 	}
 
 	@media (max-width: 768px) {
-		.header-content {
-			@apply flex-col;
+		.container {
+			padding-left: 1rem;
+			padding-right: 1rem;
+			padding-top: 1.5rem;
+			padding-bottom: 1.5rem;
 		}
 
-		.profile-image {
-			@apply w-24 h-24;
-		}
-
-		.header-text h1 {
-			@apply text-3xl;
+		.section h2 {
+			font-size: 1.5rem;
 		}
 	}
 </style>
