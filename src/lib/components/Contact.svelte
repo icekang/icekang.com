@@ -41,7 +41,7 @@
 
 	.contact-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		grid-template-columns: repeat(2, 1fr);
 		gap: 1rem;
 	}
 
@@ -65,5 +65,11 @@
 
 	.contact-item a:hover {
 		color: rgb(147, 197, 253);
+	}
+
+	@media (max-width: 768px) {
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
