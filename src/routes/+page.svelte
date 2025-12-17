@@ -85,7 +85,7 @@
 				'Achieved high-precision performance with mean position and rotation errors of <strong>3.9 mm and 1.19°</strong>, respectively'
 			]
 		},
-{
+		{
 			title: 'Software Engineer / Co-Founder',
 			company: 'Inside the Sandbox',
 			location: 'Thailand',
