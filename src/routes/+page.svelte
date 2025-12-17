@@ -85,6 +85,17 @@
 				'Achieved high-precision performance with mean position and rotation errors of <strong>3.9 mm and 1.19°</strong>, respectively'
 			]
 		},
+{
+			title: 'Software Engineer / Co-Founder',
+			company: 'Inside the Sandbox',
+			location: 'Thailand',
+			duration: '01/2020 - 09/2021',
+			achievements: [
+				'Developed interactive storytelling websites for digital marketing campaigns via different tech stacks including ReactJS, JavaScript, Svelte, Express, Flask, Firebase, Docker, Kubernetes, etc.',
+				'One campaign attracted <strong>&gt;1M organic users</strong> within the first day after launch and was <strong>#1 Twitter trending in Thailand</strong>, leading to the first 2 commercial contracts for the company',
+				'Co-founded the company with a registered capital of <strong>THB 1M</strong>, which was earned from the commercial contracts'
+			]
+		},
 		{
 			title: 'Data Scientist',
 			company: 'Siam Commercial Bank (SCB)',
@@ -114,17 +125,6 @@
 				'Built a dashboard for data visualization, helping Quantitative analysts to monitor their &gt;1K alphas along with their &gt;10 quantitative performance metrics using Python, Dash, and SQL',
 				'Solved &gt;20 GB of data syncing with multi-threading. Received a part-time offer after the internship',
 				'Automated excel report generation for the Office Manager summarizing the performance of &gt;10 employees and &gt;10 specific key metrics, using Python, Pandas, and Numpy'
-			]
-		},
-		{
-			title: 'Software Engineer / Co-Founder',
-			company: 'Inside the Sandbox',
-			location: 'Thailand',
-			duration: '01/2020 - 09/2021',
-			achievements: [
-				'Developed interactive storytelling websites for digital marketing campaigns via different tech stacks including ReactJS, JavaScript, Svelte, Express, Flask, Firebase, Docker, Kubernetes, etc.',
-				'One campaign attracted <strong>&gt;1M organic users</strong> within the first day after launch and was <strong>#1 Twitter trending in Thailand</strong>, leading to the first 2 commercial contracts for the company',
-				'Co-founded the company with a registered capital of <strong>THB 1M</strong>, which was earned from the commercial contracts'
 			]
 		},
 		{
