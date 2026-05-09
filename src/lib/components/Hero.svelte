@@ -1,5 +1,13 @@
 <script lang="ts">
 	import portrait from '$lib/images/naravich-portrait.png';
+
+	function scrollToResume(e: MouseEvent) {
+		e.preventDefault();
+		const resumeSection = document.getElementById('resume');
+		if (resumeSection) {
+			resumeSection.scrollIntoView({ behavior: 'smooth' });
+		}
+	}
 </script>
 
 <section class="flex flex-col md:flex-row min-h-[80vh] border-b-2 border-black relative">
@@ -20,9 +28,11 @@
 				Computer Vision, and Generative AI.
 			</p>
 		</div>
-		<button
-			class="bg-primary-container text-on-primary px-8 py-4 font-nav-lg text-nav-lg uppercase tracking-widest border-2 border-black shadow-cartoon hover:scale-95 transition-transform duration-75 rounded-none"
-			>VIEW WORK ↓</button
+		<a
+			href="#resume"
+			on:click={scrollToResume}
+			class="bg-primary-container text-on-primary px-8 py-4 font-nav-lg text-nav-lg uppercase tracking-widest border-2 border-black shadow-cartoon hover:scale-95 transition-transform duration-75 rounded-none inline-block"
+			>VIEW WORK ↓</a
 		>
 		<!-- Floating Nameplate -->
 		<div
