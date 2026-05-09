@@ -3,28 +3,28 @@
 
 	const experiences = [
 		{
-			period: '2022 — Present',
-			location: 'Zürich, CH',
-			title: 'Alpha Wrap Algorithm',
-			tags: ['WebAssembly', 'Rust'],
+			period: '11/2024 — Present',
+			location: 'Switzerland',
+			title: 'ML Engineer, Data Scientist @ Tradition',
+			tags: ['PyTorch', 'Airflow', 'LLMs'],
 			description:
-				'Engineered a high-performance quantitative wrapper utilizing WebAssembly to isolate predictive models, ensuring strict memory safety while maintaining low latency across distributed node environments.'
+				'Designed and deployed a real-time recommendation system for fixed-income derivatives, generating >USD 655K in revenue. Built a GitLab-integrated LLM bot for automated CI/CD code reviews.'
 		},
 		{
-			period: '2020 — 2022',
-			location: 'Geneva, CH',
-			title: 'Project EPIC',
-			tags: ['Polars', 'Python'],
+			period: '09/2023 — 02/2024',
+			location: 'Switzerland',
+			title: 'Computer Vision Engineer @ AXA',
+			tags: ['PyTorch', 'Computer Vision', 'MLOps'],
 			description:
-				'Led the migration of legacy Pandas pipelines to Polars, achieving a 40x speedup in daily ingestion of macroeconomic datasets for algorithmic trading models. Designed the foundational schema for real-time validation.'
+				'Built a production-ready Computer Vision system for automated actuarial risk identification using satellite imagery. Engineered a highly efficient MLOps pipeline accelerating R&D velocity.'
 		},
 		{
-			period: '2018 — 2020',
-			location: 'Lausanne, CH',
-			title: 'Tooling Architecture',
-			tags: ['uv', 'Ruff'],
+			period: '01/2020 — 09/2021',
+			location: 'Thailand',
+			title: 'Software Engineer & Co-Founder @ Inside the Sandbox',
+			tags: ['Svelte', 'React', 'Firebase'],
 			description:
-				'Advocated and implemented a modernized Python development ecosystem relying on uv and Ruff. Reduced CI/CD times by 60% and established a unified linter standard across 40+ micro-repositories.'
+				'Co-founded and developed interactive storytelling websites for digital marketing campaigns, with one campaign attracting >1M organic users on launch day and trending #1 on Twitter in Thailand.'
 		}
 	];
 </script>
@@ -37,7 +37,7 @@
 	<div class="absolute inset-0 opacity-20 bg-grid-pattern pointer-events-none"></div>
 	<div class="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-20">
 		<div class="mb-12 border-b-2 border-black inline-block pb-2">
-			<h2 class="font-headline-lg text-headline-lg text-on-background">Experience Engine</h2>
+			<h2 class="font-headline-lg text-headline-lg text-on-background">Resume</h2>
 		</div>
 		<div class="flex flex-col gap-8">
 			{#each experiences as exp}
