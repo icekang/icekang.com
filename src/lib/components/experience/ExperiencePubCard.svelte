@@ -3,6 +3,7 @@
 	export let authors: string;
 	export let description: string;
 	export let link: string = "#";
+	export let index: number | undefined = undefined;
 
 	$: formattedAuthors = authors.replace(
 		'Naravich Chutisilp',
@@ -11,6 +12,9 @@
 </script>
 
 <div class="p-10 bg-surface border-b-2 border-black relative z-10">
+	{#if index !== undefined}
+		<span class="absolute top-3 left-4 font-headline-lg font-black text-on-surface/30 text-xl leading-none">{index + 1}.</span>
+	{/if}
 	<article class="border-2 border-black p-8 shadow-cartoon bg-surface-container-lowest">
 		<div class="flex flex-col md:flex-row justify-between items-start gap-6">
 			<div>
