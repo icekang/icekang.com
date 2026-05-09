@@ -1,5 +1,5 @@
 <nav
-	class="bg-surface docked full-width top-0 border-b-2 border-black flex justify-between items-center w-full px-margin-desktop py-4 max-w-full z-50 sticky"
+	class="bg-surface docked full-width top-0 border-b-2 border-black flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-full z-50 sticky"
 >
 	<div
 		class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight text-on-surface uppercase flex items-center leading-none mt-2"
