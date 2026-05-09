@@ -1,3 +1,7 @@
+<script lang="ts">
+	import portrait from '$lib/images/naravich-portrait.png';
+</script>
+
 <section class="flex flex-col md:flex-row min-h-[80vh] border-b-2 border-black relative">
 	<!-- Left 50% -->
 	<div
@@ -12,8 +16,8 @@
 			class="bg-surface-container-lowest border-2 border-black p-4 mb-6 max-w-sm shadow-cartoon rotate-1"
 		>
 			<p class="font-body-md text-body-md text-on-surface">
-				Exploring the intersection of Swiss structuralism, high-precision AI/ML, and the kinetic
-				motion of 1930s Rubber Hose animation.
+				Machine Learning Engineer & Researcher specializing in real-time ML/AI financial systems,
+				Computer Vision, and Generative AI.
 			</p>
 		</div>
 		<button
@@ -54,9 +58,9 @@
 				<div class="w-3 h-3 rounded-full bg-[#28C840] border border-black"></div>
 			</div>
 			<img
-				alt="Digital Porcelain Bust"
+				alt="Naravich Chutisilp"
 				class="w-full h-full object-cover object-center"
-				src="./screen.png"
+				src={portrait}
 			/>
 			<!-- Decorative rubber hose accent -->
 		</div>
