@@ -34,7 +34,7 @@
 
 <section
 	class="bg-surface-container-low min-h-screen relative border-b-2 border-black pb-20"
-	id="experience"
+	id="resume"
 >
 	<!-- Blueprint Grid Background -->
 	<div class="absolute inset-0 opacity-20 bg-grid-pattern pointer-events-none"></div>
