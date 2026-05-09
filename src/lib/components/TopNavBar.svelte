@@ -1,31 +1,36 @@
 <nav
 	class="bg-surface docked full-width top-0 border-b-2 border-black flex justify-between items-center w-full px-margin-desktop py-4 max-w-full z-50 sticky"
 >
-	<div class="font-nav-lg text-nav-lg font-black tracking-tighter text-on-surface uppercase">
+	<div
+		class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight text-on-surface uppercase flex items-center leading-none mt-2"
+	>
 		icekang
 	</div>
 	<div class="hidden md:flex gap-4 items-center">
 		<a
 			class="bg-primary text-on-primary px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest hover:border-b-2 hover:border-black transition-all"
-			href="#">HOME</a
+			href="/">HOME</a
 		>
-		<a
-			class="text-on-surface px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest hover:border-b-2 hover:border-black transition-all"
-			href="#experience">EXPERIENCE</a
+		<span
+			class="text-on-surface/50 px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest cursor-not-allowed"
+			>EXPERIENCE</span
 		>
-		<a
-			class="text-on-surface px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest hover:border-b-2 hover:border-black transition-all"
-			href="#">PROJECTS</a
+		<span
+			class="text-on-surface/50 px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest cursor-not-allowed"
+			>PROJECTS</span
 		>
-		<a
-			class="text-on-surface px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest hover:border-b-2 hover:border-black transition-all"
-			href="#">BLOG</a
+		<span
+			class="text-on-surface/50 px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest cursor-not-allowed"
+			>BLOG</span
 		>
 	</div>
 	<div>
-		<button
-			class="bg-primary-container text-on-primary font-nav-lg text-nav-lg uppercase tracking-widest px-6 py-3 shadow-cartoon hover:scale-95 transition-transform duration-75 border-2 border-black rounded-none"
-			>CONTACT</button
+		<a
+			href="https://www.linkedin.com/in/icekang/"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="bg-primary-container text-on-primary font-nav-lg text-nav-lg uppercase tracking-widest px-6 py-3 shadow-cartoon hover:scale-95 transition-transform duration-75 border-2 border-black rounded-none inline-block"
+			>CONTACT</a
 		>
 	</div>
 </nav>
