@@ -1,5 +1,14 @@
 <script lang="ts">
 	import portrait from '$lib/images/naravich-portrait.png';
+	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import { backOut } from 'svelte/easing';
+
+	let mounted = false;
+
+	onMount(() => {
+		mounted = true;
+	});
 
 	function scrollToResume(e: MouseEvent) {
 		e.preventDefault();
@@ -35,21 +44,38 @@
 			>VIEW WORK ↓</a
 		>
 		<!-- Floating Nameplate -->
-		<div
-			class="absolute top-1/4 -right-8 w-16 h-16 bg-surface border-2 border-black shadow-cartoon-sm hidden md:flex items-center justify-center rotate-6 z-20"
-		>
-			<span class="material-symbols-outlined text-3xl">ads_click</span>
-		</div>
-		<div
-			class="absolute bottom-1/4 -left-4 w-20 h-20 bg-surface border-2 border-black shadow-cartoon hidden md:flex items-center justify-center -rotate-12 z-20"
-		>
-			<span class="material-symbols-outlined text-4xl">science</span>
-		</div>
-		<div
-			class="absolute top-1/2 -right-4 w-12 h-12 bg-surface border-2 border-black shadow-cartoon-sm hidden md:flex items-center justify-center rotate-12 z-20"
-		>
-			<span class="material-symbols-outlined text-2xl">architecture</span>
-		</div>
+		{#if mounted}
+			<div
+				class="absolute top-1/4 -right-8 z-20 hidden md:block"
+				in:fly={{ y: 50, duration: 800, delay: 20, easing: backOut }}
+			>
+				<div
+					class="w-16 h-16 bg-surface border-2 border-black shadow-cartoon-sm flex items-center justify-center rotate-6"
+				>
+					<span class="material-symbols-outlined text-3xl">ads_click</span>
+				</div>
+			</div>
+			<div
+				class="absolute bottom-1/4 -left-4 z-20 hidden md:block"
+				in:fly={{ y: 50, duration: 800, delay: 40, easing: backOut }}
+			>
+				<div
+					class="w-20 h-20 bg-surface border-2 border-black shadow-cartoon flex items-center justify-center -rotate-12"
+				>
+					<span class="material-symbols-outlined text-4xl">science</span>
+				</div>
+			</div>
+			<div
+				class="absolute top-1/2 -right-4 z-20 hidden md:block"
+				in:fly={{ y: 50, duration: 800, delay: 60, easing: backOut }}
+			>
+				<div
+					class="w-12 h-12 bg-surface border-2 border-black shadow-cartoon-sm flex items-center justify-center rotate-12"
+				>
+					<span class="material-symbols-outlined text-2xl">architecture</span>
+				</div>
+			</div>
+		{/if}
 	</div>
 	<!-- Right 50% -->
 	<div
@@ -57,22 +83,25 @@
 	>
 		<!-- Blueprint subtle grid on right side -->
 		<div class="absolute inset-0 opacity-10 bg-grid-pattern pointer-events-none"></div>
-		<div
-			class="relative w-full max-w-lg aspect-square border-2 border-black shadow-cartoon bg-surface-container flex items-center justify-center overflow-hidden"
-		>
+		{#if mounted}
 			<div
-				class="absolute top-0 left-0 w-full h-8 bg-surface border-b-2 border-black flex items-center px-4 gap-2 z-20"
+				in:fly={{ y: 50, duration: 800, delay: 80, easing: backOut }}
+				class="relative w-full max-w-lg aspect-square border-2 border-black shadow-cartoon bg-surface-container flex items-center justify-center overflow-hidden"
 			>
-				<div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black"></div>
-				<div class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-black"></div>
-				<div class="w-3 h-3 rounded-full bg-[#28C840] border border-black"></div>
+				<div
+					class="absolute top-0 left-0 w-full h-8 bg-surface border-b-2 border-black flex items-center px-4 gap-2 z-20"
+				>
+					<div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black"></div>
+					<div class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-black"></div>
+					<div class="w-3 h-3 rounded-full bg-[#28C840] border border-black"></div>
+				</div>
+				<img
+					alt="Naravich Chutisilp"
+					class="w-full h-full object-cover object-center"
+					src={portrait}
+				/>
+				<!-- Decorative rubber hose accent -->
 			</div>
-			<img
-				alt="Naravich Chutisilp"
-				class="w-full h-full object-cover object-center"
-				src={portrait}
-			/>
-			<!-- Decorative rubber hose accent -->
-		</div>
+		{/if}
 	</div>
 </section>
