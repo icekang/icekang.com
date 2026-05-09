@@ -117,21 +117,21 @@
 			authors:
 				'Karim Kadry, Shoaib A. Goraya, Ajay Manicka, Abdalla Abdelwahed, Naravich Chutisilp, Farhad R. Nezami, Elazer R Edelman',
 			description: 'Published in ICLR 2026',
-			link: '#'
+			link: 'https://openreview.net/forum?id=JyboUMeEUi'
 		},
 		{
 			title:
 				'TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking',
 			authors: 'Andrea Settimi, Naravich Chutisilp, Florian Aymanns, Julien Gamerro, Yves Weinand',
 			description: 'Published in Applied Sciences 2024',
-			link: '#'
+			link: 'https://www.mdpi.com/2076-3417/14/7/3011'
 		},
 		{
 			title: 'A Unified Model for Gaze Following and Social Gaze Prediction',
 			authors: 'Anshul Gupta, Samy Tafasca, Naravich Chutisilp, Jean-Marc Odobez',
 			description:
 				'Published in IEEE International Conference on Automatic Face and Gesture Recognition 2024',
-			link: '#'
+			link: 'https://ieeexplore.ieee.org/document/10581955'
 		}
 	];
 
