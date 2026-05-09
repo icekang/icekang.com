@@ -3,6 +3,11 @@
 	export let authors: string;
 	export let description: string;
 	export let link: string = "#";
+
+	$: formattedAuthors = authors.replace(
+		'Naravich Chutisilp',
+		'<mark class="bg-yellow-300 text-black font-bold px-1 rounded-sm">Naravich Chutisilp</mark>'
+	);
 </script>
 
 <div class="p-10 bg-surface border-b-2 border-black relative z-10">
@@ -10,7 +15,7 @@
 		<div class="flex flex-col md:flex-row justify-between items-start gap-6">
 			<div>
 				<h3 class="font-headline-lg text-[40px] leading-tight mb-4 uppercase">{title}</h3>
-				<p class="font-body-md mb-4 text-on-surface"><span class="font-bold">Authors:</span> {authors}</p>
+				<p class="font-body-md mb-4 text-on-surface"><span class="font-bold">Authors:</span> {@html formattedAuthors}</p>
 				<p class="font-body-md text-on-surface-variant italic">
 					{description}
 				</p>
