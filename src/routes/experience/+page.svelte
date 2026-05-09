@@ -95,7 +95,7 @@
 		{
 			period: '09/2021 - 09/2024',
 			company: 'EPFL',
-			role: 'MSc Computer Science',
+			role: 'M.Sc Computer Science',
 			description: 'GPA: 5.70 / 6.00',
 			tags: [],
 			borderClass: 'border-b-2 border-black'
@@ -103,7 +103,7 @@
 		{
 			period: '08/2017 - 05/2021',
 			company: 'Chulalongkorn University',
-			role: 'BEng Computer Engineering',
+			role: 'B.Eng Computer Engineering',
 			description: 'Valedictorian (First Class Honors with Gold Medal) - GPA: 3.99 / 4.00',
 			tags: [],
 			borderClass: 'md:border-b-0 md:border-r-2 border-black'
