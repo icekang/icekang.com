@@ -1,28 +1,9 @@
 <script>
-	import "../app.css";
+	import '../app.css';
 </script>
 
-<div class="app">
-	<main>
-		<slot />
-	</main>
+<div
+	class="app min-h-screen flex flex-col bg-background font-body-md text-on-background w-full lg:max-w-[87%] mx-auto lg:border-x-2 border-black"
+>
+	<slot />
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-</style>
