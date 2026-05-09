@@ -20,7 +20,7 @@
 					{description}
 				</p>
 			</div>
-			<a class="border-2 border-black px-6 py-2 uppercase font-bold hover:bg-black hover:text-white transition-colors flex items-center gap-2" href={link}>
+			<a class="border-2 border-black px-6 py-2 uppercase font-bold hover:bg-black hover:text-white transition-colors flex items-center gap-2" href={link} target="_blank" rel="noopener noreferrer">
 				PDF <span class="material-symbols-outlined text-sm">open_in_new</span>
 			</a>
 		</div>
