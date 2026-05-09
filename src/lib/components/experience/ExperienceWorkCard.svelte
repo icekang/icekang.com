@@ -5,9 +5,13 @@
 	export let description: string;
 	export let tags: string[] = [];
 	export let borderClass: string = "border-b-2 md:border-b-0 md:border-r-2 border-black";
+	export let index: number | undefined = undefined;
 </script>
 
-<article class="p-10 {borderClass} bg-surface hover:shadow-cartoon transition-shadow">
+<article class="p-10 {borderClass} bg-surface hover:shadow-cartoon transition-shadow relative">
+	{#if index !== undefined}
+		<span class="absolute top-4 left-4 font-headline-lg font-black text-on-surface/30 text-xl leading-none">{index + 1}.</span>
+	{/if}
 	<div class="flex flex-col h-full">
 		<div class="mb-6">
 			<p class="font-nav-lg text-primary uppercase text-[12px] font-bold mb-2">{period}</p>

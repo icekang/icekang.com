@@ -166,27 +166,27 @@
 	<div class="w-full lg:w-3/4 flex flex-col bg-grid-blueprint relative">
 		<ExperienceSectionHeader title="WORK" />
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-b-2 border-black relative z-10">
-			{#each workItems as item}
-				<ExperienceWorkCard {...item} />
+			{#each workItems as item, index}
+				<ExperienceWorkCard {...item} {index} />
 			{/each}
 		</div>
 
 		<ExperienceSectionHeader title="EDUCATION" />
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-b-2 border-black relative z-10">
-			{#each eduItems as item}
-				<ExperienceWorkCard {...item} />
+			{#each eduItems as item, index}
+				<ExperienceWorkCard {...item} {index} />
 			{/each}
 		</div>
 
 		<ExperienceSectionHeader title="PUBLICATIONS" />
-		{#each pubItems as item}
-			<ExperiencePubCard {...item} />
+		{#each pubItems as item, index}
+			<ExperiencePubCard {...item} {index} />
 		{/each}
 
 		<ExperienceSectionHeader title="PROJECTS" />
 		<div class="grid grid-cols-1 md:grid-cols-2 relative z-10">
-			{#each projectItems as item}
-				<ExperienceProjectCard {...item} />
+			{#each projectItems as item, index}
+				<ExperienceProjectCard {...item} {index} />
 			{/each}
 		</div>
 	</div>
