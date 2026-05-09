@@ -8,7 +8,7 @@
 		class="w-full md:w-1/2 bg-primary-container flex flex-col justify-center items-start px-margin-mobile md:px-margin-desktop py-20 border-b-2 md:border-b-0 md:border-r-2 border-black relative z-10 overflow-visible"
 	>
 		<h1
-			class="font-headline-xl text-headline-xl text-on-surface uppercase bg-surface-container-lowest border-2 border-black p-8 shadow-cartoon mb-8 inline-block -rotate-3"
+			class="font-headline-xl text-headline-lg md:font-headline-xl md:text-headline-xl text-on-surface uppercase bg-surface-container-lowest border-2 border-black p-4 md:p-8 shadow-cartoon mb-8 inline-block -rotate-3"
 		>
 			NARAVICH CHUTISILP
 		</h1>
@@ -26,17 +26,17 @@
 		>
 		<!-- Floating Nameplate -->
 		<div
-			class="absolute top-1/4 -right-8 w-16 h-16 bg-surface border-2 border-black shadow-cartoon-sm flex items-center justify-center rotate-6 z-20"
+			class="absolute top-1/4 -right-8 w-16 h-16 bg-surface border-2 border-black shadow-cartoon-sm hidden md:flex items-center justify-center rotate-6 z-20"
 		>
 			<span class="material-symbols-outlined text-3xl">ads_click</span>
 		</div>
 		<div
-			class="absolute bottom-1/4 -left-4 w-20 h-20 bg-surface border-2 border-black shadow-cartoon flex items-center justify-center -rotate-12 z-20"
+			class="absolute bottom-1/4 -left-4 w-20 h-20 bg-surface border-2 border-black shadow-cartoon hidden md:flex items-center justify-center -rotate-12 z-20"
 		>
 			<span class="material-symbols-outlined text-4xl">science</span>
 		</div>
 		<div
-			class="absolute top-1/2 -right-4 w-12 h-12 bg-surface border-2 border-black shadow-cartoon-sm flex items-center justify-center rotate-12 z-20"
+			class="absolute top-1/2 -right-4 w-12 h-12 bg-surface border-2 border-black shadow-cartoon-sm hidden md:flex items-center justify-center rotate-12 z-20"
 		>
 			<span class="material-symbols-outlined text-2xl">architecture</span>
 		</div>
