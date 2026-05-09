@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TopNavBar from '$lib/components/TopNavBar.svelte';
 	import Hero from '$lib/components/Hero.svelte';
-	import Experience from '$lib/components/Experience.svelte';
+	import Resume from '$lib/components/Resume.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 </script>
 
@@ -12,6 +12,6 @@
 <TopNavBar />
 <main class="flex-grow flex flex-col">
 	<Hero />
-	<Experience />
+	<Resume />
 </main>
 <Footer />

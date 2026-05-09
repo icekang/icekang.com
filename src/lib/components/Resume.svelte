@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ExperienceCard from './ResumeCard.svelte';
+	import ResumeCard from './ResumeCard.svelte';
 
 	const experiences = [
 		{
@@ -44,7 +44,7 @@
 		</div>
 		<div class="flex flex-col gap-8">
 			{#each experiences as exp}
-				<ExperienceCard {...exp} />
+				<ResumeCard {...exp} />
 			{/each}
 		</div>
 	</div>
