@@ -4,6 +4,7 @@
 	export let title: string;
 	export let tags: string[];
 	export let description: string;
+	export let accentColor: string = '#eeeeee';
 </script>
 
 <div
@@ -25,7 +26,10 @@
 			>
 		</div>
 	</div>
-	<div class="w-full md:w-3/4 p-8 flex flex-col justify-center">
+	<div 
+		class="w-full md:w-3/4 p-8 flex flex-col justify-center transition-colors duration-200 right-col"
+		style="--accent-color: {accentColor};"
+	>
 		<h3 class="font-headline-lg-mobile text-headline-lg-mobile mb-4">
 			{title}
 		</h3>
@@ -41,10 +45,10 @@
 			{description}
 		</p>
 	</div>
-	<!-- Action Hint -->
-	<div
-		class="absolute right-0 top-0 h-full w-12 border-l border-black flex justify-center items-center bg-surface-dim opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-	>
-		<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
-	</div>
 </div>
+
+<style>
+	.group:hover .right-col {
+		background-color: var(--accent-color);
+	}
+</style>
