@@ -8,7 +8,8 @@
 			title: 'ML Engineer, Data Scientist @ Tradition',
 			tags: ['PyTorch', 'Airflow', 'LLMs'],
 			description:
-				'Designed and deployed a real-time recommendation system for fixed-income derivatives, generating >USD 655K in revenue. Built a GitLab-integrated LLM bot for automated CI/CD code reviews.'
+				'Designed and deployed a real-time recommendation system for fixed-income derivatives, generating >USD 873K in revenue. Built a GitLab-integrated LLM bot for automated CI/CD code reviews.',
+			accentColor: '#d5e3ff'
 		},
 		{
 			period: '09/2023 — 02/2024',
@@ -16,7 +17,8 @@
 			title: 'Computer Vision Engineer @ AXA',
 			tags: ['PyTorch', 'Computer Vision', 'MLOps'],
 			description:
-				'Built a production-ready Computer Vision system for automated actuarial risk identification using satellite imagery. Engineered a highly efficient MLOps pipeline accelerating R&D velocity.'
+				'Built a production-ready Computer Vision system for automated actuarial risk identification using satellite imagery. Engineered a highly efficient MLOps pipeline accelerating R&D velocity.',
+			accentColor: '#ffdad6'
 		},
 		{
 			period: '01/2020 — 09/2021',
@@ -24,7 +26,8 @@
 			title: 'Software Engineer & Co-Founder @ Inside the Sandbox',
 			tags: ['Svelte', 'React', 'Firebase'],
 			description:
-				'Co-founded and developed interactive storytelling websites for digital marketing campaigns, with one campaign attracting >1M organic users on launch day and trending #1 on Twitter in Thailand.'
+				'Co-founded and developed interactive storytelling websites for digital marketing campaigns, with one campaign attracting >1M organic users on launch day and trending #1 on Twitter in Thailand.',
+			accentColor: '#e3e3de'
 		}
 	];
 </script>
