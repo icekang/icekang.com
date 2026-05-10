@@ -30,8 +30,8 @@ export const books: Book[] = [
 		category: 'Classic Literature',
 		collection: 'Classic',
 		coverClass: 'bg-surface-accent',
-		rating: 5,
-		dateRead: 'May 10, 2026',
+		rating: 4.5,
+		dateRead: 'April 06, 2026',
 		marginaliaId: '#001',
 		fullReview: {
 			subtitle: 'The Immense Complexity of the Individual',
@@ -56,18 +56,37 @@ export const books: Book[] = [
 		title: 'The Metamorphosis',
 		author: 'Franz Kafka',
 		description: 'A surreal exploration of isolation and the human condition, following Gregor Samsa’s sudden transformation.',
-		status: 'Read',
+		status: 'Reviewed',
 		category: 'Classic Literature',
 		collection: 'Classic',
 		coverClass: 'bg-surface-accent',
-		rating: 0,
-		dateRead: '',
+		rating: 5,
+		dateRead: 'April 21, 2026',
 		marginaliaId: '#002',
 		fullReview: {
-			subtitle: 'TBD',
-			paragraphs: [],
-			quote: '',
-			motifs: []
+			subtitle: 'My Worst Nightmare is to be Gregor Samsa',
+			paragraphs: [
+				"One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. That's how the book begins, and it never explains how or why Gregor has transformed into a giant insect.",
+				"We later learn that he is a traveling salesman and the sole breadwinner of the family, sacrificing his personal needs and wants to pay off his family's debt. His parents initially show appreciation for his sacrifice, but slowly, they take it for granted. His younger sister, Grete, is all he has, and he truly loves her.",
+				"However, after Gregor's transformation, everyone slowly turns against him. His father never wants to see him and treats him like a cockroach; his mother faints whenever he is in his sight; and his sister, who initially tried her best to take care of him, eventually grows to hate him and gives him the cold shoulder.",
+				"I see this book as an analogy for a family burning out while taking care of a loved one who is suffering from depression or mental health issues. Gregor cannot leave his room. He can no longer function as a normal 'human' in society. His family, by social norms, are ashamed of him. Additionally, they are struggling financially without him fulfilling his 'responsibility'. They have other things to worry about, and Gregor slowly becomes a negativity radiator that kills the mood of everyone in the house.",
+				"The story ends in the most depressing way possible—so much so that I have to pause and take a very deep breath. It is the cherry on top of the darkest version of humanity: a family that eventually sees their own as a bug to be gotten rid of. Yet, it is a version of reality that is hauntingly not far-fetched."
+			],
+			quote: '\"Father, Mother\", said his sister, [...], \"we can\'t carry on like this. Maybe you can\'t see it, but I can. I don\'t want to call this monster my brother, all I can say is: we have to try and get rid of it. We\'ve done all that\' humanly possible to look after it and be patient, I don\'t think anyone could accuse us of doing anything wrong.\"',
+			motifs: [
+				{
+					title: "Locked Doors and Thresholds",
+					description: "These represent the physical and emotional barriers the family uses to isolate Gregor, turning his room into a prison as they slowly shut him out of their lives."
+				},
+				{
+					title: "Food and Decay",
+					description: "Gregor’s changing appetite—from fresh milk to rotting scraps—symbolizes his fading connection to human society and the family's transition from care to total neglect."
+				},
+				{
+					title: "Financial Debt and Value",
+					description: "The constant focus on money highlights the transactional nature of the family's affection; Gregor is seen as valuable when he provides, but becomes a 'vermin' when he becomes a cost."
+				}
+			]
 		}
 	},
 	{

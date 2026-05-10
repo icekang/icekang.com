@@ -12,9 +12,9 @@
 	export let handleImageError: () => void;
 </script>
 
-<header class="w-full border-b-2 border-black flex flex-col md:flex-row">
+<header class="w-full border-b-2 border-black flex flex-col md:flex-row md:max-h-[650px] overflow-hidden">
 	<div
-		class="w-full md:w-1/2 p-margin-mobile md:p-margin-desktop flex flex-col justify-center border-b-2 md:border-b-0 md:border-r-2 border-black relative overflow-hidden bg-white"
+		class="w-full md:w-1/2 p-margin-mobile md:p-margin-desktop flex flex-col justify-center border-b-2 md:border-b-0 md:border-r-2 border-black relative overflow-y-auto bg-white"
 	>
 		<div
 			class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"
@@ -25,21 +25,25 @@
 		>
 			Marginalia {marginaliaId}
 		</h2>
-		<h1 class="font-headline-xl text-headline-xl italic z-10 leading-tight">{title}</h1>
+		<h1
+			class="font-headline-lg text-headline-lg md:font-headline-xl md:text-headline-xl italic z-10 leading-tight break-words"
+		>
+			{title}
+		</h1>
 		<p class="font-body-lg text-body-lg mt-6 z-10 max-w-lg">{description}</p>
 	</div>
 	<div
-		class="w-full md:w-1/2 max-h-[280px] bg-surface-main border-l-0 md:border-l-2 border-black relative min-h-[300px] md:min-h-[400px] flex items-center justify-center overflow-hidden blueprint-pattern bg-blueprint"
+		class="w-full md:w-1/2 h-[300px] md:h-auto bg-surface-main border-l-0 md:border-l-2 border-black relative md:min-h-[400px] flex items-center justify-center overflow-hidden blueprint-pattern bg-blueprint"
 	>
 		<div
-			class="relative z-10 w-full h-3/4 flex items-center justify-center"
+			class="relative z-10 w-full h-full flex items-center justify-center"
 			style="transform: translateY({scrollY * (isMobile ? -0.15 : 0.25)}px);"
 		>
 			{#if coverUrl}
-				<div class="w-full relative group">
+				<div class="w-full h-[110%] -top-[5%] relative group">
 					<img
 						alt="{title} book cover"
-						class="relative z-10 w-full h-full object-contain"
+						class="relative z-10 w-full h-full object-cover"
 						src={coverUrl}
 						on:load={handleImageLoad}
 						on:error={handleImageError}
