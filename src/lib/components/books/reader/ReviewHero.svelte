@@ -8,11 +8,9 @@
 	export let scrollY: number = 0;
 	export let isMobile: boolean = false;
 
-	let coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
-
-	function handleImageError() {
-		coverUrl = ''; // Fallback
-	}
+	export let coverUrl: string;
+	export let handleImageLoad: (e: Event) => void;
+	export let handleImageError: () => void;
 </script>
 
 <header class="w-full border-b-2 border-black flex flex-col md:flex-row">
@@ -33,6 +31,7 @@
 				alt="{title} book cover"
 				class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-80"
 				src={coverUrl}
+				on:load={handleImageLoad}
 				on:error={handleImageError}
 				style="transform: translateY({scrollY * (isMobile ? -0.2 : 0.35)}px) scale(1.1);"
 			/>

@@ -22,7 +22,7 @@ export interface Book {
 export const books: Book[] = [
 	{
 		id: 'mrs-dalloway',
-		isbn: '9780156628709',
+		isbn: '9780525507741',
 		title: 'Mrs. Dalloway',
 		author: 'Virginia Woolf',
 		description: 'An exploration of the internal lives of high-society Londoners post-WWI, weaving a tapestry of memory, regret, and the relentless ticking of time.',
@@ -50,7 +50,7 @@ export const books: Book[] = [
 	},
 	{
 		id: 'to-the-lighthouse',
-		isbn: '9780156907392',
+		isbn: '9780199536610',
 		title: 'To the Lighthouse',
 		author: 'Virginia Woolf',
 		description: 'An examination of perception and the passage of time. The narrative shifts continuously, capturing the transient nature of human experience.',
