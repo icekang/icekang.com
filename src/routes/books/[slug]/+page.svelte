@@ -61,12 +61,11 @@
 	<title>{book.title} Review - ICEKANG</title>
 </svelte:head>
 
-<!-- <ReadingProgressBar {scrollProgress} /> -->
-
 <div
 	class="min-h-screen flex flex-col font-body-md antialiased selection:bg-surface-accent selection:text-white bg-white text-black"
 >
 	<TopNavBar />
+	<ReadingProgressBar {scrollProgress} />
 
 	<main class="flex-grow flex flex-col w-full">
 		<ReviewHero
