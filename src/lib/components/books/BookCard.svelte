@@ -68,10 +68,10 @@
 			style="background-color: #f9f9f9;"
 		>
 			<div
-				class="w-full md:w-[200px] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative"
+				class="w-full md:w-[200px] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 flex flex-col items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative"
 			>
 				<div
-					class="w-24 h-32 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon overflow-hidden relative"
+					class="w-24 h-32 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon overflow-hidden relative mb-2"
 				>
 					{#if coverUrl}
 						<img
@@ -83,6 +83,9 @@
 						/>
 					{/if}
 				</div>
+				<span class="text-[9px] mt-3 italic opacity-30 uppercase tracking-tighter"
+					>Source: {coverSource}</span
+				>
 				{#if collection}
 					<div
 						class="absolute top-4 left-4 bg-mac-red border-2 border-black px-1 py-0.5 transform -rotate-12 shadow-sm font-label-md text-[10px] uppercase text-white z-10"
@@ -108,14 +111,13 @@
 							>{category}</span
 						>
 					{/if}
-					<span class="text-[10px] italic opacity-40 ml-auto">Source: {coverSource}</span>
 				</div>
 				<p class="font-body-md text-body-md max-w-2xl {descClass} transition-colors line-clamp-3">
 					{description}
 				</p>
 			</div>
 			<div
-				class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center w-12 h-12 bg-black text-white border-2 border-black rounded-full shadow-cartoon-sm"
+				class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center w-12 h-12 bg-surface-accent text-white border-2 border-black rounded-full shadow-cartoon-sm"
 			>
 				<span class="material-symbols-outlined">arrow_forward</span>
 			</div>
@@ -128,21 +130,17 @@
 			style="background-color: #f9f9f9;"
 		>
 			<div
-				class="h-48 border-b-2 border-black flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative"
+				class="h-72 border-b-2 border-black flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative overflow-hidden"
 			>
-				<div
-					class="w-20 h-28 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon-sm overflow-hidden relative"
-				>
-					{#if coverUrl}
-						<img
-							src={coverUrl}
-							on:load={handleImageLoad}
-							on:error={handleImageError}
-							alt={title}
-							class="w-full h-full object-cover"
-						/>
-					{/if}
-				</div>
+				{#if coverUrl}
+					<img
+						src={coverUrl}
+						on:load={handleImageLoad}
+						on:error={handleImageError}
+						alt={title}
+						class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+					/>
+				{/if}
 				{#if collection}
 					<div
 						class="absolute top-3 left-3 bg-mac-red border-2 border-black px-1 py-0.5 transform -rotate-12 shadow-sm font-label-md text-[9px] uppercase text-white z-10"
@@ -150,6 +148,11 @@
 						{collection}
 					</div>
 				{/if}
+				<div
+					class="absolute bottom-2 right-2 bg-white/80 backdrop-blur-sm border border-black px-1.5 py-0.5 text-[8px] italic opacity-60"
+				>
+					Source: {coverSource}
+				</div>
 			</div>
 			<div class="p-4 flex flex-col flex-grow">
 				<h4
@@ -172,7 +175,7 @@
 				<p class="font-body-md text-sm {descClass} transition-colors line-clamp-4">{description}</p>
 			</div>
 			<div
-				class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 bg-black text-white border-2 border-black rounded-full flex items-center justify-center"
+				class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 bg-surface-accent text-white border-2 border-black rounded-full flex items-center justify-center shadow-cartoon-sm"
 			>
 				<span class="material-symbols-outlined text-sm">arrow_forward</span>
 			</div>
