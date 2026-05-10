@@ -33,18 +33,14 @@
 		class="w-full md:w-1/2 max-h-[280px] bg-surface-main border-l-0 md:border-l-2 border-black relative min-h-[300px] md:min-h-[400px] flex items-center justify-center overflow-hidden blueprint-pattern bg-blueprint"
 	>
 		<div
-			class="relative z-10 w-3/4 h-3/4 flex items-center justify-center"
+			class="relative z-10 w-full h-3/4 flex items-center justify-center"
 			style="transform: translateY({scrollY * (isMobile ? -0.15 : 0.25)}px);"
 		>
 			{#if coverUrl}
-				<div class="relative group">
-					<!-- Brutalist Shadow -->
-					<div
-						class="absolute inset-0 bg-black translate-x-3 translate-y-3 shadow-cartoon transition-transform"
-					></div>
+				<div class="w-full relative group">
 					<img
 						alt="{title} book cover"
-						class="relative z-10 w-full h-full object-contain border-2 border-black"
+						class="relative z-10 w-full h-full object-contain"
 						src={coverUrl}
 						on:load={handleImageLoad}
 						on:error={handleImageError}
