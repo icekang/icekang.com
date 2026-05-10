@@ -51,7 +51,20 @@ export default {
               "on-surface-variant": "#414751",
               "on-tertiary-container": "#d3d3ce",
               "surface-container-lowest": "#ffffff",
-              "background": "#f9f9f9"
+              "background": "#f9f9f9",
+              "blueprint-grid": "#0000001a",
+              "surface-main": "#f9f9f9",
+              "mac-red": "#FF5F57",
+              "mac-yellow": "#FFBD2E",
+              "mac-green": "#28C840",
+              "surface-accent": "#005baa"
+      },
+      "boxShadow": {
+              "cartoon": "8px 8px 0px 0px #000000",
+              "cartoon-sm": "4px 4px 0px 0px #000000"
+      },
+      "backgroundImage": {
+              "blueprint": "linear-gradient(to right, #0000001a 1px, transparent 1px), linear-gradient(to bottom, #0000001a 1px, transparent 1px)"
       },
       "borderRadius": {
               "DEFAULT": "0.25rem",
