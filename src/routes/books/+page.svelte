@@ -5,6 +5,8 @@
 	import BookListHeader from '$lib/components/books/BookListHeader.svelte';
 	import BookCard from '$lib/components/books/BookCard.svelte';
 
+	let viewMode: 'grid' | 'list' = 'list';
+
 	const books: Array<{
 		title: string;
 		description: string;
@@ -69,9 +71,9 @@
 		<BookHero />
 
 		<section class="border-b-2 border-black bg-surface-main blueprint-pattern bg-blueprint flex-grow relative">
-			<BookListHeader />
+			<BookListHeader bind:viewMode />
 
-			<div class="flex flex-col w-full">
+			<div class="w-full {viewMode === 'list' ? 'flex flex-col' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop'}">
 				{#each books as book, i}
 					<BookCard
 						title={book.title}
@@ -81,6 +83,7 @@
 						collection={book.collection}
 						coverClass={book.coverClass}
 						isLast={i === books.length - 1}
+						{viewMode}
 					/>
 				{/each}
 			</div>
@@ -102,3 +105,4 @@
 		'opsz' 24;
 	}
 </style>
+
