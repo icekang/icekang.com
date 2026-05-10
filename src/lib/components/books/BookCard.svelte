@@ -2,7 +2,7 @@
 	export let id: string;
 	export let title: string;
 	export let description: string;
-	export let status: 'Reviewed' | 'Draft' | 'Pending Index';
+	export let status: 'Reviewed' | 'Draft' | 'Pending Index' | 'Read';
 	export let category: string = '';
 	export let collection: string | null = null;
 	export let coverClass: string = 'bg-surface-accent';
@@ -40,27 +40,33 @@
 	$: statusColorClass =
 		status === 'Reviewed'
 			? 'bg-mac-green border-black text-black'
-			: status === 'Draft'
+			: status === 'Draft' || status === 'Read'
 				? 'bg-mac-yellow border-black text-black'
 				: 'border-gray-400 text-gray-400 bg-transparent';
 
 	$: statusStyle =
 		status === 'Reviewed'
 			? 'background-color: rgb(163, 217, 165);'
-			: status === 'Draft'
+			: status === 'Draft' || status === 'Read'
 				? 'background-color: rgb(254, 240, 138);'
 				: '';
 
 	$: titleClass =
-		status === 'Pending Index'
-			? 'text-gray-400 group-hover:text-black'
+		status === 'Pending Index' || status === 'Read'
+			? 'text-gray-400'
 			: 'group-hover:text-surface-accent';
 
-	$: descClass = status === 'Pending Index' ? 'text-gray-400 group-hover:text-black' : 'text-black';
+	$: descClass = status === 'Pending Index' || status === 'Read' ? 'text-gray-400' : 'text-black';
+
+	$: isClickable = status === 'Reviewed' || status === 'Draft';
 </script>
 
 {#if viewMode === 'list'}
-	<a href="/books/{id}" class="block h-full">
+	<svelte:element
+		this={isClickable ? 'a' : 'div'}
+		href={isClickable ? `/books/${id}` : undefined}
+		class="block h-full {isClickable ? '' : 'cursor-default'}"
+	>
 		<article
 			class="flex flex-col md:flex-row {isLast
 				? ''
@@ -116,17 +122,25 @@
 					{description}
 				</p>
 			</div>
-			<div
-				class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center w-12 h-12 bg-surface-accent text-white border-2 border-black rounded-full shadow-cartoon-sm"
-			>
-				<span class="material-symbols-outlined">arrow_forward</span>
-			</div>
+			{#if isClickable}
+				<div
+					class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center w-12 h-12 bg-surface-accent text-white border-2 border-black rounded-full shadow-cartoon-sm"
+				>
+					<span class="material-symbols-outlined">arrow_forward</span>
+				</div>
+			{/if}
 		</article>
-	</a>
+	</svelte:element>
 {:else}
-	<a href="/books/{id}" class="block h-full">
+	<svelte:element
+		this={isClickable ? 'a' : 'div'}
+		href={isClickable ? `/books/${id}` : undefined}
+		class="block h-full {isClickable ? '' : 'cursor-default'}"
+	>
 		<article
-			class="flex flex-col border-2 border-black group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9] h-full shadow-cartoon"
+			class="flex flex-col border-2 border-black group hover:bg-white transition-colors relative {isClickable
+				? 'cursor-pointer'
+				: 'cursor-default'} bg-[#f9f9f9] h-full shadow-cartoon"
 			style="background-color: #f9f9f9;"
 		>
 			<div
@@ -138,7 +152,9 @@
 						on:load={handleImageLoad}
 						on:error={handleImageError}
 						alt={title}
-						class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+						class="w-full h-full object-cover transition-transform duration-500 {isClickable
+							? 'group-hover:scale-110'
+							: ''} opacity-90 group-hover:opacity-100"
 					/>
 				{/if}
 				{#if collection}
@@ -174,11 +190,13 @@
 				</div>
 				<p class="font-body-md text-sm {descClass} transition-colors line-clamp-4">{description}</p>
 			</div>
-			<div
-				class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 bg-surface-accent text-white border-2 border-black rounded-full flex items-center justify-center shadow-cartoon-sm"
-			>
-				<span class="material-symbols-outlined text-sm">arrow_forward</span>
-			</div>
+			{#if isClickable}
+				<div
+					class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 bg-surface-accent text-white border-2 border-black rounded-full flex items-center justify-center shadow-cartoon-sm"
+				>
+					<span class="material-symbols-outlined text-sm">arrow_forward</span>
+				</div>
+			{/if}
 		</article>
-	</a>
+	</svelte:element>
 {/if}
