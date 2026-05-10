@@ -36,11 +36,12 @@
 	<div
 		class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 relative z-50 bg-surface"
 	>
-		<div
-			class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight text-on-surface uppercase flex items-center leading-none mt-2"
+		<a
+			href="/"
+			class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight text-on-surface uppercase flex items-center leading-none mt-2 hover:text-surface-accent transition-colors"
 		>
 			icekang
-		</div>
+		</a>
 
 		<!-- Desktop Menu -->
 		<div class="hidden md:flex gap-4 items-center">
