@@ -6,28 +6,39 @@
 	import BookCard from '$lib/components/books/BookCard.svelte';
 
 	let viewMode: 'grid' | 'list' = 'list';
-	let ready = false;
 	import { books } from '$lib/data/books';
-	import RevealOverlay from '$lib/components/books/reader/RevealOverlay.svelte';
 </script>
 
 <svelte:head>
 	<title>Mrs. Dalloway Review - NANO BANANA</title>
-	<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Newsreader:opsz,wght@6..72,400;500;600&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Newsreader:opsz,wght@6..72,400;500;600&display=swap"
+		rel="stylesheet"
+	/>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+		rel="stylesheet"
+	/>
 </svelte:head>
 
-<RevealOverlay bind:ready />
-<div class="text-black flex flex-col font-body-md selection:bg-surface-accent selection:text-white bg-[#f9f9f9] min-h-screen w-full relative">
+<div
+	class="text-black flex flex-col font-body-md selection:bg-surface-accent selection:text-white bg-[#f9f9f9] min-h-screen w-full relative"
+>
 	<TopNavBar />
 
 	<main class="flex-grow flex flex-col">
 		<BookHero />
 
-		<section class="border-b-2 border-black bg-surface-main blueprint-pattern bg-blueprint flex-grow relative">
+		<section
+			class="border-b-2 border-black bg-surface-main blueprint-pattern bg-blueprint flex-grow relative"
+		>
 			<BookListHeader bind:viewMode />
 
-			<div class="w-full {viewMode === 'list' ? 'flex flex-col' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop'}">
+			<div
+				class="w-full {viewMode === 'list'
+					? 'flex flex-col'
+					: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop'}"
+			>
 				{#each books as book, i}
 					<BookCard
 						id={book.id}
@@ -55,10 +66,9 @@
 	}
 	.material-symbols-outlined {
 		font-variation-settings:
-		'FILL' 0,
-		'wght' 400,
-		'GRAD' 0,
-		'opsz' 24;
+			'FILL' 0,
+			'wght' 400,
+			'GRAD' 0,
+			'opsz' 24;
 	}
 </style>
-
