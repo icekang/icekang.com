@@ -92,7 +92,6 @@
 				rating={book.rating}
 				dateRead={book.dateRead}
 				category={book.category}
-				isbn={book.isbn}
 				{coverSource}
 			/>
 

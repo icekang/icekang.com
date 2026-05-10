@@ -3,7 +3,6 @@
 	export let rating: number;
 	export let dateRead: string;
 	export let category: string;
-	export let isbn: string;
 	export let coverSource: string;
 </script>
 
