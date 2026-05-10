@@ -7,7 +7,7 @@
 >
 	<!-- Left Column: Branding and Text -->
 	<div
-		class="w-full md:w-3/5 flex flex-col relative border-r-2 border-black bg-[#f9f9f9] p-margin-desktop"
+		class="w-full md:w-3/5 flex flex-col relative border-0 md:border-r-2 border-black bg-[#f9f9f9] p-margin-desktop"
 	>
 		<!-- Icon stays absolute to this container -->
 		<div
