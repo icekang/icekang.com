@@ -22,7 +22,7 @@
 				Book Reviews
 			</h1>
 			<p class="font-body-lg text-body-lg max-w-sm mb-6 text-black">
-				A technical directory of literature. Structural analysis of narrative forms.
+				A stash of books I've read, plus some highly subjective opinions on them.
 			</p>
 		</div>
 	</div>
@@ -43,8 +43,13 @@
 
 <style>
 	@keyframes float {
-		0%, 100% { transform: translateY(0) scale(1.1); }
-		50% { transform: translateY(-10px) scale(1.12); }
+		0%,
+		100% {
+			transform: translateY(0) scale(1.1);
+		}
+		50% {
+			transform: translateY(-10px) scale(1.12);
+		}
 	}
 	.animate-float {
 		animation: float 6s ease-in-out infinite;
