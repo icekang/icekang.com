@@ -2,10 +2,12 @@
 	import newspaperAnim from '$lib/images/newspaper_anim.webp';
 </script>
 
-<section class="flex flex-col md:flex-row min-h-[40vh] border-b-2 border-black bg-surface-main">
+<section
+	class="flex flex-col md:flex-row min-h-[40vh] border-b-2 border-black bg-surface-main items-stretch"
+>
 	<!-- Left Column: Branding and Text -->
 	<div
-		class="w-full md:w-3/4 flex flex-col relative border-r-2 border-black h-full min-h-[40vh] bg-[#f9f9f9] p-margin-desktop"
+		class="w-full md:w-3/5 flex flex-col relative border-r-2 border-black bg-[#f9f9f9] p-margin-desktop"
 	>
 		<!-- Icon stays absolute to this container -->
 		<div
@@ -25,11 +27,11 @@
 	</div>
 	<!-- Right Column: Mascot Illustration -->
 	<div
-		class="w-full md:w-1/4 bg-surface-main p-margin-desktop flex items-center justify-center relative blueprint-pattern bg-blueprint"
+		class="w-full md:w-2/5 bg-surface-main p-margin-desktop flex items-center justify-center relative blueprint-pattern bg-blueprint"
 	>
 		<img
 			alt="Anthropomorphic newspaper reading itself illustration"
-			class="max-w-full max-h-[30vh] object-contain h-auto opacity-90 relative z-10"
+			class="w-full h-auto max-h-[35vh] scale-110 object-contain opacity-90 relative z-10"
 			src={newspaperAnim}
 		/>
 	</div>
