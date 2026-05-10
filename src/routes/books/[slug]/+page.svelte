@@ -61,25 +61,25 @@
 	<title>{book.title} Review - ICEKANG</title>
 </svelte:head>
 
-<ReadingProgressBar {scrollProgress} />
+<!-- <ReadingProgressBar {scrollProgress} /> -->
 
 <div
-	class="min-h-screen flex flex-col font-body-md antialiased selection:bg-surface-accent selection:text-white bg-white text-black pt-4"
+	class="min-h-screen flex flex-col font-body-md antialiased selection:bg-surface-accent selection:text-white bg-white text-black"
 >
 	<TopNavBar />
 
 	<main class="flex-grow flex flex-col w-full">
-		<ReviewHero 
-			title={book.title} 
-			description={book.description} 
-			isbn={book.isbn} 
+		<ReviewHero
+			title={book.title}
+			description={book.description}
+			isbn={book.isbn}
 			marginaliaId={book.marginaliaId}
 			scrollY={y}
 			{isMobile}
 		/>
 
 		<section class="w-full flex flex-col md:flex-row flex-grow">
-			<ReviewSidebar 
+			<ReviewSidebar
 				author={book.author}
 				rating={book.rating}
 				dateRead={book.dateRead}
@@ -87,7 +87,7 @@
 				isbn={book.isbn}
 			/>
 
-			<ReviewContent 
+			<ReviewContent
 				subtitle={book.fullReview.subtitle}
 				paragraphs={book.fullReview.paragraphs}
 				quote={book.fullReview.quote}
