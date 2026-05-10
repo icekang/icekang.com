@@ -4,7 +4,7 @@ export interface Book {
 	title: string;
 	author: string;
 	description: string;
-	status: 'Reviewed' | 'Draft' | 'Read';
+	status: 'Reviewed' | 'Draft' | 'Read' | 'Reading';
 	category: string;
 	collection: string | null;
 	coverClass: string;
@@ -95,7 +95,7 @@ export const books: Book[] = [
 		title: 'The Blind Earthworm in the Labyrinth',
 		author: 'Veeraporn Nitiprapha',
 		description: 'A lush, sensory-driven narrative exploring forbidden love and the intricacies of human desire.',
-		status: 'Read',
+		status: 'Reading',
 		category: 'Contemporary Literature',
 		collection: 'Thai',
 		coverClass: 'bg-surface-accent',

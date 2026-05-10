@@ -2,7 +2,7 @@
 	export let id: string;
 	export let title: string;
 	export let description: string;
-	export let status: 'Reviewed' | 'Draft' | 'Pending Index' | 'Read';
+	export let status: 'Reviewed' | 'Draft' | 'Pending Index' | 'Read' | 'Reading';
 	export let category: string = '';
 	export let collection: string | null = null;
 	export let coverClass: string = 'bg-surface-accent';
@@ -42,14 +42,18 @@
 			? 'bg-mac-green border-black text-black'
 			: status === 'Draft' || status === 'Read'
 				? 'bg-mac-yellow border-black text-black'
-				: 'border-gray-400 text-gray-400 bg-transparent';
+				: status === 'Reading'
+					? 'bg-surface-accent border-black text-white'
+					: 'border-gray-400 text-gray-400 bg-transparent';
 
 	$: statusStyle =
 		status === 'Reviewed'
 			? 'background-color: rgb(163, 217, 165);'
 			: status === 'Draft' || status === 'Read'
 				? 'background-color: rgb(254, 240, 138);'
-				: '';
+				: status === 'Reading'
+					? 'background-color: #3b82f6;'
+					: '';
 
 	$: titleClass =
 		status === 'Pending Index' || status === 'Read'
