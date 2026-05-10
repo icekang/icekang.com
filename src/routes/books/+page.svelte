@@ -6,7 +6,9 @@
 	import BookCard from '$lib/components/books/BookCard.svelte';
 
 	let viewMode: 'grid' | 'list' = 'list';
+	let ready = false;
 	import { books } from '$lib/data/books';
+	import RevealOverlay from '$lib/components/books/reader/RevealOverlay.svelte';
 </script>
 
 <svelte:head>
@@ -15,6 +17,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 </svelte:head>
 
+<RevealOverlay bind:ready />
 <div class="text-black flex flex-col font-body-md selection:bg-surface-accent selection:text-white bg-[#f9f9f9] min-h-screen w-full relative">
 	<TopNavBar />
 
