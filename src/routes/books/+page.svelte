@@ -6,56 +6,7 @@
 	import BookCard from '$lib/components/books/BookCard.svelte';
 
 	let viewMode: 'grid' | 'list' = 'list';
-
-	const books: Array<{
-		title: string;
-		description: string;
-		status: 'Reviewed' | 'Draft' | 'Pending Index';
-		category: string;
-		collection: string | null;
-		coverClass: string;
-	}> = [
-		{
-			title: 'To the Lighthouse',
-			description: 'An examination of perception and the passage of time. The narrative shifts continuously, capturing the transient nature of human experience.',
-			status: 'Reviewed',
-			category: 'Structuralism',
-			collection: null,
-			coverClass: 'bg-surface-accent'
-		},
-		{
-			title: 'The Waves',
-			description: 'A choral arrangement of six distinct voices. The boundaries between self and other dissolve in a rhythmic tide of consciousness.',
-			status: 'Draft',
-			category: 'Voices',
-			collection: 'COLLECTION 04',
-			coverClass: 'bg-white'
-		},
-		{
-			title: 'Orlando',
-			description: 'A satirical biography spanning centuries. The protagonist undergoes a profound transformation, challenging conventional notions of identity.',
-			status: 'Pending Index',
-			category: '',
-			collection: null,
-			coverClass: 'bg-surface-main border-dashed'
-		},
-		{
-			title: 'Mrs. Dalloway',
-			description: 'A single day in post-war London. The interplay of memory and present reality builds toward a quietly devastating climax.',
-			status: 'Reviewed',
-			category: 'Time',
-			collection: null,
-			coverClass: 'bg-surface-accent'
-		},
-		{
-			title: "Howl's Moving Castle",
-			description: 'A whimsical exploration of agency and appearance. The physical environment reshapes itself in response to emotional states.',
-			status: 'Draft',
-			category: 'Kinetic',
-			collection: null,
-			coverClass: 'bg-white'
-		}
-	];
+	import { books } from '$lib/data/books';
 </script>
 
 <svelte:head>
@@ -76,6 +27,7 @@
 			<div class="w-full {viewMode === 'list' ? 'flex flex-col' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop'}">
 				{#each books as book, i}
 					<BookCard
+						id={book.id}
 						title={book.title}
 						description={book.description}
 						status={book.status}
