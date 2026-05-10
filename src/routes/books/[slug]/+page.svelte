@@ -3,7 +3,7 @@
 	import TopNavBar from '$lib/components/TopNavBar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import type { PageData } from './$types';
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 
 	// Refactored Components
@@ -52,8 +52,25 @@
 		coverSource = 'Open Library';
 	}
 
+	// Dummy transition to make parent wait for children
+	function wait(node: HTMLElement, { duration = 0 }) {
+		return { duration };
+	}
+
+	let revealing = false;
+
 	onMount(() => {
-		ready = true;
+		// 1. Wait 1s, then start sliding the shutter bars
+		setTimeout(() => {
+			revealing = true;
+		}, 1000);
+
+		// 2. Wait for the entire animation to finish (1s start + 480ms max delay + 1.2s slide)
+		// and then remove the overlay entirely
+		setTimeout(() => {
+			ready = true;
+		}, 2700);
+
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
@@ -62,18 +79,52 @@
 <svelte:window bind:innerWidth />
 
 {#if !ready}
-	<div class="fixed inset-0 z-[100] flex pointer-events-none overflow-hidden" aria-hidden="true">
+	<div
+		id="book-preview"
+		class="fixed inset-0 z-[100] pointer-events-none overflow-hidden"
+		aria-hidden="true"
+	>
+		<!-- Background Shutter Bars -->
+		{#each Array(12) as _, i (i)}
+			<div
+				class="shutter-bar absolute w-full h-[8.34vh] bg-white border-outline-variant border-1 rounded-full z-10"
+				class:animate-reveal={revealing}
+				style="top: {i * 8.33}vh; animation-delay: {i * 40}ms"
+			></div>
+		{/each}
+
+		<!-- Top Layer Skeletal Page -->
 		<div
-			class="w-1/2 h-full bg-[#f9f9f9] border-r-2 border-black blueprint-pattern bg-blueprint flex items-center justify-end p-margin-desktop"
-			out:fly={{ x: '-100%', duration: 1000, easing: cubicInOut }}
+			id="book-preview-inner"
+			class="absolute inset-0 z-[110] flex items-center justify-center pointer-events-none"
+			class:animate-reveal={revealing}
+			style="animation-delay: 100ms"
 		>
-			<div class="w-1 h-32 bg-black/10 mr-[-2px]"></div>
-		</div>
-		<div
-			class="w-1/2 h-full bg-[#f9f9f9] border-l-2 border-black blueprint-pattern bg-blueprint flex items-center justify-start p-margin-desktop"
-			out:fly={{ x: '100%', duration: 1000, easing: cubicInOut }}
-		>
-			<div class="w-1 h-32 bg-black/10 ml-[-2px]"></div>
+			<div class="w-full max-w-5xl px-margin-desktop flex flex-col justify-center">
+				<!-- Content Skeleton -->
+				<div class="flex flex-col gap-6 md:gap-10 w-full">
+					<!-- Title -->
+					<div class="h-12 md:h-24 w-3/4 bg-black rounded-full"></div>
+
+					<!-- Paragraph 1 -->
+					<div class="flex flex-col gap-4">
+						<div class="h-12 md:h-24 w-full bg-black rounded-full"></div>
+						<div class="h-12 md:h-24 w-5/6 bg-black rounded-full"></div>
+						<div class="h-12 md:h-24 w-2/3 bg-black rounded-full"></div>
+						<div class="h-12 md:h-24 w-full bg-black rounded-full"></div>
+					</div>
+
+					<!-- Paragraph 2 -->
+					<div class="flex flex-col gap-4 mt-16 md:mt-20">
+						<div class="h-12 md:h-24 w-11/12 bg-black rounded-full"></div>
+						<div class="h-12 md:h-24 w-4/5 bg-black rounded-full"></div>
+						<div class="h-12 md:h-24 w-full bg-black rounded-full"></div>
+					</div>
+
+					<!-- CTA/Footer -->
+					<div class="h-12 md:h-24 w-32 bg-black rounded-full opacity-80"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 {/if}
@@ -131,5 +182,23 @@
 			'wght' 400,
 			'GRAD' 0,
 			'opsz' 24;
+	}
+
+	@keyframes slideRight {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(110vw);
+		}
+	}
+
+	.shutter-bar.animate-reveal,
+	#book-preview-inner.animate-reveal {
+		animation: slideRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+	}
+
+	#book-preview-inner.animate-reveal {
+		animation-duration: 1s; /* Slightly faster for parallax */
 	}
 </style>
