@@ -1,5 +1,6 @@
 <script>
 	import newspaperAnim from '$lib/images/newspaper_anim.webp';
+	import newspaperAnimSmall from '$lib/images/newspaper_anim_small.webp';
 </script>
 
 <section
@@ -29,11 +30,14 @@
 	<div
 		class="w-full md:w-2/5 bg-surface-main p-margin-desktop flex items-center justify-center relative blueprint-pattern bg-blueprint"
 	>
-		<img
-			alt="Anthropomorphic newspaper reading itself illustration"
-			class="w-full h-auto max-h-[35vh] scale-110 object-contain opacity-90 relative z-10 animate-float"
-			src={newspaperAnim}
-		/>
+		<picture>
+			<source media="(max-width: 640px)" srcset={newspaperAnimSmall} />
+			<img
+				alt="Anthropomorphic newspaper reading itself illustration"
+				class="w-full h-auto max-h-[35vh] scale-110 object-contain opacity-90 relative z-10 animate-float"
+				src={newspaperAnim}
+			/>
+		</picture>
 	</div>
 </section>
 
