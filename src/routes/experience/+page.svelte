@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import TopNavBar from '$lib/components/TopNavBar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import ExperienceSidebar from '$lib/components/experience/ExperienceSidebar.svelte';
@@ -151,6 +152,15 @@
 			borderClass: 'border-b-2 md:border-b-0 border-black'
 		}
 	];
+
+	let revealCurtain = false;
+	onMount(() => {
+		requestAnimationFrame(() => {
+			setTimeout(() => {
+				revealCurtain = true;
+			}, 50);
+		});
+	});
 </script>
 
 <svelte:head>
@@ -158,6 +168,26 @@
 </svelte:head>
 
 <TopNavBar />
+
+<div class="fixed inset-0 z-[200] pointer-events-none flex items-start h-[120vh] -top-[20vh] overflow-hidden">
+	<!-- 4 staggered panels with rounded tops -->
+	<div 
+		class="w-1/4 h-full bg-primary rounded-t-[100px] transition-transform duration-[1000ms] ease-in-out delay-[0ms]"
+		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
+	></div>
+	<div 
+		class="w-1/4 h-full bg-primary rounded-t-[150px] transition-transform duration-[1100ms] ease-in-out delay-[150ms]"
+		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
+	></div>
+	<div 
+		class="w-1/4 h-full bg-primary rounded-t-[80px] transition-transform duration-[950ms] ease-in-out delay-[50ms]"
+		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
+	></div>
+	<div 
+		class="w-1/4 h-full bg-primary rounded-t-[120px] transition-transform duration-[1050ms] ease-in-out delay-[200ms]"
+		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
+	></div>
+</div>
 
 <main class="flex-grow flex flex-col lg:flex-row border-b-2 border-black bg-surface">
 	<ExperienceSidebar />

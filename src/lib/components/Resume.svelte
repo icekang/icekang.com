@@ -1,5 +1,8 @@
 <script lang="ts">
 	import ResumeCard from './ResumeCard.svelte';
+	import { goto } from '$app/navigation';
+	import { tweened } from 'svelte/motion';
+	import { cubicInOut } from 'svelte/easing';
 
 	const experiences = [
 		{
@@ -30,6 +33,27 @@
 			accentColor: '#e3e3de'
 		}
 	];
+
+	let buttonRect = { top: 0, left: 0, width: 0, height: 0 };
+	let isExpanding = false;
+	const scale = tweened(1, { duration: 1000, easing: cubicInOut });
+
+	function gotoCV(e: MouseEvent) {
+		const target = e.currentTarget as HTMLElement;
+		buttonRect = target.getBoundingClientRect();
+		isExpanding = true;
+		
+		scale.set(300); // Expanding scale factor
+		
+		setTimeout(() => {
+			goto('/experience');
+			// Reset the state so the home page returns to normal if they navigate back
+			setTimeout(() => {
+				isExpanding = false;
+				scale.set(1, { duration: 0 });
+			}, 500);
+		}, 1000);
+	}
 </script>
 
 <section
@@ -47,5 +71,27 @@
 				<ResumeCard {...exp} />
 			{/each}
 		</div>
+
+		<div class="mt-16 flex justify-center relative">
+			<button 
+				on:click={gotoCV}
+				class="bg-primary text-on-primary font-nav-lg text-[20px] uppercase tracking-widest px-8 py-4 shadow-cartoon hover:scale-95 transition-transform duration-75 border-2 border-black rounded-none relative overflow-hidden"
+			>
+				FULL CV
+			</button>
+		</div>
 	</div>
+
+	{#if isExpanding}
+		<div 
+			class="fixed z-[100] bg-primary rounded-full pointer-events-none"
+			style="
+				top: {buttonRect.top + buttonRect.height/2}px; 
+				left: {buttonRect.left + buttonRect.width/2}px; 
+				width: 10px; 
+				height: 10px; 
+				transform: translate(-50%, -50%) scale({$scale});
+			"
+		></div>
+	{/if}
 </section>
