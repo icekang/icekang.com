@@ -165,25 +165,35 @@
 
 <svelte:head>
 	<title>Experience | Naravich Chutisilp</title>
+	<meta
+		name="description"
+		content="Naravich Chutisilp - ML Engineer & Researcher specializing in real-time ML/AI financial systems and Generative AI"
+	/>
+	<meta
+		name="keywords"
+		content="Naravich Chutisilp, ML Engineer, Computer Vision, Deep Learning, AI Researcher"
+	/>
 </svelte:head>
 
 <TopNavBar />
 
-<div class="fixed inset-0 z-[200] pointer-events-none flex items-start h-[120vh] -top-[20vh] overflow-hidden">
+<div
+	class="fixed inset-0 z-[200] pointer-events-none flex items-start h-[120vh] -top-[20vh] overflow-hidden"
+>
 	<!-- 4 staggered panels with rounded tops -->
-	<div 
+	<div
 		class="w-1/4 h-full bg-primary rounded-t-[100px] transition-transform duration-[1000ms] ease-in-out delay-[0ms]"
 		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
 	></div>
-	<div 
+	<div
 		class="w-1/4 h-full bg-primary rounded-t-[150px] transition-transform duration-[1100ms] ease-in-out delay-[150ms]"
 		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
 	></div>
-	<div 
+	<div
 		class="w-1/4 h-full bg-primary rounded-t-[80px] transition-transform duration-[950ms] ease-in-out delay-[50ms]"
 		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
 	></div>
-	<div 
+	<div
 		class="w-1/4 h-full bg-primary rounded-t-[120px] transition-transform duration-[1050ms] ease-in-out delay-[200ms]"
 		style="transform: {revealCurtain ? 'translateY(120vh)' : 'translateY(0)'};"
 	></div>
@@ -227,7 +237,8 @@
 <style>
 	.bg-grid-blueprint {
 		background-size: 64px 64px;
-		background-image: linear-gradient(to right, #e3e2e2 1px, transparent 1px),
+		background-image:
+			linear-gradient(to right, #e3e2e2 1px, transparent 1px),
 			linear-gradient(to bottom, #e3e2e2 1px, transparent 1px);
 	}
 </style>

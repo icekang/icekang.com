@@ -3,8 +3,6 @@
 	import TopNavBar from '$lib/components/TopNavBar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import type { PageData } from './$types';
-	import { fade, fly } from 'svelte/transition';
-	import { cubicInOut } from 'svelte/easing';
 
 	// Refactored Components
 	import ReadingProgressBar from '$lib/components/books/reader/ReadingProgressBar.svelte';
@@ -64,7 +62,12 @@
 <RevealOverlay bind:ready />
 
 <svelte:head>
-	<title>{book.title} Review - ICEKANG</title>
+	<title>{book.title} Review | Naravich Chutisilp</title>
+	<meta name="description" content={book.fullReview.subtitle} />
+	<meta
+		name="keywords"
+		content={[...book.fullReview.motifs.map((m) => m.title), book.title, book.author].join(', ')}
+	/>
 </svelte:head>
 
 <div
@@ -77,7 +80,6 @@
 		<ReviewHero
 			title={book.title}
 			description={book.description}
-			isbn={book.isbn}
 			marginaliaId={book.marginaliaId}
 			scrollY={y}
 			{isMobile}

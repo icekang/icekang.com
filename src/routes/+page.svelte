@@ -7,6 +7,17 @@
 
 <svelte:head>
 	<title>Naravich Chutisilp | Icekang</title>
+	<meta
+		name="description"
+		content="Naravich Chutisilp - ML Engineer & Researcher specializing in real-time ML/AI financial systems and Generative AI"
+	/>
+	<meta
+		name="keywords"
+		content="Naravich Chutisilp, ML Engineer, Computer Vision, Deep Learning, AI Researcher"
+	/>
+	<meta property="og:image" content="/logo.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="/logo.png" />
 </svelte:head>
 
 <TopNavBar />

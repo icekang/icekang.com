@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>Mrs. Dalloway Review - NANO BANANA</title>
+	<title>Book Reviews | Naravich Chutisilp</title>
 	<link
 		href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Newsreader:opsz,wght@6..72,400;500;600&display=swap"
 		rel="stylesheet"
