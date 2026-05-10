@@ -28,6 +28,7 @@
 				{#each books as book, i}
 					<BookCard
 						id={book.id}
+						isbn={book.isbn}
 						title={book.title}
 						description={book.description}
 						status={book.status}

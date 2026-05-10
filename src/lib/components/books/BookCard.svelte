@@ -8,6 +8,14 @@
 	export let coverClass: string = 'bg-surface-accent';
 	export let isLast: boolean = false;
 	export let viewMode: 'grid' | 'list' = 'list';
+	export let isbn: string = '';
+
+	let coverUrl = isbn ? `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg` : '';
+	
+	function handleImageError() {
+		// Fallback to a solid color if even Open Library fails
+		coverUrl = '';
+	}
 
 	$: statusColorClass = status === 'Reviewed' 
 		? 'bg-mac-green border-black text-black' 
@@ -34,7 +42,11 @@
 <a href="/books/{id}" class="block h-full">
 	<article class="flex flex-col md:flex-row {isLast ? '' : 'border-b-2 border-black'} group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9]" style="background-color: #f9f9f9;">
 		<div class="w-full md:w-[200px] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative">
-			<div class="w-24 h-32 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon"></div>
+			<div class="w-24 h-32 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon overflow-hidden relative">
+				{#if coverUrl}
+					<img src={coverUrl} on:error={handleImageError} alt={title} class="w-full h-full object-cover" />
+				{/if}
+			</div>
 			{#if collection}
 				<div class="absolute top-4 left-4 bg-mac-red border-2 border-black px-1 py-0.5 transform -rotate-12 shadow-sm font-label-md text-[10px] uppercase text-white z-10">{collection}</div>
 			{/if}
@@ -58,7 +70,11 @@
 	<a href="/books/{id}" class="block h-full">
 		<article class="flex flex-col border-2 border-black group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9] h-full shadow-cartoon" style="background-color: #f9f9f9;">
 		<div class="h-48 border-b-2 border-black flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative">
-			<div class="w-20 h-28 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon-sm"></div>
+			<div class="w-20 h-28 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon-sm overflow-hidden relative">
+				{#if coverUrl}
+					<img src={coverUrl} on:error={handleImageError} alt={title} class="w-full h-full object-cover" />
+				{/if}
+			</div>
 			{#if collection}
 				<div class="absolute top-3 left-3 bg-mac-red border-2 border-black px-1 py-0.5 transform -rotate-12 shadow-sm font-label-md text-[9px] uppercase text-white z-10">{collection}</div>
 			{/if}
