@@ -12,7 +12,9 @@
 	export let handleImageError: () => void;
 </script>
 
-<header class="w-full border-b-2 border-black flex flex-col md:flex-row md:max-h-[650px] overflow-hidden">
+<header
+	class="w-full border-b-2 border-black flex flex-col md:flex-row md:max-h-[650px] overflow-hidden"
+>
 	<div
 		class="w-full md:w-1/2 p-margin-mobile md:p-margin-desktop flex flex-col justify-center border-b-2 md:border-b-0 md:border-r-2 border-black relative overflow-y-auto bg-white"
 	>
@@ -37,10 +39,10 @@
 	>
 		<div
 			class="relative z-10 w-full h-full flex items-center justify-center"
-			style="transform: translateY({scrollY * (isMobile ? -0.15 : 0.25)}px);"
+			style="transform: translateY({scrollY * (isMobile ? 0.15 : 0.25)}px);"
 		>
 			{#if coverUrl}
-				<div class="w-full h-[110%] -top-[5%] relative group">
+				<div class="w-full h-[140%] md:h-[110%] relative group">
 					<img
 						alt="{title} book cover"
 						class="relative z-10 w-full h-full object-cover"
