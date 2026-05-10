@@ -21,6 +21,9 @@
 	let y = 0;
 	let innerWidth = 0;
 
+	let coverUrl = `https://books.google.com/books/content?vid=ISBN${book.isbn}&printsec=frontcover&img=1&zoom=3`;
+	let coverSource = 'Google Books';
+
 	$: isMobile = innerWidth < 768;
 
 	function handleScroll() {
@@ -29,6 +32,24 @@
 		const scrollTop = window.scrollY;
 		const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 		scrollProgress = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100));
+	}
+
+	function handleImageLoad(e: Event) {
+		const img = e.currentTarget as HTMLImageElement;
+		// Google Books placeholder signatures:
+		// Small: 128x192 or 128x170
+		// High-res (zoom=2/3): 575x750
+		if (
+			(img.naturalWidth === 128 && (img.naturalHeight === 192 || img.naturalHeight === 170)) ||
+			(img.naturalWidth === 575 && img.naturalHeight === 750)
+		) {
+			handleImageError();
+		}
+	}
+
+	function handleImageError() {
+		coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+		coverSource = 'Open Library';
 	}
 
 	onMount(() => {
@@ -75,6 +96,9 @@
 			marginaliaId={book.marginaliaId}
 			scrollY={y}
 			{isMobile}
+			{coverUrl}
+			{handleImageLoad}
+			{handleImageError}
 		/>
 
 		<section class="w-full flex flex-col md:flex-row flex-grow">
@@ -84,6 +108,7 @@
 				dateRead={book.dateRead}
 				category={book.category}
 				isbn={book.isbn}
+				{coverSource}
 			/>
 
 			<ReviewContent

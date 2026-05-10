@@ -4,6 +4,7 @@
 	export let dateRead: string;
 	export let category: string;
 	export let isbn: string;
+	export let coverSource: string;
 </script>
 
 <aside class="w-full md:w-[300px] flex-shrink-0 border-b-2 md:border-b-0 md:border-r-2 border-black p-margin-mobile md:p-margin-desktop flex flex-col gap-8 bg-surface-main">
@@ -49,7 +50,7 @@
 		<h3 class="font-label-caps text-label-caps text-surface-accent border-b-2 border-black pb-1 uppercase inline-block self-start">
 			Cover Source
 		</h3>
-		<p class="font-body-md text-body-md italic opacity-70">Open Library API</p>
+		<p class="font-body-md text-body-md italic opacity-70">{coverSource}</p>
 	</div>
 
 	<div class="mt-auto pt-8">
