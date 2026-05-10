@@ -9,6 +9,8 @@
 	export let isLast: boolean = false;
 	export let viewMode: 'grid' | 'list' = 'list';
 	export let isbn: string = '';
+	export let rating: number = 0;
+	export let dateRead: string = '';
 
 	let coverUrl = isbn
 		? `https://books.google.com/books/content?vid=ISBN${isbn}&printsec=frontcover&img=1&zoom=2`
@@ -119,9 +121,38 @@
 					>
 					{#if category}
 						<span
-							class="border border-black px-2 py-0.5 font-label-md text-label-md uppercase bg-surface-main text-black"
+							class="border border-black px-2 py-1 font-label-md text-label-md uppercase bg-surface-main text-black"
 							>{category}</span
 						>
+					{/if}
+
+					{#if rating > 0}
+						<div class="flex items-center gap-0.5 ml-2 border-l border-black/10 pl-2">
+							{#each Array(5) as _, i}
+								{#if i + 1 <= rating}
+									<span
+										class="material-symbols-outlined text-[14px] text-black"
+										style="font-variation-settings: 'FILL' 1;">star</span
+									>
+								{:else if i < rating}
+									<span
+										class="material-symbols-outlined text-[14px] text-black"
+										style="font-variation-settings: 'FILL' 1;">star_half</span
+									>
+								{:else}
+									<span
+										class="material-symbols-outlined text-[14px] text-black"
+										style="font-variation-settings: 'FILL' 0;">star</span
+									>
+								{/if}
+							{/each}
+						</div>
+					{/if}
+
+					{#if dateRead}
+						<span class="text-[10px] font-label-md uppercase opacity-40 md:ml-auto">
+							Read: {dateRead}
+						</span>
 					{/if}
 				</div>
 				<p class="font-body-md text-body-md max-w-2xl {descClass} transition-colors line-clamp-3">

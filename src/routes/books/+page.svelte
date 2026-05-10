@@ -5,8 +5,28 @@
 	import BookListHeader from '$lib/components/books/BookListHeader.svelte';
 	import BookCard from '$lib/components/books/BookCard.svelte';
 
-	let viewMode: 'grid' | 'list' = 'list';
 	import { books } from '$lib/data/books';
+
+	let viewMode: 'grid' | 'list' = 'list';
+
+	const statusPriority: Record<string, number> = {
+		Reading: 1,
+		Reviewed: 2,
+		Draft: 3,
+		Read: 4,
+		'Pending Index': 5
+	};
+
+	$: sortedBooks = [...books].sort((a, b) => {
+		const pA = statusPriority[a.status] || 99;
+		const pB = statusPriority[b.status] || 99;
+
+		if (pA !== pB) return pA - pB;
+
+		const dateA = new Date(a.dateRead).getTime() || 0;
+		const dateB = new Date(b.dateRead).getTime() || 0;
+		return dateB - dateA;
+	});
 </script>
 
 <svelte:head>
@@ -39,7 +59,7 @@
 					? 'flex flex-col'
 					: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop'}"
 			>
-				{#each books as book, i}
+				{#each sortedBooks as book, i}
 					<BookCard
 						id={book.id}
 						isbn={book.isbn}
@@ -49,7 +69,9 @@
 						category={book.category}
 						collection={book.collection}
 						coverClass={book.coverClass}
-						isLast={i === books.length - 1}
+						rating={book.rating}
+						dateRead={book.dateRead}
+						isLast={i === sortedBooks.length - 1}
 						{viewMode}
 					/>
 				{/each}
