@@ -31,8 +31,18 @@
 	>
 		<img
 			alt="Anthropomorphic newspaper reading itself illustration"
-			class="w-full h-auto max-h-[35vh] scale-110 object-contain opacity-90 relative z-10"
+			class="w-full h-auto max-h-[35vh] scale-110 object-contain opacity-90 relative z-10 animate-float"
 			src={newspaperAnim}
 		/>
 	</div>
 </section>
+
+<style>
+	@keyframes float {
+		0%, 100% { transform: translateY(0) scale(1.1); }
+		50% { transform: translateY(-10px) scale(1.12); }
+	}
+	.animate-float {
+		animation: float 6s ease-in-out infinite;
+	}
+</style>

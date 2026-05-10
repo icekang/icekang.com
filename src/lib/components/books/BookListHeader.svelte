@@ -11,20 +11,20 @@
 </script>
 
 <div
-	class="sticky top-[72px] z-40 bg-white border-b-2 border-black px-margin-desktop py-4 flex justify-between items-center shadow-sm overflow-hidden"
+	class="sticky top-[72px] z-40 border-b-2 border-black px-margin-desktop py-4 flex justify-between items-center -mt-[2px] relative"
 	style="background-color: #005baa;"
 >
 	<h3 class="font-nav-lg text-nav-lg uppercase tracking-widest text-white">Library</h3>
-	<div class="flex gap-2">
+	<div class="flex gap-4">
 		<button
-			class="w-8 h-8 border-2 flex items-center justify-center transition-colors {viewMode === 'grid' ? 'bg-black text-white border-black' : 'text-white border-white hover:bg-white/10'}"
+			class="w-8 h-8 border-2 flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-cartoon-sm {viewMode === 'grid' ? 'bg-black text-white border-black' : 'bg-white text-black border-black'}"
 			on:click={() => setView('grid')}
 			aria-label="Grid View"
 		>
 			<span class="material-symbols-outlined text-sm">grid_view</span>
 		</button>
 		<button
-			class="w-8 h-8 border-2 flex items-center justify-center transition-colors {viewMode === 'list' ? 'bg-black text-white border-black' : 'text-white border-white hover:bg-white/10'}"
+			class="w-8 h-8 border-2 flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-cartoon-sm {viewMode === 'list' ? 'bg-black text-white border-black' : 'bg-white text-black border-black'}"
 			on:click={() => setView('list')}
 			aria-label="List View"
 		>
