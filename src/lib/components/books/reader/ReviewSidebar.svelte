@@ -26,12 +26,28 @@
 		</h3>
 		<div class="flex gap-1">
 			{#each Array(5) as _, i}
-				<span
-					class="material-symbols-outlined text-black"
-					style="font-variation-settings: 'FILL' {i < rating ? 1 : 0};"
-				>
-					star
-				</span>
+				{#if i + 1 <= rating}
+					<span
+						class="material-symbols-outlined text-black"
+						style="font-variation-settings: 'FILL' 1;"
+					>
+						star
+					</span>
+				{:else if i < rating}
+					<span
+						class="material-symbols-outlined text-black"
+						style="font-variation-settings: 'FILL' 1;"
+					>
+						star_half
+					</span>
+				{:else}
+					<span
+						class="material-symbols-outlined text-black"
+						style="font-variation-settings: 'FILL' 0;"
+					>
+						star
+					</span>
+				{/if}
 			{/each}
 		</div>
 	</div>
