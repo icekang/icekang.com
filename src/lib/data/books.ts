@@ -119,8 +119,8 @@ export const books: Book[] = [
 		category: 'Fantasy',
 		collection: null,
 		coverClass: 'bg-surface-accent',
-		rating: 0,
-		dateRead: '',
+		rating: 3.5,
+		dateRead: 'April 18, 2026',
 		marginaliaId: '#004',
 		fullReview: {
 			subtitle: 'TBD',
@@ -175,17 +175,26 @@ export const books: Book[] = [
 		title: 'The Prophet',
 		author: 'Kahlil Gibran',
 		description: 'A collection of poetic essays on the human condition, offering timeless wisdom on love, work, and joy.',
-		status: 'Read',
+		status: 'Reviewed',
 		category: 'Philosophy',
 		collection: null,
 		coverClass: 'bg-surface-accent',
-		rating: 0,
-		dateRead: '',
+		rating: 5,
+		dateRead: 'Sep 17, 2024',
 		marginaliaId: '#007',
 		fullReview: {
-			subtitle: 'TBD',
-			paragraphs: [],
-			quote: '',
+			subtitle: 'The Prophet: A Parting Gift of Wisdom',
+			paragraphs: [
+				"The prophet, Almustafa, who has been living in the city of Orphalese for twelve years and is beloved by many villagers, is about to leave the town as he sees a large sailing boat approaching. As he climbs down the hill where he likes to enjoy his solitude each day, the people gather around him, lamenting his imminent departure and asking for his wisdom for the last time...",
+				"His philosophy, woven into beautiful words, really makes the wisdom more powerful. I don't have much to say, as I think each chapter captures its essence perfectly.",
+				"And here is part I love the most in his book: On Marriage"
+			],
+			quote: "Love one another, but make not a bond of love: \n\
+			Let it rather be a moving sea between the shores of your souls. \n\
+			Fill each other’s cup but drink not from one cup.\n\
+			Give one another of your bread but eat not from the same loaf. \n\
+			Sing and dance together and be joyous, but let each one of your be alone,\n\
+			Even as the strings of the lute are alone though they quiver with the same music.",
 			motifs: []
 		}
 	},
