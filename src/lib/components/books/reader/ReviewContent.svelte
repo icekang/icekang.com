@@ -38,7 +38,7 @@
 			</blockquote>
 		</div>
 
-		<h3
+		<!-- <h3
 			class="font-headline-md text-2xl font-bold mt-12 mb-6 border-b-2 border-black inline-block pb-2 uppercase tracking-tight"
 		>
 			Core Narrative Motifs
@@ -56,6 +56,6 @@
 					</div>
 				</li>
 			{/each}
-		</ul>
+		</ul> -->
 	</div>
 </article>
