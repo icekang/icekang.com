@@ -68,37 +68,39 @@
 		class="block h-full {isClickable ? '' : 'cursor-default'}"
 	>
 		<article
-			class="flex flex-col md:flex-row {isLast
+			class="flex flex-row {isLast
 				? ''
 				: 'border-b-2 border-black'} group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9]"
 			style="background-color: #f9f9f9;"
 		>
 			<div
-				class="w-full md:w-[200px] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 flex flex-col items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative"
+				class="w-1/3 md:w-[200px] border-r-2 border-black p-4 md:p-6 flex-shrink-0 flex flex-col items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative"
 			>
-				<div
-					class="w-24 h-32 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon overflow-hidden relative mb-2"
-				>
-					{#if coverUrl}
-						<img
-							src={coverUrl}
-							on:load={handleImageLoad}
-							on:error={handleImageError}
-							alt={title}
-							class="w-full h-full object-cover"
-						/>
+				<div class="relative transform group-hover:-translate-y-1 transition-transform mb-2">
+					<div
+						class="w-24 h-32 border-2 border-black {coverClass} shadow-cartoon overflow-hidden relative"
+					>
+						{#if coverUrl}
+							<img
+								src={coverUrl}
+								on:load={handleImageLoad}
+								on:error={handleImageError}
+								alt={title}
+								class="w-full h-full object-cover"
+							/>
+						{/if}
+					</div>
+					{#if collection}
+						<div
+							class="absolute -top-2 -left-2 bg-mac-red border-2 border-black px-1 py-0.5 transform -rotate-12 shadow-sm font-label-md text-[10px] uppercase text-white z-20 whitespace-nowrap"
+						>
+							{collection}
+						</div>
 					{/if}
 				</div>
-				<span class="text-[9px] mt-3 italic opacity-30 uppercase tracking-tighter"
+				<span class="text-[9px] italic opacity-30 uppercase tracking-tighter"
 					>Source: {coverSource}</span
 				>
-				{#if collection}
-					<div
-						class="absolute top-4 left-4 bg-mac-red border-2 border-black px-1 py-0.5 transform -rotate-12 shadow-sm font-label-md text-[10px] uppercase text-white z-10"
-					>
-						{collection}
-					</div>
-				{/if}
 			</div>
 			<div class="flex-grow p-6 flex flex-col justify-center">
 				<h4
