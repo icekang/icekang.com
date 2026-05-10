@@ -32,7 +32,7 @@
 				format_quote
 			</span>
 			<blockquote
-				class="text-2xl md:text-headline-lg font-headline-lg italic text-center leading-relaxed"
+				class="text-2xl md:text-headline-md font-headline-md italic text-center leading-relaxed whitespace-pre-line"
 			>
 				{quote}
 			</blockquote>
