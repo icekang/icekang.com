@@ -1,4 +1,5 @@
 <script lang="ts">
+	export let id: string;
 	export let title: string;
 	export let description: string;
 	export let status: 'Reviewed' | 'Draft' | 'Pending Index';
@@ -30,6 +31,7 @@
 </script>
 
 {#if viewMode === 'list'}
+<a href="/books/{id}" class="block h-full">
 	<article class="flex flex-col md:flex-row {isLast ? '' : 'border-b-2 border-black'} group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9]" style="background-color: #f9f9f9;">
 		<div class="w-full md:w-[200px] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative">
 			<div class="w-24 h-32 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon"></div>
@@ -51,8 +53,10 @@
 			<span class="material-symbols-outlined">arrow_forward</span>
 		</div>
 	</article>
+</a>
 {:else}
-	<article class="flex flex-col border-2 border-black group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9] h-full shadow-cartoon" style="background-color: #f9f9f9;">
+	<a href="/books/{id}" class="block h-full">
+		<article class="flex flex-col border-2 border-black group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9] h-full shadow-cartoon" style="background-color: #f9f9f9;">
 		<div class="h-48 border-b-2 border-black flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative">
 			<div class="w-20 h-28 border-2 border-black {coverClass} transform group-hover:-translate-y-1 transition-transform shadow-cartoon-sm"></div>
 			{#if collection}
@@ -73,5 +77,6 @@
 			<span class="material-symbols-outlined text-sm">arrow_forward</span>
 		</div>
 	</article>
+</a>
 {/if}
 
