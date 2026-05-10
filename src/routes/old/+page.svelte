@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/images/logo.jpg';
+	import logo from '$lib/images/logo.png';
 	import Header from '$lib/components/Header.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import ExperienceItem from '$lib/components/ExperienceItem.svelte';

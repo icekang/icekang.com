@@ -3,7 +3,6 @@
 
 	export let title: string;
 	export let description: string;
-	export let isbn: string;
 	export let marginaliaId: string;
 	export let scrollY: number = 0;
 	export let isMobile: boolean = false;
