@@ -63,13 +63,13 @@
 		// 1. Wait 1s, then start sliding the shutter bars
 		setTimeout(() => {
 			revealing = true;
-		}, 1000);
+		}, 500);
 
 		// 2. Wait for the entire animation to finish (1s start + 480ms max delay + 1.2s slide)
 		// and then remove the overlay entirely
 		setTimeout(() => {
 			ready = true;
-		}, 2700);
+		}, 1500);
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
@@ -87,9 +87,9 @@
 		<!-- Background Shutter Bars -->
 		{#each Array(12) as _, i (i)}
 			<div
-				class="shutter-bar absolute w-full h-[8.34vh] bg-white border-outline-variant border-1 rounded-full z-10"
+				class="shutter-bar absolute w-full h-[8.34vh] rounded-full z-10 bg-surface-container-high scale-x-[1.2]"
 				class:animate-reveal={revealing}
-				style="top: {i * 8.33}vh; animation-delay: {i * 40}ms"
+				style="top: {i * 8.33}vh; animation-delay: {Math.abs(i - 5.5) * 80}ms"
 			></div>
 		{/each}
 
@@ -104,25 +104,25 @@
 				<!-- Content Skeleton -->
 				<div class="flex flex-col gap-6 md:gap-10 w-full">
 					<!-- Title -->
-					<div class="h-12 md:h-24 w-3/4 bg-black rounded-full"></div>
+					<div class="h-12 md:h-24 w-3/4 bg-on-secondary-container rounded-full"></div>
 
 					<!-- Paragraph 1 -->
 					<div class="flex flex-col gap-4">
-						<div class="h-12 md:h-24 w-full bg-black rounded-full"></div>
-						<div class="h-12 md:h-24 w-5/6 bg-black rounded-full"></div>
-						<div class="h-12 md:h-24 w-2/3 bg-black rounded-full"></div>
-						<div class="h-12 md:h-24 w-full bg-black rounded-full"></div>
+						<div class="h-12 md:h-24 w-full bg-on-secondary-container rounded-full"></div>
+						<div class="h-12 md:h-24 w-5/6 bg-on-secondary-container rounded-full"></div>
+						<div class="h-12 md:h-24 w-2/3 bg-on-secondary-container rounded-full"></div>
+						<div class="h-12 md:h-24 w-full bg-on-secondary-container rounded-full"></div>
 					</div>
 
 					<!-- Paragraph 2 -->
 					<div class="flex flex-col gap-4 mt-16 md:mt-20">
-						<div class="h-12 md:h-24 w-11/12 bg-black rounded-full"></div>
-						<div class="h-12 md:h-24 w-4/5 bg-black rounded-full"></div>
-						<div class="h-12 md:h-24 w-full bg-black rounded-full"></div>
+						<div class="h-12 md:h-24 w-11/12 bg-on-secondary-container rounded-full"></div>
+						<div class="h-12 md:h-24 w-4/5 bg-on-secondary-container rounded-full"></div>
+						<div class="h-12 md:h-24 w-full bg-on-secondary-container rounded-full"></div>
 					</div>
 
 					<!-- CTA/Footer -->
-					<div class="h-12 md:h-24 w-32 bg-black rounded-full opacity-80"></div>
+					<div class="h-12 md:h-24 w-32 bg-on-secondary-container rounded-full opacity-80"></div>
 				</div>
 			</div>
 		</div>
@@ -195,7 +195,7 @@
 
 	.shutter-bar.animate-reveal,
 	#book-preview-inner.animate-reveal {
-		animation: slideRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		animation: slideRight 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards;
 	}
 
 	#book-preview-inner.animate-reveal {
