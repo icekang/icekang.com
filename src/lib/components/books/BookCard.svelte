@@ -76,13 +76,13 @@
 		<article
 			class="flex flex-row {isLast
 				? ''
-				: 'border-b-2 border-black'} group hover:bg-white transition-colors relative cursor-pointer bg-[#f9f9f9]"
+				: 'border-b-2 border-black'} {isClickable ? 'group hover:bg-white cursor-pointer' : 'cursor-default'} transition-colors relative bg-[#f9f9f9]"
 			style="background-color: #f9f9f9;"
 		>
 			<div
-				class="w-1/3 md:w-[200px] border-r-2 border-black p-4 md:p-6 flex-shrink-0 flex flex-col items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative"
+				class="w-1/3 md:w-[200px] border-r-2 border-black p-4 md:p-6 flex-shrink-0 flex flex-col items-center justify-center bg-surface-main {isClickable ? 'group-hover:bg-white' : ''} transition-colors relative"
 			>
-				<div class="relative transform group-hover:-translate-y-1 transition-transform mb-2">
+				<div class="relative transform {isClickable ? 'group-hover:-translate-y-1' : ''} transition-transform mb-2">
 					<div
 						class="w-24 h-32 border-2 border-black {coverClass} shadow-cartoon overflow-hidden relative"
 					>
@@ -175,13 +175,13 @@
 		class="block h-full {isClickable ? '' : 'cursor-default'}"
 	>
 		<article
-			class="flex flex-col border-2 border-black group hover:bg-white transition-colors relative {isClickable
-				? 'cursor-pointer'
+			class="flex flex-col border-2 border-black transition-colors relative {isClickable
+				? 'group hover:bg-white cursor-pointer'
 				: 'cursor-default'} bg-[#f9f9f9] h-full shadow-cartoon"
 			style="background-color: #f9f9f9;"
 		>
 			<div
-				class="h-72 border-b-2 border-black flex items-center justify-center bg-surface-main group-hover:bg-white transition-colors relative overflow-hidden"
+				class="h-72 border-b-2 border-black flex items-center justify-center bg-surface-main {isClickable ? 'group-hover:bg-white' : ''} transition-colors relative overflow-hidden"
 			>
 				{#if coverUrl}
 					<img
