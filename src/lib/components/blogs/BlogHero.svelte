@@ -8,18 +8,28 @@
 	import weiss from '$lib/images/blogs/weiss.png';
 
 	let images = [
-		{ id: 'horn', src: horn, x: -27.33, y: -12.59, scale: 0.306, rotate: 0, flipX: 1, z: 12 },
-		{ id: 'cow', src: cow, x: 33.94, y: -26.08, scale: 0.336, rotate: 0, flipX: 1, z: 11 },
-		{ id: 'cupidL', src: cupid, x: -14.49, y: 5.79, scale: 0.153, rotate: 2.64, flipX: -1, z: 15 },
-		{ id: 'statue', src: statue, x: -0.13, y: -0.72, scale: 0.318, rotate: 0, flipX: 1, z: 18 },
-		{ id: 'cupidR', src: cupid, x: 14.51, y: 5.68, scale: 0.151, rotate: -4.96, flipX: 1, z: 16 },
-		{ id: 'wat', src: wat, x: 0.11, y: -15.2, scale: 0.523, rotate: 0, flipX: 1, z: 19 },
-		{ id: 'weissL', src: weiss, x: -39.68, y: -23.11, scale: 0.269, rotate: 0.08, flipX: 1, z: 13 },
-		{ id: 'weissR', src: weiss, x: 27.19, y: -21.31, scale: 0.303, rotate: 0.18, flipX: -1, z: 14 }
+		{ id: 'horn', src: horn, x: -27.33, y: -12.59, scale: 0.306, mx: -27.47, my: -29.12, mScale: 0.306, rotate: 0, flipX: 1, z: 12 },
+		{ id: 'cow', src: cow, x: 33.94, y: -26.08, scale: 0.336, mx: 26.50, my: -43.99, mScale: 0.336, rotate: 0, flipX: 1, z: 11 },
+		{ id: 'cupidL', src: cupid, x: -14.49, y: 5.79, scale: 0.153, mx: -18.40, my: -10.40, mScale: 0.170, rotate: 2.64, flipX: -1, z: 15 },
+		{ id: 'statue', src: statue, x: -0.13, y: -0.72, scale: 0.318, mx: 1.63, my: -4.45, mScale: 0.538, rotate: 0, flipX: 1, z: 18 },
+		{ id: 'cupidR', src: cupid, x: 14.51, y: 5.68, scale: 0.151, mx: 21.81, my: -10.02, mScale: 0.181, rotate: -4.96, flipX: 1, z: 16 },
+		{ id: 'wat', src: wat, x: 0.11, y: -15.2, scale: 0.523, mx: 0.66, my: -33.24, mScale: 0.523, rotate: 0, flipX: 1, z: 19 },
+		{ id: 'weissL', src: weiss, x: -39.68, y: -23.11, scale: 0.269, mx: -39.82, my: -39.64, mScale: 0.269, rotate: 0.08, flipX: 1, z: 13 },
+		{ id: 'weissR', src: weiss, x: 27.19, y: -21.31, scale: 0.303, mx: 27.05, my: -37.84, mScale: 0.303, rotate: 0.18, flipX: -1, z: 14 }
 	];
 
 	let activeId = null;
 	let container;
+	let isMobile = false;
+
+	onMount(() => {
+		const checkMobile = () => {
+			isMobile = window.innerWidth < 768;
+		};
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	});
 
 	// Easter Egg Editor Mode
 	let editorMode = false;
@@ -39,11 +49,12 @@
 		}, 400);
 	}
 
-	let dragMode = null; // 'move', 'resize', 'rotate'
+	let dragMode = null; // 'move', 'resize', 'rotate', 'move_all'
 	let startMouse = { x: 0, y: 0 };
 
 	// For Move
 	let startImage = { x: 0, y: 0 };
+	let startAllImages = [];
 	// For Resize
 	let initialScale = 0;
 	let resizeState = null;
@@ -53,10 +64,25 @@
 	let startAngle = 0;
 
 	function pointerDown(e, img) {
+		if (activeId === 'ALL') {
+			dragMode = 'move_all';
+			startMouse = { x: e.clientX, y: e.clientY };
+			startAllImages = images.map((i) => ({
+				id: i.id,
+				x: isMobile && i.mx !== undefined ? i.mx : i.x,
+				y: isMobile && i.my !== undefined ? i.my : i.y
+			}));
+			e.target.setPointerCapture(e.pointerId);
+			return;
+		}
+
 		activeId = img.id;
 		dragMode = 'move';
 		startMouse = { x: e.clientX, y: e.clientY };
-		startImage = { x: img.x, y: img.y };
+		startImage = {
+			x: isMobile && img.mx !== undefined ? img.mx : img.x,
+			y: isMobile && img.my !== undefined ? img.my : img.y
+		};
 		e.target.setPointerCapture(e.pointerId);
 	}
 
@@ -104,9 +130,9 @@
 		const anchorScreenOffsetY = anchorLocalX * Math.sin(theta) + anchorLocalY * Math.cos(theta);
 
 		resizeState = {
-			initialX: img.x,
-			initialY: img.y,
-			initialScale: img.scale,
+			initialX: isMobile && img.mx !== undefined ? img.mx : img.x,
+			initialY: isMobile && img.my !== undefined ? img.my : img.y,
+			initialScale: isMobile && img.mScale !== undefined ? img.mScale : img.scale,
 			cx,
 			cy,
 			anchorScreenOffsetX,
@@ -139,14 +165,33 @@
 	function pointerMove(e) {
 		if (!dragMode || !activeId || !container) return;
 
-		if (dragMode === 'move') {
+		if (dragMode === 'move_all') {
+			const vmin = Math.min(window.innerWidth, window.innerHeight);
+			const dx = ((e.clientX - startMouse.x) / vmin) * 100;
+			const dy = ((startMouse.y - e.clientY) / vmin) * 100; // Inverted for bottom anchor
+
+			images = images.map((img) => {
+				const startImg = startAllImages.find((i) => i.id === img.id);
+				if (!startImg) return img;
+
+				if (isMobile) {
+					return { ...img, mx: startImg.x + dx, my: startImg.y + dy };
+				} else {
+					return { ...img, x: startImg.x + dx, y: startImg.y + dy };
+				}
+			});
+		} else if (dragMode === 'move') {
 			const vmin = Math.min(window.innerWidth, window.innerHeight);
 			const dx = ((e.clientX - startMouse.x) / vmin) * 100;
 			const dy = ((startMouse.y - e.clientY) / vmin) * 100; // Inverted for bottom anchor
 
 			images = images.map((img) => {
 				if (img.id === activeId) {
-					return { ...img, x: startImage.x + dx, y: startImage.y + dy };
+					if (isMobile) {
+						return { ...img, mx: startImage.x + dx, my: startImage.y + dy };
+					} else {
+						return { ...img, x: startImage.x + dx, y: startImage.y + dy };
+					}
 				}
 				return img;
 			});
@@ -165,12 +210,21 @@
 
 			images = images.map((img) => {
 				if (img.id === activeId) {
-					return {
-						...img,
-						scale: resizeState.initialScale * scaleFactor,
-						x: resizeState.initialX + delta_x_pct,
-						y: resizeState.initialY + delta_y_pct
-					};
+					if (isMobile) {
+						return {
+							...img,
+							mScale: resizeState.initialScale * scaleFactor,
+							mx: resizeState.initialX + delta_x_pct,
+							my: resizeState.initialY + delta_y_pct
+						};
+					} else {
+						return {
+							...img,
+							scale: resizeState.initialScale * scaleFactor,
+							x: resizeState.initialX + delta_x_pct,
+							y: resizeState.initialY + delta_y_pct
+						};
+					}
 				}
 				return img;
 			});
@@ -194,7 +248,11 @@
 	// Editor Controls
 	function flipActive() {
 		if (!activeId) return;
-		images = images.map((img) => (img.id === activeId ? { ...img, flipX: img.flipX * -1 } : img));
+		if (activeId === 'ALL') {
+			images = images.map((img) => ({ ...img, flipX: img.flipX * -1 }));
+		} else {
+			images = images.map((img) => (img.id === activeId ? { ...img, flipX: img.flipX * -1 } : img));
+		}
 	}
 
 	function moveLayerZ(id, delta) {
@@ -264,6 +322,10 @@
 			x: Number(img.x.toFixed(2)),
 			y: Number(img.y.toFixed(2)),
 			scale: Number(img.scale.toFixed(3)),
+			mx: img.mx !== undefined ? Number(img.mx.toFixed(2)) : Number(img.x.toFixed(2)),
+			my: img.my !== undefined ? Number(img.my.toFixed(2)) : Number(img.y.toFixed(2)),
+			mScale:
+				img.mScale !== undefined ? Number(img.mScale.toFixed(3)) : Number(img.scale.toFixed(3)),
 			rotate: Number(img.rotate.toFixed(2)),
 			flipX: img.flipX,
 			z: img.z
@@ -295,7 +357,20 @@
 	on:pointerup={pointerUp}
 	on:pointerleave={pointerUp}
 	on:pointerdown={(e) => {
-		if (editorMode && e.target === container) activeId = null;
+		if (editorMode && e.target === container) {
+			if (activeId === 'ALL') {
+				dragMode = 'move_all';
+				startMouse = { x: e.clientX, y: e.clientY };
+				startAllImages = images.map((i) => ({
+					id: i.id,
+					x: isMobile && i.mx !== undefined ? i.mx : i.x,
+					y: isMobile && i.my !== undefined ? i.my : i.y
+				}));
+				e.target.setPointerCapture(e.pointerId);
+			} else {
+				activeId = null;
+			}
+		}
 	}}
 	on:click={handleHeroClick}
 >
@@ -340,13 +415,13 @@
 		<div
 			id="wrapper-{img.id}"
 			class="absolute origin-center transition-shadow duration-150 {editorMode &&
-			activeId === img.id
+			(activeId === img.id || activeId === 'ALL')
 				? 'ring-2 ring-primary ring-dashed bg-white/10'
 				: ''}"
 			style="
-				left: calc(50% + {img.x}vmin); 
-				bottom: calc(50% + {img.y}vmin); 
-				height: {img.scale * 100}vmin;
+				left: calc(50% + {isMobile && img.mx !== undefined ? img.mx : img.x}vmin); 
+				bottom: calc(50% + {isMobile && img.my !== undefined ? img.my : img.y}vmin); 
+				height: {(isMobile && img.mScale !== undefined ? img.mScale : img.scale) * 100}vmin;
 				width: max-content;
 				z-index: {img.z};
 				translate: -50% 50%;
@@ -359,10 +434,13 @@
 				alt={img.id}
 				on:pointerdown={(e) => editorMode && pointerDown(e, img)}
 				class="h-full w-auto {editorMode ? 'cursor-grab active:cursor-grabbing' : ''} {editorMode &&
-				activeId === img.id
+				(activeId === img.id || activeId === 'ALL')
 					? 'drop-shadow-[0_0_20px_rgba(255,255,0,0.8)]'
 					: 'drop-shadow-xl'}"
-				style="transform: scaleX({img.flipX}); {editorMode && activeId && activeId !== img.id
+				style="transform: scaleX({img.flipX}); {editorMode &&
+				activeId &&
+				activeId !== img.id &&
+				activeId !== 'ALL'
 					? 'pointer-events: none;'
 					: ''}"
 				draggable="false"
@@ -435,6 +513,10 @@
 						<span
 							class="font-bold py-1 bg-gray-100 border-l-4 border-primary px-2 flex-grow truncate"
 							>Active: {activeId || 'None'}</span
+						>
+						<button
+							class="px-3 py-1 bg-white border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] active:shadow-none transition-all font-bold"
+							on:click={() => (activeId = 'ALL')}>ALL</button
 						>
 						<button
 							class="px-3 py-1 bg-white border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] active:shadow-none transition-all font-bold"
