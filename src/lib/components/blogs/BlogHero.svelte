@@ -8,18 +8,36 @@
 	import weiss from '$lib/images/blogs/weiss.png';
 
 	let images = [
-		{ id: 'horn', src: horn, x: -16.51, y: -15.54, scale: 0.379, rotate: 0, flipX: 1, z: 95 },
-		{ id: 'cow', src: cow, x: 23.58, y: -33.6, scale: 0.377, rotate: 0, flipX: 1, z: 93 },
-		{ id: 'cupidL', src: cupid, x: -9.4, y: 6.3, scale: 0.216, rotate: 2.64, flipX: -1, z: 97 },
-		{ id: 'statue', src: statue, x: 0.78, y: -2.27, scale: 0.406, rotate: 0, flipX: 1, z: 98 },
-		{ id: 'cupidR', src: cupid, x: 11.29, y: 6.85, scale: 0.214, rotate: -4.97, flipX: 1, z: 94 },
-		{ id: 'wat', src: wat, x: -0.23, y: -19.66, scale: 0.625, rotate: 0, flipX: 1, z: 100 },
-		{ id: 'weissL', src: weiss, x: -23.31, y: -29.04, scale: 0.284, rotate: 0.08, flipX: 1, z: 96 },
-		{ id: 'weissR', src: weiss, x: 19.44, y: -27.99, scale: 0.303, rotate: 0.18, flipX: -1, z: 99 }
+		{ id: 'horn', src: horn, x: -27.33, y: -12.59, scale: 0.306, rotate: 0, flipX: 1, z: 94 },
+		{ id: 'cow', src: cow, x: 33.94, y: -26.08, scale: 0.336, rotate: 0, flipX: 1, z: 93 },
+		{ id: 'cupidL', src: cupid, x: -14.49, y: 5.79, scale: 0.153, rotate: 2.64, flipX: -1, z: 97 },
+		{ id: 'statue', src: statue, x: -0.13, y: -0.72, scale: 0.318, rotate: 0, flipX: 1, z: 99 },
+		{ id: 'cupidR', src: cupid, x: 14.51, y: 5.68, scale: 0.151, rotate: -4.96, flipX: 1, z: 98 },
+		{ id: 'wat', src: wat, x: 0.11, y: -15.2, scale: 0.523, rotate: 0, flipX: 1, z: 100 },
+		{ id: 'weissL', src: weiss, x: -39.68, y: -23.11, scale: 0.269, rotate: 0.08, flipX: 1, z: 95 },
+		{ id: 'weissR', src: weiss, x: 27.19, y: -21.31, scale: 0.303, rotate: 0.18, flipX: -1, z: 96 }
 	];
 
 	let activeId = null;
 	let container;
+
+	// Easter Egg Editor Mode
+	let editorMode = false;
+	let tapCount = 0;
+	let tapTimeout;
+
+	function handleHeroClick() {
+		tapCount++;
+		if (tapCount >= 5) {
+			editorMode = !editorMode;
+			if (!editorMode) activeId = null;
+			tapCount = 0;
+		}
+		clearTimeout(tapTimeout);
+		tapTimeout = setTimeout(() => {
+			tapCount = 0;
+		}, 400);
+	}
 
 	let dragMode = null; // 'move', 'resize', 'rotate'
 	let startMouse = { x: 0, y: 0 };
@@ -122,9 +140,9 @@
 		if (!dragMode || !activeId || !container) return;
 
 		if (dragMode === 'move') {
-			const rect = container.getBoundingClientRect();
-			const dx = ((e.clientX - startMouse.x) / rect.width) * 100;
-			const dy = ((startMouse.y - e.clientY) / rect.height) * 100; // Inverted for bottom anchor
+			const vmin = Math.min(window.innerWidth, window.innerHeight);
+			const dx = ((e.clientX - startMouse.x) / vmin) * 100;
+			const dy = ((startMouse.y - e.clientY) / vmin) * 100; // Inverted for bottom anchor
 
 			images = images.map((img) => {
 				if (img.id === activeId) {
@@ -141,9 +159,9 @@
 			const delta_Cx = resizeState.anchorScreenOffsetX * (1 - scaleFactor);
 			const delta_Cy = resizeState.anchorScreenOffsetY * (1 - scaleFactor);
 
-			const rect = container.getBoundingClientRect();
-			const delta_x_pct = (delta_Cx / rect.width) * 100;
-			const delta_y_pct = (-delta_Cy / rect.height) * 100;
+			const vmin = Math.min(window.innerWidth, window.innerHeight);
+			const delta_x_pct = (delta_Cx / vmin) * 100;
+			const delta_y_pct = (-delta_Cy / vmin) * 100;
 
 			images = images.map((img) => {
 				if (img.id === activeId) {
@@ -277,28 +295,31 @@
 	on:pointerup={pointerUp}
 	on:pointerleave={pointerUp}
 	on:pointerdown={(e) => {
-		if (e.target === container) activeId = null;
+		if (editorMode && e.target === container) activeId = null;
 	}}
+	on:click={handleHeroClick}
 >
-	<!-- GENERAL GRID BACKGROUND -->
-	<div
-		class="absolute inset-0 pointer-events-none"
-		style="
-			background-image: 
-				linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-				linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-			background-size: 50px 50px;
-			background-position: center center;
-		"
-	></div>
+	{#if editorMode}
+		<!-- GENERAL GRID BACKGROUND -->
+		<div
+			class="absolute inset-0 pointer-events-none"
+			style="
+				background-image: 
+					linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+					linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+				background-size: 50px 50px;
+				background-position: center center;
+			"
+		></div>
 
-	<!-- CENTER CROSSHAIRS -->
-	<div
-		class="absolute top-1/2 left-0 w-full h-[1px] bg-white/40 pointer-events-none z-0 shadow-[0_0_5px_rgba(255,255,255,0.5)]"
-	></div>
-	<div
-		class="absolute top-0 left-1/2 w-[1px] h-full bg-white/40 pointer-events-none z-0 shadow-[0_0_5px_rgba(255,255,255,0.5)]"
-	></div>
+		<!-- CENTER CROSSHAIRS -->
+		<div
+			class="absolute top-1/2 left-0 w-full h-[1px] bg-white/40 pointer-events-none z-0 shadow-[0_0_5px_rgba(255,255,255,0.5)]"
+		></div>
+		<div
+			class="absolute top-0 left-1/2 w-[1px] h-full bg-white/40 pointer-events-none z-0 shadow-[0_0_5px_rgba(255,255,255,0.5)]"
+		></div>
+	{/if}
 
 	<!-- TITLE OVERLAY -->
 	<div class="absolute top-10 left-10 z-[100] pointer-events-none">
@@ -314,13 +335,13 @@
 		<!-- Wrapper handles position and rotation -->
 		<div
 			id="wrapper-{img.id}"
-			class="absolute origin-center transition-shadow duration-150 {activeId === img.id
+			class="absolute origin-center transition-shadow duration-150 {editorMode && activeId === img.id
 				? 'ring-2 ring-primary ring-dashed bg-white/10'
 				: ''}"
 			style="
-				left: calc(50% + {img.x}%); 
-				bottom: calc(50% + {img.y}%); 
-				height: {img.scale * 100}%;
+				left: calc(50% + {img.x}vmin); 
+				bottom: calc(50% + {img.y}vmin); 
+				height: {img.scale * 100}vmin;
 				width: max-content;
 				z-index: {img.z};
 				translate: -50% 50%;
@@ -331,17 +352,17 @@
 			<img
 				src={img.src}
 				alt={img.id}
-				on:pointerdown={(e) => pointerDown(e, img)}
-				class="h-full w-auto cursor-grab active:cursor-grabbing {activeId === img.id
+				on:pointerdown={(e) => editorMode && pointerDown(e, img)}
+				class="h-full w-auto {editorMode ? 'cursor-grab active:cursor-grabbing' : ''} {editorMode && activeId === img.id
 					? 'drop-shadow-[0_0_20px_rgba(255,255,0,0.8)]'
 					: 'drop-shadow-xl'}"
-				style="transform: scaleX({img.flipX}); {activeId && activeId !== img.id
+				style="transform: scaleX({img.flipX}); {editorMode && activeId && activeId !== img.id
 					? 'pointer-events: none;'
 					: ''}"
 				draggable="false"
 			/>
 
-			{#if activeId === img.id}
+			{#if editorMode && activeId === img.id}
 				<!-- Top Left Resize Handle -->
 				<div
 					class="absolute top-0 left-0 w-6 h-6 bg-white border-2 border-black -mt-3 -ml-3 cursor-nwse-resize shadow-[2px_2px_0_0_rgba(0,0,0,1)] flex items-center justify-center z-50 hover:bg-primary"
@@ -386,10 +407,11 @@
 		</div>
 	{/each}
 
-	<!-- EDITOR PANEL -->
-	<div
-		class="absolute top-10 right-10 z-[100] bg-surface border-2 border-black flex flex-col shadow-[4px_4px_0_0_rgba(0,0,0,1)] w-64 font-body-sm text-black max-h-[80vh] overflow-hidden"
-	>
+	{#if editorMode}
+		<!-- EDITOR PANEL -->
+		<div
+			class="absolute top-10 right-10 z-[100] bg-surface border-2 border-black flex flex-col shadow-[4px_4px_0_0_rgba(0,0,0,1)] w-64 font-body-sm text-black max-h-[80vh] overflow-hidden"
+		>
 		<!-- HEADER / TOGGLE -->
 		<button
 			class="flex justify-between items-center {panelCollapsed
@@ -468,6 +490,7 @@
 			</div>
 		{/if}
 	</div>
+	{/if}
 </section>
 
 <style>
