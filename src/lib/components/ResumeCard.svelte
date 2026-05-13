@@ -21,12 +21,10 @@
 				class="material-symbols-outlined text-on-surface-variant text-sm"
 				data-icon="location_on">location_on</span
 			>
-			<span class="font-label-md text-label-md text-on-surface-variant uppercase"
-				>{location}</span
-			>
+			<span class="font-label-md text-label-md text-on-surface-variant uppercase">{location}</span>
 		</div>
 	</div>
-	<div 
+	<div
 		class="w-full md:w-3/4 p-8 flex flex-col justify-center transition-colors duration-200 right-col"
 		style="--accent-color: {accentColor};"
 	>

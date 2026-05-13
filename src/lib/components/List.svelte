@@ -13,34 +13,34 @@
 				CATEGORY.SOFTWARE_ENGINEERING
 			]
 		},
-        {
-            name: 'Aerial Risk Detection: A Deep Learning Solution to Help Insurance Underwriters Assess Sites from Aerial/Satellite Images',
-            categories: [CATEGORY.COMPUTER_VISION, CATEGORY.SOFTWARE_ENGINEERING]
-        },
-        {
+		{
+			name: 'Aerial Risk Detection: A Deep Learning Solution to Help Insurance Underwriters Assess Sites from Aerial/Satellite Images',
+			categories: [CATEGORY.COMPUTER_VISION, CATEGORY.SOFTWARE_ENGINEERING]
+		},
+		{
 			name: 'TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking',
 			categories: [CATEGORY.SOFTWARE_ENGINEERING, CATEGORY.COMPUTER_VISION]
 		},
-        {
-            name: 'AI4Autism: An Object Detection for Autism Spectrum Disorder Diagnosis',
-            categories: [CATEGORY.NLP, CATEGORY.COMPUTER_VISION, CATEGORY.MACHINE_LEARNING_ENGINEER]
-        },
-        {
-            name: 'Data Scientist at SCB: MerlinDIY: An AutoML for non-technical users to build and utilize deep learning models',
-            categories: [CATEGORY.MACHINE_LEARNING_ENGINEER, CATEGORY.SOFTWARE_ENGINEERING]
-        },
-        {
-            name: 'Software Engineer at Taskworld: Maintaining and Developing Taskworld\'s Core Features',
-            categories: [CATEGORY.SOFTWARE_ENGINEERING]
-        },
-        {
-            name: 'Quantitative Developer at WorldQuant: A Data-Driven Dashboard for Quantitative Researchers',
-            categories: [CATEGORY.SOFTWARE_ENGINEERING]
-        },
-        {
-            name: 'Data Scientist at HOME dot TECH: An Unsupervised Learning for Real Estate Property Analysis',
-            categories: [CATEGORY.MACHINE_LEARNING]
-        }
+		{
+			name: 'AI4Autism: An Object Detection for Autism Spectrum Disorder Diagnosis',
+			categories: [CATEGORY.NLP, CATEGORY.COMPUTER_VISION, CATEGORY.MACHINE_LEARNING_ENGINEER]
+		},
+		{
+			name: 'Data Scientist at SCB: MerlinDIY: An AutoML for non-technical users to build and utilize deep learning models',
+			categories: [CATEGORY.MACHINE_LEARNING_ENGINEER, CATEGORY.SOFTWARE_ENGINEERING]
+		},
+		{
+			name: "Software Engineer at Taskworld: Maintaining and Developing Taskworld's Core Features",
+			categories: [CATEGORY.SOFTWARE_ENGINEERING]
+		},
+		{
+			name: 'Quantitative Developer at WorldQuant: A Data-Driven Dashboard for Quantitative Researchers',
+			categories: [CATEGORY.SOFTWARE_ENGINEERING]
+		},
+		{
+			name: 'Data Scientist at HOME dot TECH: An Unsupervised Learning for Real Estate Property Analysis',
+			categories: [CATEGORY.MACHINE_LEARNING]
+		}
 	];
 
 	let tags = items
@@ -53,46 +53,46 @@
 		}, []);
 
 	$: filteredItems = items.filter((item) => {
-		return tags.find((tag) => selectAll || tag.selected && item.categories.includes(tag.name));
+		return tags.find((tag) => selectAll || (tag.selected && item.categories.includes(tag.name)));
 	});
-    let selectAll = true;
+	let selectAll = true;
 </script>
 
 <div>
 	<div class="flex flex-row gap-4 my-2">
-        <button
-				class:bg-gray-500={!selectAll}
-				class:hover:bg-gray-700={!selectAll}
-				class:bg-blue-500={selectAll}
-				class:hover:bg-blue-700={selectAll}
-				class="text-sm text-white font-bold py-2 px-4 rounded-full"
-				on:click={() => {
-					selectAll = !selectAll;
-                    if (selectAll) {
-                        tags.forEach((tag) => {
-                            tag.selected = true;
-                        });
-                    } else {
-                        tags.forEach((tag) => {
-                            tag.selected = false;
-                        });
-                    }
-				}}>ALL</button
-			>
-        {#key selectAll}
-		{#each tags as tag}
-			<button
-				class:bg-gray-500={!tag.selected}
-				class:hover:bg-gray-700={!tag.selected}
-				class:bg-blue-500={tag.selected}
-				class:hover:bg-blue-700={tag.selected}
-				class="text-sm text-white font-bold py-2 px-4 rounded-full"
-				on:click={() => {
-					tag.selected = !tag.selected;
-				}}>{tag.name}</button
-			>
-        {/each}
-        {/key}
+		<button
+			class:bg-gray-500={!selectAll}
+			class:hover:bg-gray-700={!selectAll}
+			class:bg-blue-500={selectAll}
+			class:hover:bg-blue-700={selectAll}
+			class="text-sm text-white font-bold py-2 px-4 rounded-full"
+			on:click={() => {
+				selectAll = !selectAll;
+				if (selectAll) {
+					tags.forEach((tag) => {
+						tag.selected = true;
+					});
+				} else {
+					tags.forEach((tag) => {
+						tag.selected = false;
+					});
+				}
+			}}>ALL</button
+		>
+		{#key selectAll}
+			{#each tags as tag}
+				<button
+					class:bg-gray-500={!tag.selected}
+					class:hover:bg-gray-700={!tag.selected}
+					class:bg-blue-500={tag.selected}
+					class:hover:bg-blue-700={tag.selected}
+					class="text-sm text-white font-bold py-2 px-4 rounded-full"
+					on:click={() => {
+						tag.selected = !tag.selected;
+					}}>{tag.name}</button
+				>
+			{/each}
+		{/key}
 	</div>
 	<ul>
 		{#each filteredItems as item}
@@ -117,6 +117,6 @@
 
 	li:hover {
 		@apply bg-sky-400;
-        @apply text-gray-900
+		@apply text-gray-900;
 	}
 </style>

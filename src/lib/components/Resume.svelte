@@ -42,9 +42,9 @@
 		const target = e.currentTarget as HTMLElement;
 		buttonRect = target.getBoundingClientRect();
 		isExpanding = true;
-		
+
 		scale.set(300); // Expanding scale factor
-		
+
 		setTimeout(() => {
 			goto('/experience');
 			// Reset the state so the home page returns to normal if they navigate back
@@ -73,7 +73,7 @@
 		</div>
 
 		<div class="mt-16 flex justify-center relative">
-			<button 
+			<button
 				on:click={gotoCV}
 				class="bg-primary text-on-primary font-nav-lg text-[20px] uppercase tracking-widest px-8 py-4 shadow-cartoon hover:scale-95 transition-transform duration-75 border-2 border-black rounded-none relative overflow-hidden"
 			>
@@ -83,11 +83,11 @@
 	</div>
 
 	{#if isExpanding}
-		<div 
+		<div
 			class="fixed z-[100] bg-primary rounded-full pointer-events-none"
 			style="
-				top: {buttonRect.top + buttonRect.height/2}px; 
-				left: {buttonRect.left + buttonRect.width/2}px; 
+				top: {buttonRect.top + buttonRect.height / 2}px; 
+				left: {buttonRect.left + buttonRect.width / 2}px; 
 				width: 10px; 
 				height: 10px; 
 				transform: translate(-50%, -50%) scale({$scale});

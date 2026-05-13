@@ -2,7 +2,7 @@
 	export let title: string;
 	export let authors: string;
 	export let description: string;
-	export let link: string = "#";
+	export let link: string = '#';
 	export let index: number | undefined = undefined;
 
 	$: formattedAuthors = authors.replace(
@@ -12,19 +12,36 @@
 </script>
 
 <div class="p-4 md:p-10 bg-surface border-b-2 border-black relative z-10 w-full overflow-hidden">
-	<article class="relative border-2 border-black p-4 md:p-8 shadow-cartoon bg-surface-container-lowest overflow-hidden">
+	<article
+		class="relative border-2 border-black p-4 md:p-8 shadow-cartoon bg-surface-container-lowest overflow-hidden"
+	>
 		{#if index !== undefined}
-			<span class="absolute top-3 left-4 font-headline-lg font-black text-on-surface/30 text-xl leading-none">{index + 1}.</span>
+			<span
+				class="absolute top-3 left-4 font-headline-lg font-black text-on-surface/30 text-xl leading-none"
+				>{index + 1}.</span
+			>
 		{/if}
 		<div class="flex flex-col md:flex-row justify-between items-start gap-6 pt-6 md:pt-0">
 			<div class="w-full overflow-hidden">
-				<h3 class="font-headline-lg text-[24px] md:text-[40px] leading-tight mb-4 uppercase break-words hyphens-auto">{title}</h3>
-				<p class="font-body-md mb-4 text-on-surface"><span class="font-bold">Authors:</span> {@html formattedAuthors}</p>
+				<h3
+					class="font-headline-lg text-[24px] md:text-[40px] leading-tight mb-4 uppercase break-words hyphens-auto"
+				>
+					{title}
+				</h3>
+				<p class="font-body-md mb-4 text-on-surface">
+					<span class="font-bold">Authors:</span>
+					{@html formattedAuthors}
+				</p>
 				<p class="font-body-md text-on-surface-variant italic">
 					{description}
 				</p>
 			</div>
-			<a class="border-2 border-black px-6 py-2 uppercase font-bold hover:bg-black hover:text-white transition-colors flex items-center gap-2 whitespace-nowrap self-start mt-4 md:mt-0" href={link} target="_blank" rel="noopener noreferrer">
+			<a
+				class="border-2 border-black px-6 py-2 uppercase font-bold hover:bg-black hover:text-white transition-colors flex items-center gap-2 whitespace-nowrap self-start mt-4 md:mt-0"
+				href={link}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				PDF <span class="material-symbols-outlined text-sm">open_in_new</span>
 			</a>
 		</div>

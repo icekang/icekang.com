@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import cow from '$lib/images/blogs/cow.png';
 	import cupid from '$lib/images/blogs/head band_cupid_hor.png';
@@ -7,20 +7,130 @@
 	import wat from '$lib/images/blogs/wat.png';
 	import weiss from '$lib/images/blogs/weiss.png';
 
-	let images = [
-		{ id: 'horn', src: horn, x: -27.33, y: -12.59, scale: 0.306, mx: -27.47, my: -29.12, mScale: 0.306, rotate: 0, flipX: 1, z: 12 },
-		{ id: 'cow', src: cow, x: 33.94, y: -26.08, scale: 0.336, mx: 26.50, my: -43.99, mScale: 0.336, rotate: 0, flipX: 1, z: 11 },
-		{ id: 'cupidL', src: cupid, x: -14.49, y: 5.79, scale: 0.153, mx: -18.40, my: -10.40, mScale: 0.170, rotate: 2.64, flipX: -1, z: 15 },
-		{ id: 'statue', src: statue, x: -0.13, y: -0.72, scale: 0.318, mx: 1.63, my: -4.45, mScale: 0.538, rotate: 0, flipX: 1, z: 18 },
-		{ id: 'cupidR', src: cupid, x: 14.51, y: 5.68, scale: 0.151, mx: 21.81, my: -10.02, mScale: 0.181, rotate: -4.96, flipX: 1, z: 16 },
-		{ id: 'wat', src: wat, x: 0.11, y: -15.2, scale: 0.523, mx: 0.66, my: -33.24, mScale: 0.523, rotate: 0, flipX: 1, z: 19 },
-		{ id: 'weissL', src: weiss, x: -39.68, y: -23.11, scale: 0.269, mx: -39.82, my: -39.64, mScale: 0.269, rotate: 0.08, flipX: 1, z: 13 },
-		{ id: 'weissR', src: weiss, x: 27.19, y: -21.31, scale: 0.303, mx: 27.05, my: -37.84, mScale: 0.303, rotate: 0.18, flipX: -1, z: 14 }
+	type CollageImage = {
+		id: string;
+		src?: string;
+		x: number;
+		y: number;
+		scale: number;
+		mx?: number;
+		my?: number;
+		mScale?: number;
+		rotate: number;
+		flipX: number;
+		z: number;
+	};
+
+	let images: CollageImage[] = [
+		{
+			id: 'horn',
+			src: horn,
+			x: -27.33,
+			y: -12.59,
+			scale: 0.306,
+			mx: -27.47,
+			my: -29.12,
+			mScale: 0.306,
+			rotate: 0,
+			flipX: 1,
+			z: 12
+		},
+		{
+			id: 'cow',
+			src: cow,
+			x: 33.94,
+			y: -26.08,
+			scale: 0.336,
+			mx: 26.5,
+			my: -43.99,
+			mScale: 0.336,
+			rotate: 0,
+			flipX: 1,
+			z: 11
+		},
+		{
+			id: 'cupidL',
+			src: cupid,
+			x: -14.49,
+			y: 5.79,
+			scale: 0.153,
+			mx: -18.4,
+			my: -10.4,
+			mScale: 0.17,
+			rotate: 2.64,
+			flipX: -1,
+			z: 15
+		},
+		{
+			id: 'statue',
+			src: statue,
+			x: -0.13,
+			y: -0.72,
+			scale: 0.318,
+			mx: 1.63,
+			my: -4.45,
+			mScale: 0.538,
+			rotate: 0,
+			flipX: 1,
+			z: 18
+		},
+		{
+			id: 'cupidR',
+			src: cupid,
+			x: 14.51,
+			y: 5.68,
+			scale: 0.151,
+			mx: 21.81,
+			my: -10.02,
+			mScale: 0.181,
+			rotate: -4.96,
+			flipX: 1,
+			z: 16
+		},
+		{
+			id: 'wat',
+			src: wat,
+			x: 0.11,
+			y: -15.2,
+			scale: 0.523,
+			mx: 0.66,
+			my: -33.24,
+			mScale: 0.523,
+			rotate: 0,
+			flipX: 1,
+			z: 19
+		},
+		{
+			id: 'weissL',
+			src: weiss,
+			x: -39.68,
+			y: -23.11,
+			scale: 0.269,
+			mx: -39.82,
+			my: -39.64,
+			mScale: 0.269,
+			rotate: 0.08,
+			flipX: 1,
+			z: 13
+		},
+		{
+			id: 'weissR',
+			src: weiss,
+			x: 27.19,
+			y: -21.31,
+			scale: 0.303,
+			mx: 27.05,
+			my: -37.84,
+			mScale: 0.303,
+			rotate: 0.18,
+			flipX: -1,
+			z: 14
+		}
 	];
 
-	let activeId = null;
-	let container;
-	let isMobile = false;
+	let activeId: string | 'ALL' | null = null;
+	let container: HTMLElement;
+	let isMobile: boolean = false;
 
 	onMount(() => {
 		const checkMobile = () => {
@@ -32,9 +142,9 @@
 	});
 
 	// Easter Egg Editor Mode
-	let editorMode = false;
-	let tapCount = 0;
-	let tapTimeout;
+	let editorMode: boolean = false;
+	let tapCount: number = 0;
+	let tapTimeout: ReturnType<typeof setTimeout>;
 
 	function handleHeroClick() {
 		tapCount++;
@@ -49,21 +159,20 @@
 		}, 400);
 	}
 
-	let dragMode = null; // 'move', 'resize', 'rotate', 'move_all'
+	let dragMode: 'move' | 'resize' | 'rotate' | 'move_all' | null = null;
 	let startMouse = { x: 0, y: 0 };
 
 	// For Move
 	let startImage = { x: 0, y: 0 };
-	let startAllImages = [];
+	let startAllImages: {id: string, x: number, y: number}[] = [];
 	// For Resize
-	let initialScale = 0;
-	let resizeState = null;
+	let resizeState: any = null;
 	// For Rotate
-	let initialRotate = 0;
+	let initialRotate: number = 0;
 	let centerPt = { x: 0, y: 0 };
-	let startAngle = 0;
+	let startAngle: number = 0;
 
-	function pointerDown(e, img) {
+	function pointerDown(e: PointerEvent, img: CollageImage) {
 		if (activeId === 'ALL') {
 			dragMode = 'move_all';
 			startMouse = { x: e.clientX, y: e.clientY };
@@ -72,7 +181,7 @@
 				x: isMobile && i.mx !== undefined ? i.mx : i.x,
 				y: isMobile && i.my !== undefined ? i.my : i.y
 			}));
-			e.target.setPointerCapture(e.pointerId);
+			if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
 			return;
 		}
 
@@ -83,10 +192,10 @@
 			x: isMobile && img.mx !== undefined ? img.mx : img.x,
 			y: isMobile && img.my !== undefined ? img.my : img.y
 		};
-		e.target.setPointerCapture(e.pointerId);
+		if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
 	}
 
-	function startResize(e, img, corner) {
+	function startResize(e: PointerEvent, img: CollageImage, corner: string) {
 		activeId = img.id;
 		dragMode = 'resize';
 
@@ -142,10 +251,10 @@
 			initialDist: Math.hypot(e.clientX - cx, e.clientY - cy)
 		};
 
-		e.target.setPointerCapture(e.pointerId);
+		if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
 	}
 
-	function startRotate(e, img) {
+	function startRotate(e: PointerEvent, img: CollageImage) {
 		activeId = img.id;
 		dragMode = 'rotate';
 		initialRotate = img.rotate;
@@ -159,10 +268,10 @@
 		}
 
 		startAngle = Math.atan2(e.clientY - centerPt.y, e.clientX - centerPt.x);
-		e.target.setPointerCapture(e.pointerId);
+		if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
 	}
 
-	function pointerMove(e) {
+	function pointerMove(e: PointerEvent) {
 		if (!dragMode || !activeId || !container) return;
 
 		if (dragMode === 'move_all') {
@@ -241,7 +350,7 @@
 		}
 	}
 
-	function pointerUp(e) {
+	function pointerUp() {
 		dragMode = null;
 	}
 
@@ -255,47 +364,30 @@
 		}
 	}
 
-	function moveLayerZ(id, delta) {
+	function moveLayerZ(id: string, delta: number) {
 		images = images.map((img) => (img.id === id ? { ...img, z: img.z + delta } : img));
 	}
 
-	function scaleActive(delta) {
-		if (!activeId || !container) return;
-		images = images.map((img) => {
-			if (img.id === activeId) {
-				const newScale = Math.max(0.02, img.scale + delta);
-				return {
-					...img,
-					scale: newScale
-				};
-			}
-			return img;
-		});
-	}
-
-	function rotateActive(delta) {
-		if (!activeId) return;
-		images = images.map((img) =>
-			img.id === activeId ? { ...img, rotate: img.rotate + delta } : img
-		);
-	}
-
 	// Layer Reordering via Drag and Drop
-	let draggedLayerId = null;
-	let panelCollapsed = true;
+	let draggedLayerId: string | null = null;
+	let panelCollapsed: boolean = true;
 
-	function handleDragStart(e, id) {
+	function handleDragStart(e: DragEvent, id: string) {
 		draggedLayerId = id;
-		e.dataTransfer.effectAllowed = 'move';
-		e.dataTransfer.setData('text/plain', id);
+		if (e.dataTransfer) {
+			e.dataTransfer.effectAllowed = 'move';
+			e.dataTransfer.setData('text/plain', id);
+		}
 	}
 
-	function handleDragOver(e) {
+	function handleDragOver(e: DragEvent) {
 		e.preventDefault(); // Necessary to allow dropping
-		e.dataTransfer.dropEffect = 'move';
+		if (e.dataTransfer) {
+			e.dataTransfer.dropEffect = 'move';
+		}
 	}
 
-	function handleDrop(e, targetId) {
+	function handleDrop(e: DragEvent, targetId: string) {
 		e.preventDefault();
 		if (!draggedLayerId || draggedLayerId === targetId) return;
 
@@ -350,6 +442,8 @@
 	}
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <section
 	bind:this={container}
 	class="relative w-full h-[60vh] md:h-[80vh] bg-[#0b55aa] overflow-hidden flex items-end justify-center border-b-2 border-black"
@@ -366,7 +460,7 @@
 					x: isMobile && i.mx !== undefined ? i.mx : i.x,
 					y: isMobile && i.my !== undefined ? i.my : i.y
 				}));
-				e.target.setPointerCapture(e.pointerId);
+				if (container) container.setPointerCapture(e.pointerId);
 			} else {
 				activeId = null;
 			}

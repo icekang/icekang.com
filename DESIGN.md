@@ -104,7 +104,7 @@ The visual style is **High-Contrast Minimalist**. It utilizes heavy horizontal a
 
 ## Colors
 
-The palette is restricted and high-impact, echoing Riso-print aesthetics. 
+The palette is restricted and high-impact, echoing Riso-print aesthetics.
 
 - **Riso Blue (#005BAA):** The primary driver of action. Use it for links, primary buttons, and structural accents. It represents the "vibrancy" of the brand.
 - **Sharp Black (#000000):** Used for all structural rules, typography, and "Rubber Hose" illustrations. It provides the Bauhaus "ink" that binds the system.
@@ -121,7 +121,7 @@ The typographic strategy balances academic authority with modern precision.
 
 This design system employs a **Strict Bauhaus Grid**. Layouts are defined by visible 1px black rules that separate sections, headers, and sidebars.
 
-- **The Grid:** A 12-column grid on desktop, transitioning to a 4-column grid on mobile. 
+- **The Grid:** A 12-column grid on desktop, transitioning to a 4-column grid on mobile.
 - **The Rules:** Content is boxed. Every major container should be bounded by a black `#000000` rule. Gutters are not empty space; they are defined by these lines.
 - **Rhythm:** Use a 4px baseline shift for vertical rhythm. Elements should "sit" on the rules, never float aimlessly.
 - **Responsive Behavior:** On mobile, horizontal rules become the primary separator, while vertical rules are reserved for specific functional "drawers" or menus.
@@ -138,7 +138,8 @@ This system is strictly flat. To convey hierarchy, we use **Structural Stacking 
 
 The architectural elements of this design system are strictly **Sharp (0px)**. All buttons, input fields, and containers must have 90-degree corners to maintain the Bauhaus aesthetic.
 
-**Exceptions:** 
+**Exceptions:**
+
 - The "Rubber Hose" illustrations and icons are the only elements allowed to use curves. These should be extremely round and "squishy" to contrast against the razor-sharp UI.
 - Selection indicators (like radio buttons) may be perfect circles to align with geometric Bauhaus shapes.
 

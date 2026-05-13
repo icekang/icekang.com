@@ -43,9 +43,23 @@
 
 	const contactInfo: ContactItem[] = [
 		{ label: 'Phone', value: '+41 762162608', href: 'tel:+41762162608' },
-		{ label: 'Email', value: 'naravich.chutisilp@gmail.com', href: 'mailto:naravich.chutisilp@gmail.com' },
-		{ label: 'LinkedIn', value: 'in/icekang', href: 'https://linkedin.com/in/icekang', external: true },
-		{ label: 'GitHub', value: 'github.com/icekang', href: 'https://github.com/icekang', external: true }
+		{
+			label: 'Email',
+			value: 'naravich.chutisilp@gmail.com',
+			href: 'mailto:naravich.chutisilp@gmail.com'
+		},
+		{
+			label: 'LinkedIn',
+			value: 'in/icekang',
+			href: 'https://linkedin.com/in/icekang',
+			external: true
+		},
+		{
+			label: 'GitHub',
+			value: 'github.com/icekang',
+			href: 'https://github.com/icekang',
+			external: true
+		}
 	];
 
 	const experiences: ExperienceData[] = [
@@ -58,7 +72,7 @@
 				'Designed, developed, and deployed a robust, real-time recommendation system for fixed-income derivatives using PyTorch, MLFlow, Optuna, and Airflow',
 				'Achieved end-to-end latency of <strong>&lt;1 minute</strong> to support rapid broker decision-making, generating <strong>&gt;USD 655K in revenue</strong>',
 				'Initiated and delivered a full-stack GitLab-integrated LLM bot for the CI/CD pipeline providing automated merge request summaries and code reviews',
-				'The LLM bot enhanced development productivity across <strong>50% of the data science team\'s projects</strong>'
+				"The LLM bot enhanced development productivity across <strong>50% of the data science team's projects</strong>"
 			]
 		},
 		{
@@ -80,7 +94,7 @@
 			duration: '10/2022 - 08/2023',
 			achievements: [
 				'Developed a 6-DoF pose estimation and 3D object tracking system for carpentry tool heads',
-				'Released an open-source C++ project using OpenCV and OpenGL. <em>Manuscript accepted by MDPI\'s Applied Science Journal 2024</em>',
+				"Released an open-source C++ project using OpenCV and OpenGL. <em>Manuscript accepted by MDPI's Applied Science Journal 2024</em>",
 				'Integrated the project into Augmented Reality (AR) software employing real-time SLAM',
 				'Achieved high-precision performance with mean position and rotation errors of <strong>3.9 mm and 1.19°</strong>, respectively'
 			]
@@ -141,11 +155,12 @@
 
 	const educationList: EducationData[] = [
 		{
-			title: 'Master\'s Thesis (3D CV & ML)',
+			title: "Master's Thesis (3D CV & ML)",
 			school: 'MIT with Profs. Elazer Edelman (MIT) and Maria Brbic (EPFL)',
 			location: 'United States',
 			duration: '03/2024 - 10/2024',
-			description: 'Comparative study on 3D arterial plaque segmentation, benchmarking 3D Multimodal self-supervised learning (contrastive and generative SSL) against a supervised baseline. <em>In Preparation for Publication</em>'
+			description:
+				'Comparative study on 3D arterial plaque segmentation, benchmarking 3D Multimodal self-supervised learning (contrastive and generative SSL) against a supervised baseline. <em>In Preparation for Publication</em>'
 		},
 		{
 			title: 'MSc Computer Science',
@@ -159,21 +174,27 @@
 			school: 'Chulalongkorn University',
 			location: 'Thailand',
 			duration: '08/2017 - 05/2021',
-			description: '<strong>Valedictorian</strong> (graduated top of class: First Class Honors with Gold Medal) - <strong>GPA 3.99/4.00</strong>'
+			description:
+				'<strong>Valedictorian</strong> (graduated top of class: First Class Honors with Gold Medal) - <strong>GPA 3.99/4.00</strong>'
 		}
 	];
 
 	const skillsList: SkillCategory[] = [
 		{ title: 'Languages & Frameworks', items: 'Python, C++, JavaScript' },
-		{ title: 'Machine Learning', items: 'Generative AI (LLMs), PyTorch, Computer Vision, Multimodal ML' },
+		{
+			title: 'Machine Learning',
+			items: 'Generative AI (LLMs), PyTorch, Computer Vision, Multimodal ML'
+		},
 		{ title: 'Infrastructure', items: 'MLOps Pipelines' }
 	];
 
 	const publicationsList: Publication[] = [
 		{
-			title: 'TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking',
+			title:
+				'TTool: A Supervised Artificial Intelligence-Assisted Visual Pose Detector for Tool Heads in Augmented Reality Woodworking',
 			venue: 'Applied Sciences 2024',
-			authors: 'Andrea Settimi, <strong>Naravich Chutisilp</strong>, Florian Aymanns, Julien Gamerro, Yves Weinand'
+			authors:
+				'Andrea Settimi, <strong>Naravich Chutisilp</strong>, Florian Aymanns, Julien Gamerro, Yves Weinand'
 		},
 		{
 			title: 'A Unified Model for Gaze Following and Social Gaze Prediction',
@@ -185,8 +206,14 @@
 
 <svelte:head>
 	<title>Naravich Chutisilp - ML Engineer & Researcher</title>
-	<meta name="description" content="Naravich Chutisilp - ML Engineer & Researcher specializing in real-time ML/AI financial systems and Generative AI" />
-	<meta name="keywords" content="Naravich Chutisilp, ML Engineer, Computer Vision, Deep Learning, AI Researcher" />
+	<meta
+		name="description"
+		content="Naravich Chutisilp - ML Engineer & Researcher specializing in real-time ML/AI financial systems and Generative AI"
+	/>
+	<meta
+		name="keywords"
+		content="Naravich Chutisilp, ML Engineer, Computer Vision, Deep Learning, AI Researcher"
+	/>
 </svelte:head>
 
 <div class="container">
@@ -219,7 +246,10 @@
 		padding-right: 1.5rem;
 		padding-top: 3rem;
 		padding-bottom: 3rem;
-		font-family: system-ui, -apple-system, sans-serif;
+		font-family:
+			system-ui,
+			-apple-system,
+			sans-serif;
 		line-height: 1.625;
 	}
 

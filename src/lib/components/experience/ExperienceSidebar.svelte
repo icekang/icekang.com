@@ -45,7 +45,8 @@
 <style>
 	.bg-grid-blueprint {
 		background-size: 24px 24px;
-		background-image: linear-gradient(to right, #e3e2e2 1px, transparent 1px),
+		background-image:
+			linear-gradient(to right, #e3e2e2 1px, transparent 1px),
 			linear-gradient(to bottom, #e3e2e2 1px, transparent 1px);
 	}
 </style>

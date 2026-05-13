@@ -27,9 +27,13 @@
 		<section
 			class="border-b-2 border-black bg-surface-main blueprint-pattern bg-blueprint flex-grow relative"
 		>
-			<div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop">
+			<div
+				class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop"
+			>
 				<!-- Blog Posts will go here -->
-                <p class="col-span-full text-center py-20 text-xl font-bold font-headline-md opacity-50">More articles coming soon...</p>
+				<p class="col-span-full text-center py-20 text-xl font-bold font-headline-md opacity-50">
+					More articles coming soon...
+				</p>
 			</div>
 		</section>
 	</main>

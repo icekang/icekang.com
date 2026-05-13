@@ -1,17 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @config "../tailwind.config.js";
 
 @layer utilities {
-    .shadow-cartoon {
-        box-shadow: 8px 8px 0px 0px #000000;
-    }
-    .shadow-cartoon-sm {
-        box-shadow: 4px 4px 0px 0px #000000;
-    }
-    .bg-grid-pattern {
-        background-image: 
-            linear-gradient(to right, #000000 1px, transparent 1px),
-            linear-gradient(to bottom, #000000 1px, transparent 1px);
-        background-size: 40px 40px;
-    }
+	.shadow-cartoon {
+		box-shadow: 8px 8px 0px 0px #000000;
+	}
+	.shadow-cartoon-sm {
+		box-shadow: 4px 4px 0px 0px #000000;
+	}
+	.bg-grid-pattern {
+		background-image:
+			linear-gradient(to right, #000000 1px, transparent 1px),
+			linear-gradient(to bottom, #000000 1px, transparent 1px);
+		background-size: 40px 40px;
+	}
 }

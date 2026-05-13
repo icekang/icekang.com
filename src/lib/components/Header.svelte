@@ -8,7 +8,10 @@
 		<div class="header-text">
 			<h1>Naravich Chutisilp</h1>
 			<p class="subtitle">ML Engineer & Researcher</p>
-			<p class="description">Specializing in real-time ML/AI financial systems and Generative AI tools. Building scalable MLOps pipelines with expertise in Computer Vision and Multimodal Learning.</p>
+			<p class="description">
+				Specializing in real-time ML/AI financial systems and Generative AI tools. Building scalable
+				MLOps pipelines with expertise in Computer Vision and Multimodal Learning.
+			</p>
 		</div>
 	</div>
 </header>
