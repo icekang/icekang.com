@@ -63,6 +63,12 @@
 					: 'text-on-surface hover:border-b-2 hover:border-black'} px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest transition-all"
 				href="/books">BOOKS</a
 			>
+			<a
+				class="{isActive('/blogs')
+					? 'bg-primary text-on-primary'
+					: 'text-on-surface hover:border-b-2 hover:border-black'} px-4 py-1 font-nav-lg text-nav-lg uppercase tracking-widest transition-all"
+				href="/blogs">BLOGS</a
+			>
 		</div>
 		<div class="hidden md:block">
 			<a
@@ -124,6 +130,13 @@
 					: 'text-on-surface border-transparent'} border-2 px-4 py-3 font-nav-lg text-nav-lg uppercase tracking-widest transition-all text-center"
 				href="/books"
 				on:click={(e) => handleLinkClick(e, '/books')}>BOOKS</a
+			>
+			<a
+				class="{isActive('/blogs')
+					? 'bg-primary text-on-primary border-black shadow-cartoon'
+					: 'text-on-surface border-transparent'} border-2 px-4 py-3 font-nav-lg text-nav-lg uppercase tracking-widest transition-all text-center"
+				href="/blogs"
+				on:click={(e) => handleLinkClick(e, '/blogs')}>BLOGS</a
 			>
 
 			<div class="w-full h-[2px] bg-black my-2 opacity-10"></div>
