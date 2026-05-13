@@ -8,14 +8,14 @@
 	import weiss from '$lib/images/blogs/weiss.png';
 
 	let images = [
-		{ id: 'horn', src: horn, x: -27.33, y: -12.59, scale: 0.306, rotate: 0, flipX: 1, z: 94 },
-		{ id: 'cow', src: cow, x: 33.94, y: -26.08, scale: 0.336, rotate: 0, flipX: 1, z: 93 },
-		{ id: 'cupidL', src: cupid, x: -14.49, y: 5.79, scale: 0.153, rotate: 2.64, flipX: -1, z: 97 },
-		{ id: 'statue', src: statue, x: -0.13, y: -0.72, scale: 0.318, rotate: 0, flipX: 1, z: 99 },
-		{ id: 'cupidR', src: cupid, x: 14.51, y: 5.68, scale: 0.151, rotate: -4.96, flipX: 1, z: 98 },
-		{ id: 'wat', src: wat, x: 0.11, y: -15.2, scale: 0.523, rotate: 0, flipX: 1, z: 100 },
-		{ id: 'weissL', src: weiss, x: -39.68, y: -23.11, scale: 0.269, rotate: 0.08, flipX: 1, z: 95 },
-		{ id: 'weissR', src: weiss, x: 27.19, y: -21.31, scale: 0.303, rotate: 0.18, flipX: -1, z: 96 }
+		{ id: 'horn', src: horn, x: -27.33, y: -12.59, scale: 0.306, rotate: 0, flipX: 1, z: 12 },
+		{ id: 'cow', src: cow, x: 33.94, y: -26.08, scale: 0.336, rotate: 0, flipX: 1, z: 11 },
+		{ id: 'cupidL', src: cupid, x: -14.49, y: 5.79, scale: 0.153, rotate: 2.64, flipX: -1, z: 15 },
+		{ id: 'statue', src: statue, x: -0.13, y: -0.72, scale: 0.318, rotate: 0, flipX: 1, z: 18 },
+		{ id: 'cupidR', src: cupid, x: 14.51, y: 5.68, scale: 0.151, rotate: -4.96, flipX: 1, z: 16 },
+		{ id: 'wat', src: wat, x: 0.11, y: -15.2, scale: 0.523, rotate: 0, flipX: 1, z: 19 },
+		{ id: 'weissL', src: weiss, x: -39.68, y: -23.11, scale: 0.269, rotate: 0.08, flipX: 1, z: 13 },
+		{ id: 'weissR', src: weiss, x: 27.19, y: -21.31, scale: 0.303, rotate: 0.18, flipX: -1, z: 14 }
 	];
 
 	let activeId = null;
@@ -249,10 +249,10 @@
 		const [draggedItem] = sortedLayers.splice(draggedIdx, 1);
 		sortedLayers.splice(targetIdx, 0, draggedItem);
 
-		// Reassign Z-indices based on new order (Top = 100, Bottom = 100 - length)
+		// Reassign Z-indices based on new order (Top = 19, Bottom = 19 - length)
 		images = images.map((img) => {
 			const indexInSorted = sortedLayers.findIndex((l) => l.id === img.id);
-			return { ...img, z: 100 - indexInSorted };
+			return { ...img, z: 19 - indexInSorted };
 		});
 
 		draggedLayerId = null;
@@ -322,11 +322,15 @@
 	{/if}
 
 	<!-- TITLE OVERLAY -->
-	<div class="absolute top-10 left-10 z-[100] pointer-events-none">
+	<div
+		class="absolute top-34 md:top-[18%] left-0 w-full -translate-y-1/2 z-[17] pointer-events-none flex justify-center"
+	>
 		<h1
-			class="font-headline-xl text-5xl md:text-[88px] italic tracking-tighter leading-none text-white drop-shadow-md"
+			class="font-headline-xl text-[18vw] leading-[0.8] md:text-[12vw] md:leading-none italic tracking-tighter text-white drop-shadow-lg text-center w-full"
 		>
-			Blogs
+			<span class="block md:inline">THE</span>
+			<span class="hidden md:inline">&nbsp;</span>
+			<span class="block md:inline">ARCHIVES</span>
 		</h1>
 	</div>
 
@@ -335,7 +339,8 @@
 		<!-- Wrapper handles position and rotation -->
 		<div
 			id="wrapper-{img.id}"
-			class="absolute origin-center transition-shadow duration-150 {editorMode && activeId === img.id
+			class="absolute origin-center transition-shadow duration-150 {editorMode &&
+			activeId === img.id
 				? 'ring-2 ring-primary ring-dashed bg-white/10'
 				: ''}"
 			style="
@@ -353,7 +358,8 @@
 				src={img.src}
 				alt={img.id}
 				on:pointerdown={(e) => editorMode && pointerDown(e, img)}
-				class="h-full w-auto {editorMode ? 'cursor-grab active:cursor-grabbing' : ''} {editorMode && activeId === img.id
+				class="h-full w-auto {editorMode ? 'cursor-grab active:cursor-grabbing' : ''} {editorMode &&
+				activeId === img.id
 					? 'drop-shadow-[0_0_20px_rgba(255,255,0,0.8)]'
 					: 'drop-shadow-xl'}"
 				style="transform: scaleX({img.flipX}); {editorMode && activeId && activeId !== img.id
@@ -410,86 +416,87 @@
 	{#if editorMode}
 		<!-- EDITOR PANEL -->
 		<div
-			class="absolute top-10 right-10 z-[100] bg-surface border-2 border-black flex flex-col shadow-[4px_4px_0_0_rgba(0,0,0,1)] w-64 font-body-sm text-black max-h-[80vh] overflow-hidden"
+			class="absolute top-10 right-10 z-[1000] bg-surface border-2 border-black flex flex-col shadow-[4px_4px_0_0_rgba(0,0,0,1)] w-64 font-body-sm text-black max-h-[80vh] overflow-hidden"
 		>
-		<!-- HEADER / TOGGLE -->
-		<button
-			class="flex justify-between items-center {panelCollapsed
-				? ''
-				: 'border-b-2'} border-black p-2 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer w-full text-left"
-			on:click={() => (panelCollapsed = !panelCollapsed)}
-		>
-			<span class="font-bold font-headline-sm uppercase tracking-wider px-2">Collage Editor</span>
-			<span class="font-bold text-lg px-2 leading-none">{panelCollapsed ? '+' : '−'}</span>
-		</button>
+			<!-- HEADER / TOGGLE -->
+			<button
+				class="flex justify-between items-center {panelCollapsed
+					? ''
+					: 'border-b-2'} border-black p-2 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer w-full text-left"
+				on:click={() => (panelCollapsed = !panelCollapsed)}
+			>
+				<span class="font-bold font-headline-sm uppercase tracking-wider px-2">Collage Editor</span>
+				<span class="font-bold text-lg px-2 leading-none">{panelCollapsed ? '+' : '−'}</span>
+			</button>
 
-		{#if !panelCollapsed}
-			<div class="p-4 flex flex-col gap-2 overflow-y-auto flex-1">
-				<div class="flex items-center gap-2 mb-1">
-					<span class="font-bold py-1 bg-gray-100 border-l-4 border-primary px-2 flex-grow truncate"
-						>Active: {activeId || 'None'}</span
-					>
-					<button
-						class="px-3 py-1 bg-white border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] active:shadow-none transition-all font-bold"
-						on:click={flipActive}>FLIP</button
-					>
-				</div>
-
-				<!-- LAYERS PANEL -->
-				<div class="mt-2 border-t-2 border-black pt-2">
-					<p class="font-bold mb-2 text-xs uppercase tracking-widest text-gray-600">
-						Layers (Z-Index)
-					</p>
-					<div class="flex flex-col gap-1 max-h-48 overflow-y-auto pr-1">
-						{#each [...images].sort((a, b) => b.z - a.z) as layer (layer.id)}
-							<div
-								draggable="true"
-								on:dragstart={(e) => handleDragStart(e, layer.id)}
-								on:dragover={handleDragOver}
-								on:drop={(e) => handleDrop(e, layer.id)}
-								class="flex items-center justify-between pl-2 border border-black cursor-grab active:cursor-grabbing shadow-[2px_2px_0_0_rgba(0,0,0,1)] transition-all {draggedLayerId ===
-								layer.id
-									? 'opacity-40'
-									: ''} {activeId === layer.id
-									? 'bg-[#005baa] text-white font-bold'
-									: 'bg-white hover:bg-gray-100 text-black'}"
-								on:click={() => (activeId = layer.id)}
-							>
-								<span class="text-xs uppercase truncate pr-2 pointer-events-none"
-									>{layer.id} <span class="opacity-60 text-[10px]">({layer.z})</span></span
-								>
-								<div class="flex">
-									<button
-										class="w-7 h-7 flex items-center justify-center border-l border-black hover:bg-white/20 {activeId ===
-										layer.id
-											? 'text-white'
-											: 'text-black'}"
-										on:click|stopPropagation={() => moveLayerZ(layer.id, 1)}
-										title="Bring Forward">▲</button
-									>
-									<button
-										class="w-7 h-7 flex items-center justify-center border-l border-black hover:bg-white/20 {activeId ===
-										layer.id
-											? 'text-white'
-											: 'text-black'}"
-										on:click|stopPropagation={() => moveLayerZ(layer.id, -1)}
-										title="Send Backward">▼</button
-									>
-								</div>
-							</div>
-						{/each}
+			{#if !panelCollapsed}
+				<div class="p-4 flex flex-col gap-2 overflow-y-auto flex-1">
+					<div class="flex items-center gap-2 mb-1">
+						<span
+							class="font-bold py-1 bg-gray-100 border-l-4 border-primary px-2 flex-grow truncate"
+							>Active: {activeId || 'None'}</span
+						>
+						<button
+							class="px-3 py-1 bg-white border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] active:shadow-none transition-all font-bold"
+							on:click={flipActive}>FLIP</button
+						>
 					</div>
-				</div>
 
-				<button
-					class="mt-4 w-full py-2 bg-[#005baa] text-white border-2 border-black font-bold uppercase tracking-widest shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] active:translate-x-[4px] transition-all"
-					on:click={saveLayout}
-				>
-					SAVE LAYOUT
-				</button>
-			</div>
-		{/if}
-	</div>
+					<!-- LAYERS PANEL -->
+					<div class="mt-2 border-t-2 border-black pt-2">
+						<p class="font-bold mb-2 text-xs uppercase tracking-widest text-gray-600">
+							Layers (Z-Index)
+						</p>
+						<div class="flex flex-col gap-1 max-h-48 overflow-y-auto pr-1">
+							{#each [...images].sort((a, b) => b.z - a.z) as layer (layer.id)}
+								<div
+									draggable="true"
+									on:dragstart={(e) => handleDragStart(e, layer.id)}
+									on:dragover={handleDragOver}
+									on:drop={(e) => handleDrop(e, layer.id)}
+									class="flex items-center justify-between pl-2 border border-black cursor-grab active:cursor-grabbing shadow-[2px_2px_0_0_rgba(0,0,0,1)] transition-all {draggedLayerId ===
+									layer.id
+										? 'opacity-40'
+										: ''} {activeId === layer.id
+										? 'bg-[#005baa] text-white font-bold'
+										: 'bg-white hover:bg-gray-100 text-black'}"
+									on:click={() => (activeId = layer.id)}
+								>
+									<span class="text-xs uppercase truncate pr-2 pointer-events-none"
+										>{layer.id} <span class="opacity-60 text-[10px]">({layer.z})</span></span
+									>
+									<div class="flex">
+										<button
+											class="w-7 h-7 flex items-center justify-center border-l border-black hover:bg-white/20 {activeId ===
+											layer.id
+												? 'text-white'
+												: 'text-black'}"
+											on:click|stopPropagation={() => moveLayerZ(layer.id, 1)}
+											title="Bring Forward">▲</button
+										>
+										<button
+											class="w-7 h-7 flex items-center justify-center border-l border-black hover:bg-white/20 {activeId ===
+											layer.id
+												? 'text-white'
+												: 'text-black'}"
+											on:click|stopPropagation={() => moveLayerZ(layer.id, -1)}
+											title="Send Backward">▼</button
+										>
+									</div>
+								</div>
+							{/each}
+						</div>
+					</div>
+
+					<button
+						class="mt-4 w-full py-2 bg-[#005baa] text-white border-2 border-black font-bold uppercase tracking-widest shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] active:translate-x-[4px] transition-all"
+						on:click={saveLayout}
+					>
+						SAVE LAYOUT
+					</button>
+				</div>
+			{/if}
+		</div>
 	{/if}
 </section>
 
