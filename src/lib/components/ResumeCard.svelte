@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="bg-surface border-2 border-black shadow-cartoon flex flex-col md:flex-row rounded-none relative group hover:-translate-y-1 transition-transform"
+	class="bg-surface border-2 border-black shadow-cartoon flex flex-col md:flex-row rounded-none relative"
 >
 	<div
 		class="w-full md:w-1/4 border-b-2 md:border-b-0 md:border-r-2 border-black p-6 bg-secondary-container flex flex-col justify-between"
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div
-		class="w-full md:w-3/4 p-8 flex flex-col justify-center transition-colors duration-200 right-col"
+		class="w-full md:w-3/4 p-8 flex flex-col justify-center"
 		style="--accent-color: {accentColor};"
 	>
 		<h3 class="font-headline-lg-mobile text-headline-lg-mobile mb-4">
@@ -45,8 +45,3 @@
 	</div>
 </div>
 
-<style>
-	.group:hover .right-col {
-		background-color: var(--accent-color);
-	}
-</style>
