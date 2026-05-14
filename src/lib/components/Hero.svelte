@@ -1,5 +1,6 @@
 <script lang="ts">
 	import portrait from '$lib/images/naravich-portrait.png';
+	import RetroWindow from './RetroWindow.svelte';
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
@@ -86,21 +87,18 @@
 		{#if mounted}
 			<div
 				in:fly={{ y: 50, duration: 800, delay: 80, easing: backOut }}
-				class="relative w-full max-w-lg aspect-square border-2 border-black shadow-cartoon bg-surface-container flex items-center justify-center overflow-hidden"
+				class="relative w-full max-w-lg"
 			>
-				<div
-					class="absolute top-0 left-0 w-full h-8 bg-surface border-b-2 border-black flex items-center px-4 gap-2 z-20"
+				<RetroWindow 
+					windowClass="aspect-square" 
+					contentClass="flex items-center justify-center h-full"
 				>
-					<div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black"></div>
-					<div class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-black"></div>
-					<div class="w-3 h-3 rounded-full bg-[#28C840] border border-black"></div>
-				</div>
-				<img
-					alt="Naravich Chutisilp"
-					class="w-full h-full object-cover object-center"
-					src={portrait}
-				/>
-				<!-- Decorative rubber hose accent -->
+					<img
+						alt="Naravich Chutisilp"
+						class="w-full h-full object-cover object-center"
+						src={portrait}
+					/>
+				</RetroWindow>
 			</div>
 		{/if}
 	</div>

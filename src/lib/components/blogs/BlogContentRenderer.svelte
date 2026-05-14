@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { BlogContentBlock } from '$lib/data/blogs';
+	import RetroWindow from '../RetroWindow.svelte';
 
 	export let content: BlogContentBlock[];
 </script>
@@ -41,23 +42,15 @@
 
 		{:else if block.type === 'code'}
 			<div class="md:col-span-12 my-12">
-				<!-- RetroOS Terminal Style -->
-				<div class="bg-surface border-2 border-black shadow-[12px_12px_0_0_rgba(0,0,0,1)] overflow-hidden">
-					<div class="bg-black text-white px-4 py-2 flex justify-between items-center border-b-2 border-black">
-						<div class="flex gap-2">
-							<div class="w-3 h-3 rounded-none border border-white/50"></div>
-							<div class="w-3 h-3 rounded-none border border-white/50"></div>
-							<div class="w-3 h-3 rounded-none border border-white/50"></div>
-						</div>
-						<div class="font-nav-lg text-[10px] uppercase font-bold tracking-widest opacity-60">
-							RETRO_OS // {block.language || 'SOURCE'}
-						</div>
-					</div>
-					<div class="p-8 bg-surface-main blueprint-pattern relative overflow-x-auto min-h-[200px]">
+				<RetroWindow 
+					title="RETRO_OS // {block.language || 'SOURCE'}"
+					headerClass="bg-black text-white px-4 py-2 flex justify-between items-center border-b-2 border-black"
+				>
+					<div class="p-8 bg-surface-main relative overflow-x-auto min-h-[200px]">
 						<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 20px 20px;"></div>
 						<pre class="relative font-mono text-lg text-primary selection:bg-primary selection:text-white leading-relaxed"><code>{block.code}</code></pre>
 					</div>
-				</div>
+				</RetroWindow>
 			</div>
 
 		{:else if block.type === 'image'}
