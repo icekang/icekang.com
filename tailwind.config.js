@@ -86,9 +86,10 @@ export default {
 				'body-md': ['Newsreader'],
 				'label-md': ['Hanken Grotesk'],
 				'headline-lg': ['Newsreader'],
-				'headline-xl': ['Newsreader'],
+				'headline-xl': ['Hanken Grotesk', 'sans-serif'],
 				'nav-lg': ['Hanken Grotesk'],
-				'body-lg': ['Newsreader']
+				'body-lg': ['Newsreader'],
+				'kanit': ['Kanit', 'sans-serif']
 			},
 			fontSize: {
 				'headline-lg-mobile': [

@@ -4,7 +4,12 @@
 	import { fly } from 'svelte/transition';
 	// Inverted Swiss Modernist Hero: Animated Dynamic Multilingual Stack
 
-	let languages = ['book review', 'buchkritik', 'critique de livre'];
+	let languages = [
+		{ text: 'book review', lang: 'en' },
+		{ text: 'buchkritik', lang: 'de' },
+		{ text: 'critique de livre', lang: 'fr' },
+		{ text: 'รีวิวหนังสือ', lang: 'th' }
+	];
 
 	let activeIndex = 0;
 
@@ -16,9 +21,10 @@
 	});
 
 	$: currentStack = [
-		{ text: languages[activeIndex % 3], key: activeIndex },
-		{ text: languages[(activeIndex + 1) % 3], key: activeIndex + 1 },
-		{ text: languages[(activeIndex + 2) % 3], key: activeIndex + 2 }
+		{ ...languages[activeIndex % 4], key: activeIndex },
+		{ ...languages[(activeIndex + 1) % 4], key: activeIndex + 1 },
+		{ ...languages[(activeIndex + 2) % 4], key: activeIndex + 2 },
+		{ ...languages[(activeIndex + 3) % 4], key: activeIndex + 3 }
 	];
 </script>
 
@@ -39,7 +45,7 @@
 
 	<!-- Massive Swiss Typography: Multilingual Rolling Stack -->
 	<div
-		class="mt-auto relative z-10 w-full h-[40vh] md:h-[60vh] max-h-[40vh] md:max-h-[60vh] overflow-hidden pt-12 flex flex-col justify-end"
+		class="mt-auto relative z-10 w-full h-[40vh] md:h-[60vh] max-h-[40vh] md:max-h-[60vh] overflow-hidden pt-4 flex flex-col justify-start"
 	>
 		<div class="stack-grid">
 			{#each currentStack as item, i (item.key)}
@@ -50,8 +56,11 @@
 					class="w-full"
 				>
 					<h1
-						class="font-headline-xl text-[14vw] md:text-[12vw] font-bold leading-[0.8] tracking-[-0.05em] uppercase whitespace-nowrap transition-opacity duration-1000"
-						style="opacity: {i === 0 ? 1 : i === 1 ? 0.1 : 0.05}"
+						class="text-[14vw] md:text-[12vw] leading-[0.8] tracking-[-0.05em] whitespace-nowrap transition-opacity duration-1000 {item.lang ===
+						'th'
+							? 'font-kanit font-medium'
+							: 'font-headline-xl uppercase font-bold'}"
+						style="opacity: {i === 0 ? 1 : i === 1 ? 0.1 : i === 2 ? 0.05 : 0.025}"
 					>
 						{item.text}
 					</h1>
@@ -70,8 +79,8 @@
 
 	.stack-grid {
 		display: grid;
-		grid-template-rows: auto auto auto;
+		grid-template-rows: auto auto auto auto;
 		grid-auto-rows: 0px; /* Prevents extra elements from expanding the container */
-		align-items: end;
+		align-items: start;
 	}
 </style>
