@@ -8,9 +8,7 @@
 	export let index: number | undefined = undefined;
 </script>
 
-<article
-	class="p-6 md:p-10 {borderClass} bg-surface hover:shadow-cartoon transition-shadow relative overflow-hidden"
->
+<article class="p-6 md:p-10 {borderClass} bg-surface transition-shadow relative overflow-hidden">
 	{#if index !== undefined}
 		<span
 			class="absolute top-4 left-4 font-headline-lg font-black text-on-surface/30 text-xl leading-none"
