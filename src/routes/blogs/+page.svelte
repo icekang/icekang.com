@@ -29,7 +29,7 @@
 		<section
 			class="border-b-2 border-black bg-surface-main blueprint-pattern bg-blueprint flex-grow relative"
 		>
-			<div class="w-full flex flex-col border-t-2 border-black">
+			<div class="w-full flex flex-col">
 				{#each blogItems as item}
 					<BlogItemCard {...item} />
 				{/each}

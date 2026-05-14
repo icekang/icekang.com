@@ -11,7 +11,7 @@
 			<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
 				<div class="md:col-span-4">
 					{#if block.heading}
-						<h2 class="font-headline-lg text-4xl md:text-5xl uppercase leading-[0.9] tracking-tighter border-b-4 border-black pb-4">
+						<h2 class="font-headline-lg text-4xl md:text-5xl uppercase leading-[0.9] tracking-tighter border-b-2 border-black pb-4">
 							{block.heading}
 						</h2>
 					{/if}
@@ -42,14 +42,8 @@
 
 		{:else if block.type === 'code'}
 			<div class="md:col-span-12 my-12">
-				<RetroWindow 
-					title="RETRO_OS // {block.language || 'SOURCE'}"
-					headerClass="bg-black text-white px-4 py-2 flex justify-between items-center border-b-2 border-black"
-				>
-					<div class="p-8 bg-surface-main relative overflow-x-auto min-h-[200px]">
-						<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 20px 20px;"></div>
-						<pre class="relative font-mono text-lg text-primary selection:bg-primary selection:text-white leading-relaxed"><code>{block.code}</code></pre>
-					</div>
+				<RetroWindow title="{block.language || 'SOURCE_CODE'} v1.0.0" headerClass="bg-black text-white px-4 py-2 border-b-2 border-black" contentClass="p-8 bg-white overflow-x-auto">
+					<pre class="relative font-mono text-lg text-black selection:bg-primary selection:text-white leading-relaxed"><code>{block.code}</code></pre>
 				</RetroWindow>
 			</div>
 
@@ -57,8 +51,8 @@
 			<div class="grid grid-cols-1 md:grid-cols-12 gap-8 my-12">
 				<div class={block.layout === 'inset' ? 'md:col-start-3 md:col-span-8' : 'md:col-span-12'}>
 					<figure class="flex flex-col gap-4">
-						<div class="border-2 border-black shadow-[16px_16px_0_0_rgba(0,0,0,0.1)] bg-white p-2">
-							<img src={block.url} alt={block.caption || 'Archive Image'} class="w-full" />
+						<div class="bg-surface-variant overflow-hidden">
+							<img src={block.url} alt={block.caption || 'Archive Image'} class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" />
 						</div>
 						{#if block.caption}
 							<figcaption class="font-nav-lg text-sm uppercase font-bold tracking-[0.2em] opacity-40 text-right">

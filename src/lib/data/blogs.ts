@@ -1,4 +1,4 @@
-export type BlogContentBlock = 
+export type BlogContentBlock =
 	| { type: 'paragraph'; text: string; heading?: string }
 	| { type: 'quote'; text: string; author?: string }
 	| { type: 'code'; code: string; language?: string }
@@ -7,11 +7,11 @@ export type BlogContentBlock =
 export interface BlogItem {
 	slug: string;
 	title: string;
+	fullTitle?: string;
 	description: string;
 	date: string;
 	imageUrl: string;
 	imageOrientation: 'portrait' | 'landscape';
-	href: string;
 	content: BlogContentBlock[];
 }
 
@@ -31,47 +31,124 @@ export type CollageImage = {
 
 export const blogItems: BlogItem[] = [
 	{
-		slug: 'digital-porcelain',
-		title: "Digital Porcelain",
-		description: "Exploring the delicate balance between modern brutalism and smooth user experiences.",
+		slug: 'technical-rhythm',
+		title: "ISSUE#04",
+		fullTitle: "Lorem Ipsum Dolor Sit Amet",
+		description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 		date: "MAY 14, 2026",
-		imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
-		imageOrientation: 'portrait',
-		href: "/blogs/digital-porcelain",
+		imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop",
+		imageOrientation: 'landscape',
 		content: [
-			{ 
-				type: 'paragraph', 
-				heading: "The Fragility of Pixels",
-				text: "Design isn't just about how it looks, but how it feels. In the world of Digital Porcelain, we strive for a surface that is both fragile and resilient, much like the physical ceramic itself." 
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 			},
-			{ type: 'quote', text: "The details are not the details. They make the design.", author: "Charles Eames" },
-			{ 
-				type: 'paragraph', 
-				heading: "Brutalist Roots",
-				text: "When we talk about brutalism in the digital age, we're talking about raw expressions of function. But when that meets the 'porcelain'—the smooth, responsive, and refined UI—we get something unique." 
+			{
+				type: 'image',
+				url: "https://images.unsplash.com/photo-1551288049-bbbda536ad0a?q=80&w=2000&auto=format&fit=crop",
+				caption: "Lorem Ipsum",
+				layout: 'full'
 			},
-			{ type: 'image', url: "https://images.unsplash.com/photo-1574360522682-494c8b9dedcb?q=80&w=2000&auto=format&fit=crop", caption: "The texture of digital surface.", layout: 'inset' }
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam."
+			},
+			{ type: 'quote', text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", author: "Lorem Ipsum" },
+			{
+				type: 'code',
+				code: "const lorem = 'ipsum';\nconsole.log(lorem);",
+				language: "javascript"
+			}
 		]
 	},
 	{
-		slug: 'building-with-sveltekit',
-		title: "Building with SvelteKit",
-		description: "Why we chose SvelteKit for high-performance edge computing.",
-		date: "APR 20, 2026",
+		slug: 'geometric-foundations',
+		title: "ISSUE#03",
+		fullTitle: "Lorem Ipsum Dolor Sit Amet",
+		description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+		date: "MAY 10, 2026",
+		imageUrl: "https://images.unsplash.com/photo-1509343256512-d77a5cb3791b?q=80&w=2000&auto=format&fit=crop",
+		imageOrientation: 'portrait',
+		content: [
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+			},
+			{
+				type: 'paragraph',
+				text: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam."
+			},
+			{ type: 'quote', text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", author: "Lorem Ipsum" },
+			{
+				type: 'image',
+				url: "https://images.unsplash.com/photo-1626544823105-df950291bbad?q=80&w=2000&auto=format&fit=crop",
+				caption: "Lorem Ipsum",
+				layout: 'full'
+			},
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi."
+			}
+		]
+	},
+	{
+		slug: 'modern-minimalism',
+		title: "ISSUE#02",
+		fullTitle: "Lorem Ipsum Dolor Sit Amet",
+		description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+		date: "APRIL 25, 2026",
 		imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop",
 		imageOrientation: 'landscape',
-		href: "/blogs/building-with-sveltekit",
 		content: [
-			{ 
-				type: 'paragraph', 
-				heading: "Performance First",
-				text: "SvelteKit is the most developer-friendly framework I've ever used. Its approach to server-side rendering and client-side navigation is unparalleled." 
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 			},
-			{ type: 'code', code: "export const load = async () => {\n  return {\n    data: await fetchData()\n  };\n}", language: "typescript" },
-			{ 
-				type: 'paragraph', 
-				heading: "Intuitive Routing",
-				text: "The way it handles routing with file-based structures makes it incredibly intuitive to build complex applications." 
+			{ type: 'quote', text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", author: "Lorem Ipsum" },
+			{ type: 'code', code: "const lorem = () => {\n  return 'ipsum';\n};", language: "typescript" },
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."
+			},
+			{ type: 'image', url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop", caption: "Lorem Ipsum", layout: 'inset' }
+		]
+	},
+	{
+		slug: 'digital-porcelain',
+		title: "ISSUE#01",
+		fullTitle: "The Philosophy of Digital Porcelain",
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		date: "APRIL 20, 2026",
+		imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
+		imageOrientation: 'portrait',
+		content: [
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+			},
+			{ type: 'quote', text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", author: "Lorem Ipsum" },
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+			},
+			{ type: 'image', url: "https://images.unsplash.com/photo-1633167606207-d840b5070fc2?q=80&w=2000&auto=format&fit=crop", caption: "Lorem Ipsum", layout: 'full' },
+			{
+				type: 'paragraph',
+				heading: "Lorem Ipsum",
+				text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+			},
+			{
+				type: 'code',
+				language: 'typescript',
+				code: "interface LoremIpsum {\n  lorem: 'ipsum';\n  sit: 'amet';\n}"
 			}
 		]
 	}
