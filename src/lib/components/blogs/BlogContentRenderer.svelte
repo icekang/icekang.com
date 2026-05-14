@@ -58,7 +58,7 @@
 				<div class={block.layout === 'inset' ? 'md:col-start-3 md:col-span-8' : 'md:col-span-12'}>
 					<figure class="flex flex-col gap-4">
 						<div class="border-2 border-black shadow-[16px_16px_0_0_rgba(0,0,0,0.1)] bg-white p-2">
-							<img src={block.url} alt={block.caption || 'Archive Image'} class="w-full grayscale hover:grayscale-0 transition-all duration-1000" />
+							<img src={block.url} alt={block.caption || 'Archive Image'} class="w-full" />
 						</div>
 						{#if block.caption}
 							<figcaption class="font-nav-lg text-sm uppercase font-bold tracking-[0.2em] opacity-40 text-right">

@@ -36,25 +36,25 @@
 		<div class="w-full bg-primary transition-all duration-100 ease-out" style="height: {scrollProgress}%"></div>
 	</div>
 
-	<main class="flex-grow pt-16">
+	<main class="flex-grow">
 		{#if blog.imageOrientation === 'portrait'}
 			<!-- PORTRAIT HERO (IMAGE 1 STYLE) -->
-			<div class="grid grid-cols-1 md:grid-cols-12 min-h-screen border-b-2 border-black">
+			<div class="flex flex-col-reverse md:grid md:grid-cols-12 md:h-screen border-b-2 border-black overflow-hidden">
 				<!-- Sidebar -->
-				<header class="md:col-span-3 border-r-2 border-black p-8 flex flex-col justify-between relative bg-white">
-					<div class="flex flex-col gap-8">
-						<a href="/blogs" class="font-nav-lg text-sm font-black uppercase tracking-tighter hover:text-primary transition-colors">
+				<header class="md:col-span-3 border-r-2 border-black p-6 md:p-8 flex flex-col justify-between relative bg-white h-auto md:h-full">
+					<div class="flex flex-col gap-8 h-full">
+						<a href="/blogs" class="font-nav-lg text-sm font-black uppercase tracking-tighter hover:text-primary transition-colors shrink-0">
 							← BACK_TO_COLLECTION
 						</a>
 						
-						<div class="mt-12">
-							<h1 class="font-headline-lg text-8xl md:text-[12rem] leading-[0.75] uppercase tracking-tighter vertical-text origin-top-left ml-4">
+						<div class="flex-grow flex items-center justify-center py-12 md:py-8 overflow-hidden">
+							<h1 class="font-headline-lg text-[15vw] md:text-[8vh] leading-none uppercase tracking-tighter vertical-text break-words">
 								{blog.title}
 							</h1>
 						</div>
 					</div>
 
-					<div class="flex flex-col gap-4 border-t-4 border-black pt-8">
+					<div class="flex flex-col gap-4 border-t-4 border-black pt-8 mt-auto">
 						<div class="font-nav-lg text-xs font-black uppercase tracking-widest opacity-40">Entry_Metadata</div>
 						<div class="font-headline-md text-2xl uppercase leading-none">{blog.date}</div>
 						<p class="font-body-md text-sm opacity-60 leading-tight">{blog.description}</p>
@@ -62,8 +62,8 @@
 				</header>
 
 				<!-- Image -->
-				<div class="md:col-span-9 bg-surface-variant overflow-hidden relative group">
-					<img src={blog.imageUrl} alt={blog.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" />
+				<div class="md:col-span-9 h-[60vh] md:h-full bg-surface-variant overflow-hidden relative group">
+					<img src={blog.imageUrl} alt={blog.title} class="w-full h-full object-cover transition-all duration-1000" />
 					<div class="absolute bottom-8 right-8 mix-blend-difference text-white font-nav-lg text-[10vw] font-black uppercase leading-none pointer-events-none opacity-20">
 						{blog.slug.substring(0, 3)}
 					</div>
@@ -104,7 +104,7 @@
 				</header>
 
 				<div class="w-full aspect-[21/9] bg-surface-variant overflow-hidden relative group border-t-2 border-black">
-					<img src={blog.imageUrl} alt={blog.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" />
+					<img src={blog.imageUrl} alt={blog.title} class="w-full h-full object-cover transition-all duration-1000" />
 				</div>
 			</div>
 		{/if}

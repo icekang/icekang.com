@@ -26,7 +26,7 @@
 			<img 
 				src={imageUrl} 
 				alt={imageAlt} 
-				class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter grayscale group-hover:grayscale-0" 
+				class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" 
 				loading="lazy"
 			/>
 		</div>
