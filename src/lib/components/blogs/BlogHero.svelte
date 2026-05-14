@@ -131,8 +131,43 @@
 	let activeId: string | 'ALL' | null = null;
 	let container: HTMLElement;
 	let isMobile: boolean = false;
+	
+	let loadedCount = 0;
+	let allLoaded = false;
+	let minTimePassed = false;
+	
+	function handleImageLoad() {
+		loadedCount++;
+		if (loadedCount >= images.length && minTimePassed) {
+			setTimeout(() => {
+				allLoaded = true;
+			}, 100);
+		}
+	}
+
+	function trackLoad(node: HTMLImageElement) {
+		if (node.complete) {
+			handleImageLoad();
+		} else {
+			node.addEventListener('load', handleImageLoad);
+			node.addEventListener('error', handleImageLoad);
+		}
+		return {
+			destroy() {
+				node.removeEventListener('load', handleImageLoad);
+				node.removeEventListener('error', handleImageLoad);
+			}
+		};
+	}
 
 	onMount(() => {
+		setTimeout(() => {
+			minTimePassed = true;
+			if (loadedCount >= images.length) {
+				allLoaded = true;
+			}
+		}, 800);
+
 		const checkMobile = () => {
 			isMobile = window.innerWidth < 768;
 		};
@@ -440,6 +475,7 @@
 			alert('Layout printed to console!');
 		}
 	}
+	$: watImg = images.find(i => i.id === 'wat') || images[0];
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -492,19 +528,34 @@
 
 	<!-- TITLE OVERLAY -->
 	<div
-		class="absolute top-34 md:top-[18%] left-0 w-full -translate-y-1/2 z-[17] pointer-events-none flex justify-center"
+		class="absolute top-34 md:top-[18%] left-0 w-full -translate-y-1/2 z-[17] pointer-events-none flex flex-col items-center"
 	>
 		<h1
-			class="font-headline-xl text-[18vw] leading-[0.8] md:text-[12vw] md:leading-none italic tracking-tighter text-white drop-shadow-lg text-center w-full"
+			class="font-headline-xl text-[18vw] leading-[0.8] md:text-[12vw] md:leading-none italic tracking-tighter text-white drop-shadow-lg text-center w-full relative"
 		>
 			<span class="block md:inline">THE</span>
 			<span class="hidden md:inline">&nbsp;</span>
 			<span class="block md:inline">ARCHIVES</span>
 		</h1>
+
+		{#if !allLoaded}
+			<!-- LOADING PROGRESS -->
+			<div class="absolute top-full mt-4 md:mt-6 w-48 md:w-64 flex flex-col items-center gap-2 drop-shadow-md">
+				<div class="font-body-sm text-white/90 uppercase tracking-widest font-bold text-[10px] md:text-xs text-center">
+					Loading Assets [{loadedCount}/{images.length}]
+				</div>
+				<div class="w-full h-[2px] bg-white/30 overflow-hidden">
+					<div 
+						class="h-full bg-white transition-all duration-300 ease-out"
+						style="width: {(loadedCount / images.length) * 100}%"
+					></div>
+				</div>
+			</div>
+		{/if}
 	</div>
 
 	<!-- IMAGES LAYER -->
-	{#each images as img (img.id)}
+	{#each images as img, i (img.id)}
 		<!-- Wrapper handles position and rotation -->
 		<div
 			id="wrapper-{img.id}"
@@ -513,27 +564,29 @@
 				? 'ring-2 ring-primary ring-dashed bg-white/10'
 				: ''}"
 			style="
-				left: calc(50% + {isMobile && img.mx !== undefined ? img.mx : img.x}vmin); 
-				bottom: calc(50% + {isMobile && img.my !== undefined ? img.my : img.y}vmin); 
-				height: {(isMobile && img.mScale !== undefined ? img.mScale : img.scale) * 100}vmin;
+				left: calc(50% + {img.id === 'wat' || allLoaded || editorMode ? (isMobile && img.mx !== undefined ? img.mx : img.x) : (isMobile && watImg.mx !== undefined ? watImg.mx : watImg.x)}vmin); 
+				bottom: calc(50% + {img.id === 'wat' || allLoaded || editorMode ? (isMobile && img.my !== undefined ? img.my : img.y) : (isMobile && watImg.my !== undefined ? watImg.my : watImg.y)}vmin); 
+				height: {(isMobile && img.mScale !== undefined ? img.mScale : img.scale) * (img.id === 'wat' || allLoaded || editorMode ? 100 : 0)}vmin;
 				width: max-content;
 				z-index: {img.z};
 				translate: -50% 50%;
-				transform: rotate({img.rotate}deg);
+				transform: rotate({img.id === 'wat' || allLoaded || editorMode ? img.rotate : 0}deg);
+				{!editorMode && img.id !== 'wat' ? `transition: all 1200ms cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 80}ms;` : ''}
 			"
 		>
 			<!-- Image handles flip and drag start -->
 			<img
 				src={img.src}
 				alt={img.id}
+				use:trackLoad
 				on:pointerdown={(e) => editorMode && pointerDown(e, img)}
 				class="h-full w-auto {editorMode ? 'cursor-grab active:cursor-grabbing' : ''} {editorMode &&
 				(activeId === img.id || activeId === 'ALL')
 					? 'drop-shadow-[0_0_20px_rgba(255,255,0,0.8)]'
-					: 'drop-shadow-xl'} {!editorMode && img.id === 'cupidL' ? 'fly-1' : ''} {!editorMode &&
-				img.id === 'cupidR'
+					: 'drop-shadow-xl'} {!editorMode && img.id === 'cupidL' && allLoaded ? 'fly-1' : ''} {!editorMode &&
+				img.id === 'cupidR' && allLoaded
 					? 'fly-2'
-					: ''} {!editorMode && img.id === 'weissL' ? 'wave-1' : ''} {!editorMode && img.id === 'weissR' ? 'wave-2' : ''}"
+					: ''} {!editorMode && img.id === 'weissL' && allLoaded ? 'wave-1' : ''} {!editorMode && img.id === 'weissR' && allLoaded ? 'wave-2' : ''}"
 				style="transform: scaleX({img.flipX}); {editorMode &&
 				activeId &&
 				activeId !== img.id &&
