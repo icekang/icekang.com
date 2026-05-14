@@ -119,7 +119,8 @@
 
 	let activeId: string | 'ALL' | null = null;
 	let container: HTMLElement;
-	let isMobile: boolean = false;
+	let isMobile: boolean = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+	let mounted = false;
 	
 	let loadedCount = 0;
 	let allLoaded = false;
@@ -150,6 +151,7 @@
 	}
 
 	onMount(() => {
+		mounted = true;
 		setTimeout(() => {
 			minTimePassed = true;
 			if (loadedCount >= images.length) {
@@ -227,6 +229,11 @@
 		}
 	}
 	$: watImg = images.find(i => i.id === 'wat') || images[0];
+
+	// Reactive helpers to ensure consistent mobile/desktop logic
+	$: getImgX = (img: CollageImage) => isMobile && img.mx !== undefined ? img.mx : img.x;
+	$: getImgY = (img: CollageImage) => isMobile && img.my !== undefined ? img.my : img.y;
+	$: getImgScale = (img: CollageImage) => isMobile && img.mScale !== undefined ? img.mScale : img.scale;
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -291,7 +298,8 @@
 	</div>
 
 	<!-- IMAGES LAYER -->
-	{#each images as img, i (img.id)}
+	{#if mounted}
+		{#each images as img, i (img.id)}
 		<!-- Wrapper handles position and rotation -->
 		<div
 			id="wrapper-{img.id}"
@@ -300,9 +308,9 @@
 				? 'ring-2 ring-primary ring-dashed bg-white/10'
 				: ''}"
 			style="
-				left: calc(50% + {img.id === 'wat' || allLoaded || editorMode ? (isMobile && img.mx !== undefined ? img.mx : img.x) : (isMobile && watImg.mx !== undefined ? watImg.mx : watImg.x)}vmin); 
-				bottom: calc(50% + {img.id === 'wat' || allLoaded || editorMode ? (isMobile && img.my !== undefined ? img.my : img.y) : (isMobile && watImg.my !== undefined ? watImg.my : watImg.y)}vmin); 
-				height: {(isMobile && img.mScale !== undefined ? img.mScale : img.scale) * (img.id === 'wat' || allLoaded || editorMode ? 100 : 0)}vmin;
+				left: calc(50% + {img.id === 'wat' || allLoaded || editorMode ? getImgX(img) : getImgX(watImg)}vmin); 
+				bottom: calc(50% + {img.id === 'wat' || allLoaded || editorMode ? getImgY(img) : getImgY(watImg)}vmin); 
+				height: {getImgScale(img) * (img.id === 'wat' || allLoaded || editorMode ? 100 : 0)}vmin;
 				width: max-content;
 				z-index: {img.z};
 				translate: -50% 50%;
@@ -376,6 +384,7 @@
 			{/if}
 		</div>
 	{/each}
+	{/if}
 
 	{#if editorMode}
 		<BlogHeroEditorPanel bind:images bind:activeId {saveLayout} />

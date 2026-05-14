@@ -1,3 +1,9 @@
+export type BlogContentBlock = 
+	| { type: 'paragraph'; text: string }
+	| { type: 'quote'; text: string; author?: string }
+	| { type: 'code'; code: string; language?: string }
+	| { type: 'image'; url: string; caption?: string };
+
 export interface BlogItem {
 	title: string;
 	description: string;
