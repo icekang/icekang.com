@@ -58,6 +58,8 @@
 	}
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	class="absolute top-10 right-10 z-[1000] bg-surface border-2 border-black flex flex-col shadow-[4px_4px_0_0_rgba(0,0,0,1)] w-64 font-body-sm text-black max-h-[80vh] overflow-hidden"
 >
@@ -75,8 +77,7 @@
 	{#if !panelCollapsed}
 		<div class="p-4 flex flex-col gap-2 overflow-y-auto flex-1">
 			<div class="flex items-center gap-2 mb-1">
-				<span
-					class="font-bold py-1 bg-gray-100 border-l-4 border-primary px-2 flex-grow truncate"
+				<span class="font-bold py-1 bg-gray-100 border-l-4 border-primary px-2 flex-grow truncate"
 					>Active: {activeId || 'None'}</span
 				>
 				<button
