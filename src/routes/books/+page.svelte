@@ -2,12 +2,8 @@
 	import TopNavBar from '$lib/components/TopNavBar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import BookHero from '$lib/components/books/BookHero.svelte';
-	import BookListHeader from '$lib/components/books/BookListHeader.svelte';
 	import BookCard from '$lib/components/books/BookCard.svelte';
-
 	import { books } from '$lib/data/books';
-
-	let viewMode: 'grid' | 'list' = 'list';
 
 	const statusPriority: Record<string, number> = {
 		Reading: 1,
@@ -42,7 +38,7 @@
 </svelte:head>
 
 <div
-	class="text-black flex flex-col font-body-md selection:bg-surface-accent selection:text-white bg-[#f9f9f9] min-h-screen w-full relative"
+	class="text-black flex flex-col font-body-md selection:bg-[#a83232] selection:text-white bg-[#fcf8f1] min-h-screen w-full relative"
 >
 	<TopNavBar />
 
@@ -50,14 +46,10 @@
 		<BookHero />
 
 		<section
-			class="border-b-2 border-black bg-surface-main blueprint-pattern bg-blueprint flex-grow relative"
+			class="border-b-2 border-black bg-[#fcf8f1] flex-grow relative"
 		>
-			<BookListHeader bind:viewMode />
-
 			<div
-				class="w-full {viewMode === 'list'
-					? 'flex flex-col'
-					: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop'}"
+				class="w-full flex flex-col"
 			>
 				{#each sortedBooks as book, i}
 					<BookCard
@@ -72,7 +64,6 @@
 						rating={book.rating}
 						dateRead={book.dateRead}
 						isLast={i === sortedBooks.length - 1}
-						{viewMode}
 					/>
 				{/each}
 			</div>

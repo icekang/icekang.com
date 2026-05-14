@@ -41,26 +41,26 @@
 
 	$: statusColorClass =
 		status === 'Reviewed'
-			? 'bg-mac-green border-black text-black'
+			? 'bg-[#005baa] border-black text-white'
 			: status === 'Draft' || status === 'Read'
-				? 'bg-mac-yellow border-black text-black'
+				? 'bg-[#d4a373] border-black text-black'
 				: status === 'Reading'
-					? 'bg-surface-accent border-black text-white'
+					? 'bg-black border-black text-white'
 					: 'border-gray-400 text-gray-400 bg-transparent';
 
 	$: statusStyle =
 		status === 'Reviewed'
-			? 'background-color: rgb(163, 217, 165);'
+			? 'background-color: #005baa;'
 			: status === 'Draft' || status === 'Read'
-				? 'background-color: rgb(254, 240, 138);'
+				? 'background-color: #d4a373;'
 				: status === 'Reading'
-					? 'background-color: #3b82f6;'
+					? 'background-color: #000000;'
 					: '';
 
 	$: titleClass =
 		status === 'Pending Index' || status === 'Read'
 			? 'text-gray-400'
-			: 'group-hover:text-surface-accent';
+			: 'group-hover:text-[#005baa]';
 
 	$: descClass = status === 'Pending Index' || status === 'Read' ? 'text-gray-400' : 'text-black';
 
@@ -76,15 +76,15 @@
 		<article
 			class="flex flex-row {isLast
 				? ''
-				: 'border-b-2 border-black'} {isClickable ? 'group hover:bg-white cursor-pointer' : 'cursor-default'} transition-colors relative bg-[#f9f9f9]"
-			style="background-color: #f9f9f9;"
+				: 'border-b-2 border-black'} {isClickable ? 'group hover:bg-white cursor-pointer' : 'cursor-default'} transition-colors relative bg-[#fdfbf7]"
+			style="background-color: #fdfbf7;"
 		>
 			<div
 				class="w-1/3 md:w-[200px] border-r-2 border-black p-4 md:p-6 flex-shrink-0 flex flex-col items-center justify-center bg-surface-main {isClickable ? 'group-hover:bg-white' : ''} transition-colors relative"
 			>
 				<div class="relative transform {isClickable ? 'group-hover:-translate-y-1' : ''} transition-transform mb-2">
 					<div
-						class="w-24 h-32 border-2 border-black {coverClass} shadow-cartoon overflow-hidden relative"
+						class="w-24 h-32 border-2 border-black {coverClass} shadow-sm overflow-hidden relative"
 					>
 						{#if coverUrl}
 							<img
@@ -116,7 +116,7 @@
 				</h4>
 				<div class="flex flex-wrap gap-2 mb-4 items-center">
 					<span
-						class="px-2 py-0.5 font-label-md text-label-md uppercase bg-opacity-50 border {statusColorClass}"
+						class="px-2 py-0.5 font-label-md text-[10px] uppercase tracking-wider border {statusColorClass}"
 						style={statusStyle}>{status}</span
 					>
 					{#if category}
@@ -161,7 +161,7 @@
 			</div>
 			{#if isClickable}
 				<div
-					class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center w-12 h-12 bg-surface-accent text-white border-2 border-black rounded-full shadow-cartoon-sm"
+					class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all hidden md:flex items-center justify-center w-12 h-12 bg-black text-white border-2 border-black rounded-full hover:scale-110 active:scale-95"
 				>
 					<span class="material-symbols-outlined">arrow_forward</span>
 				</div>
@@ -175,10 +175,10 @@
 		class="block h-full {isClickable ? '' : 'cursor-default'}"
 	>
 		<article
-			class="flex flex-col border-2 border-black transition-colors relative {isClickable
-				? 'group hover:bg-white cursor-pointer'
-				: 'cursor-default'} bg-[#f9f9f9] h-full shadow-cartoon"
-			style="background-color: #f9f9f9;"
+			class="flex flex-col border-2 border-black transition-all relative {isClickable
+				? 'group hover:bg-white hover:-translate-y-1 cursor-pointer'
+				: 'cursor-default'} bg-[#fdfbf7] h-full shadow-sm"
+			style="background-color: #fdfbf7;"
 		>
 			<div
 				class="h-72 border-b-2 border-black flex items-center justify-center bg-surface-main {isClickable ? 'group-hover:bg-white' : ''} transition-colors relative overflow-hidden"
@@ -229,7 +229,7 @@
 			</div>
 			{#if isClickable}
 				<div
-					class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity w-8 h-8 bg-surface-accent text-white border-2 border-black rounded-full flex items-center justify-center shadow-cartoon-sm"
+					class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all w-8 h-8 bg-black text-white border-2 border-black rounded-full flex items-center justify-center hover:scale-110 active:scale-95"
 				>
 					<span class="material-symbols-outlined text-sm">arrow_forward</span>
 				</div>
