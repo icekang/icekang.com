@@ -2,6 +2,8 @@
 	import TopNavBar from '$lib/components/TopNavBar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import BlogHero from '$lib/components/blogs/BlogHero.svelte';
+	import BlogItemCard from '$lib/components/blogs/BlogItemCard.svelte';
+	import { blogItems } from '$lib/data/blogs';
 </script>
 
 <svelte:head>
@@ -27,11 +29,11 @@
 		<section
 			class="border-b-2 border-black bg-surface-main blueprint-pattern bg-blueprint flex-grow relative"
 		>
-			<div
-				class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter p-margin-mobile md:p-margin-desktop"
-			>
-				<!-- Blog Posts will go here -->
-				<p class="col-span-full text-center py-20 text-xl font-bold font-headline-md opacity-50">
+			<div class="w-full flex flex-col border-t-2 border-black">
+				{#each blogItems as item}
+					<BlogItemCard {...item} />
+				{/each}
+				<p class="w-full text-center py-20 text-xl font-bold font-headline-md opacity-50 bg-surface">
 					More articles coming soon...
 				</p>
 			</div>
