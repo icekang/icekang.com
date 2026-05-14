@@ -6,6 +6,20 @@ export interface BlogItem {
 	href: string;
 }
 
+export type CollageImage = {
+	id: string;
+	src?: string;
+	x: number;
+	y: number;
+	scale: number;
+	mx?: number;
+	my?: number;
+	mScale?: number;
+	rotate: number;
+	flipX: number;
+	z: number;
+};
+
 export const blogItems: BlogItem[] = [
 	{
 		title: "The Aesthetics of Digital Porcelain",

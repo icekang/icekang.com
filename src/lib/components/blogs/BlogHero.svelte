@@ -1,25 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { CollageImage } from '$lib/data/blogs';
+	import BlogHeroEditorPanel from './BlogHeroEditorPanel.svelte';
+	
 	import cow from '$lib/images/blogs/cow.png';
 	import cupid from '$lib/images/blogs/head band_cupid_hor.png';
 	import horn from '$lib/images/blogs/horn.png';
 	import statue from '$lib/images/blogs/statue.png';
 	import wat from '$lib/images/blogs/wat.png';
 	import weiss from '$lib/images/blogs/weiss.png';
-
-	type CollageImage = {
-		id: string;
-		src?: string;
-		x: number;
-		y: number;
-		scale: number;
-		mx?: number;
-		my?: number;
-		mScale?: number;
-		rotate: number;
-		flipX: number;
-		z: number;
-	};
 
 	let images: CollageImage[] = [
 		{
@@ -194,254 +183,16 @@
 		}, 400);
 	}
 
-	let dragMode: 'move' | 'resize' | 'rotate' | 'move_all' | null = null;
-	let startMouse = { x: 0, y: 0 };
+	import { createEditorInteractions } from './editorInteractions';
 
-	// For Move
-	let startImage = { x: 0, y: 0 };
-	let startAllImages: {id: string, x: number, y: number}[] = [];
-	// For Resize
-	let resizeState: any = null;
-	// For Rotate
-	let initialRotate: number = 0;
-	let centerPt = { x: 0, y: 0 };
-	let startAngle: number = 0;
-
-	function pointerDown(e: PointerEvent, img: CollageImage) {
-		if (activeId === 'ALL') {
-			dragMode = 'move_all';
-			startMouse = { x: e.clientX, y: e.clientY };
-			startAllImages = images.map((i) => ({
-				id: i.id,
-				x: isMobile && i.mx !== undefined ? i.mx : i.x,
-				y: isMobile && i.my !== undefined ? i.my : i.y
-			}));
-			if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
-			return;
-		}
-
-		activeId = img.id;
-		dragMode = 'move';
-		startMouse = { x: e.clientX, y: e.clientY };
-		startImage = {
-			x: isMobile && img.mx !== undefined ? img.mx : img.x,
-			y: isMobile && img.my !== undefined ? img.my : img.y
-		};
-		if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
-	}
-
-	function startResize(e: PointerEvent, img: CollageImage, corner: string) {
-		activeId = img.id;
-		dragMode = 'resize';
-
-		const wrapper = document.getElementById('wrapper-' + img.id);
-		let cx, cy, w_px, h_px;
-		if (wrapper) {
-			const rect = wrapper.getBoundingClientRect();
-			cx = rect.left + rect.width / 2;
-			cy = rect.top + rect.height / 2;
-			w_px = wrapper.offsetWidth;
-			h_px = wrapper.offsetHeight;
-		} else {
-			cx = e.clientX;
-			cy = e.clientY;
-			w_px = 100;
-			h_px = 100;
-		}
-
-		let anchorLocalX = 0;
-		let anchorLocalY = 0;
-		// Anchor is the opposite corner
-		if (corner === 'nw') {
-			anchorLocalX = w_px / 2;
-			anchorLocalY = h_px / 2;
-		}
-		if (corner === 'ne') {
-			anchorLocalX = -w_px / 2;
-			anchorLocalY = h_px / 2;
-		}
-		if (corner === 'sw') {
-			anchorLocalX = w_px / 2;
-			anchorLocalY = -h_px / 2;
-		}
-		if (corner === 'se') {
-			anchorLocalX = -w_px / 2;
-			anchorLocalY = -h_px / 2;
-		}
-
-		const theta = (img.rotate * Math.PI) / 180;
-		const anchorScreenOffsetX = anchorLocalX * Math.cos(theta) - anchorLocalY * Math.sin(theta);
-		const anchorScreenOffsetY = anchorLocalX * Math.sin(theta) + anchorLocalY * Math.cos(theta);
-
-		resizeState = {
-			initialX: isMobile && img.mx !== undefined ? img.mx : img.x,
-			initialY: isMobile && img.my !== undefined ? img.my : img.y,
-			initialScale: isMobile && img.mScale !== undefined ? img.mScale : img.scale,
-			cx,
-			cy,
-			anchorScreenOffsetX,
-			anchorScreenOffsetY,
-			w_px,
-			h_px,
-			initialDist: Math.hypot(e.clientX - cx, e.clientY - cy)
-		};
-
-		if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
-	}
-
-	function startRotate(e: PointerEvent, img: CollageImage) {
-		activeId = img.id;
-		dragMode = 'rotate';
-		initialRotate = img.rotate;
-
-		const wrapper = document.getElementById('wrapper-' + img.id);
-		if (wrapper) {
-			const rect = wrapper.getBoundingClientRect();
-			centerPt = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-		} else {
-			centerPt = { x: e.clientX, y: e.clientY + 50 }; // fallback
-		}
-
-		startAngle = Math.atan2(e.clientY - centerPt.y, e.clientX - centerPt.x);
-		if (e.target) (e.target as Element).setPointerCapture(e.pointerId);
-	}
-
-	function pointerMove(e: PointerEvent) {
-		if (!dragMode || !activeId || !container) return;
-
-		if (dragMode === 'move_all') {
-			const vmin = Math.min(window.innerWidth, window.innerHeight);
-			const dx = ((e.clientX - startMouse.x) / vmin) * 100;
-			const dy = ((startMouse.y - e.clientY) / vmin) * 100; // Inverted for bottom anchor
-
-			images = images.map((img) => {
-				const startImg = startAllImages.find((i) => i.id === img.id);
-				if (!startImg) return img;
-
-				if (isMobile) {
-					return { ...img, mx: startImg.x + dx, my: startImg.y + dy };
-				} else {
-					return { ...img, x: startImg.x + dx, y: startImg.y + dy };
-				}
-			});
-		} else if (dragMode === 'move') {
-			const vmin = Math.min(window.innerWidth, window.innerHeight);
-			const dx = ((e.clientX - startMouse.x) / vmin) * 100;
-			const dy = ((startMouse.y - e.clientY) / vmin) * 100; // Inverted for bottom anchor
-
-			images = images.map((img) => {
-				if (img.id === activeId) {
-					if (isMobile) {
-						return { ...img, mx: startImage.x + dx, my: startImage.y + dy };
-					} else {
-						return { ...img, x: startImage.x + dx, y: startImage.y + dy };
-					}
-				}
-				return img;
-			});
-		} else if (dragMode === 'resize') {
-			const currentDist = Math.hypot(e.clientX - resizeState.cx, e.clientY - resizeState.cy);
-			let scaleFactor = currentDist / Math.max(resizeState.initialDist, 1);
-			const minScaleFactor = 0.02 / resizeState.initialScale;
-			scaleFactor = Math.max(minScaleFactor, scaleFactor);
-
-			const delta_Cx = resizeState.anchorScreenOffsetX * (1 - scaleFactor);
-			const delta_Cy = resizeState.anchorScreenOffsetY * (1 - scaleFactor);
-
-			const vmin = Math.min(window.innerWidth, window.innerHeight);
-			const delta_x_pct = (delta_Cx / vmin) * 100;
-			const delta_y_pct = (-delta_Cy / vmin) * 100;
-
-			images = images.map((img) => {
-				if (img.id === activeId) {
-					if (isMobile) {
-						return {
-							...img,
-							mScale: resizeState.initialScale * scaleFactor,
-							mx: resizeState.initialX + delta_x_pct,
-							my: resizeState.initialY + delta_y_pct
-						};
-					} else {
-						return {
-							...img,
-							scale: resizeState.initialScale * scaleFactor,
-							x: resizeState.initialX + delta_x_pct,
-							y: resizeState.initialY + delta_y_pct
-						};
-					}
-				}
-				return img;
-			});
-		} else if (dragMode === 'rotate') {
-			const currentAngle = Math.atan2(e.clientY - centerPt.y, e.clientX - centerPt.x);
-			const angleDelta = (currentAngle - startAngle) * (180 / Math.PI);
-
-			images = images.map((img) => {
-				if (img.id === activeId) {
-					return { ...img, rotate: initialRotate + angleDelta };
-				}
-				return img;
-			});
-		}
-	}
-
-	function pointerUp() {
-		dragMode = null;
-	}
-
-	// Editor Controls
-	function flipActive() {
-		if (!activeId) return;
-		if (activeId === 'ALL') {
-			images = images.map((img) => ({ ...img, flipX: img.flipX * -1 }));
-		} else {
-			images = images.map((img) => (img.id === activeId ? { ...img, flipX: img.flipX * -1 } : img));
-		}
-	}
-
-	function moveLayerZ(id: string, delta: number) {
-		images = images.map((img) => (img.id === id ? { ...img, z: img.z + delta } : img));
-	}
-
-	// Layer Reordering via Drag and Drop
-	let draggedLayerId: string | null = null;
-	let panelCollapsed: boolean = true;
-
-	function handleDragStart(e: DragEvent, id: string) {
-		draggedLayerId = id;
-		if (e.dataTransfer) {
-			e.dataTransfer.effectAllowed = 'move';
-			e.dataTransfer.setData('text/plain', id);
-		}
-	}
-
-	function handleDragOver(e: DragEvent) {
-		e.preventDefault(); // Necessary to allow dropping
-		if (e.dataTransfer) {
-			e.dataTransfer.dropEffect = 'move';
-		}
-	}
-
-	function handleDrop(e: DragEvent, targetId: string) {
-		e.preventDefault();
-		if (!draggedLayerId || draggedLayerId === targetId) return;
-
-		const sortedLayers = [...images].sort((a, b) => b.z - a.z);
-		const draggedIdx = sortedLayers.findIndex((img) => img.id === draggedLayerId);
-		const targetIdx = sortedLayers.findIndex((img) => img.id === targetId);
-
-		// Move item in the sorted array
-		const [draggedItem] = sortedLayers.splice(draggedIdx, 1);
-		sortedLayers.splice(targetIdx, 0, draggedItem);
-
-		// Reassign Z-indices based on new order (Top = 19, Bottom = 19 - length)
-		images = images.map((img) => {
-			const indexInSorted = sortedLayers.findIndex((l) => l.id === img.id);
-			return { ...img, z: 19 - indexInSorted };
-		});
-
-		draggedLayerId = null;
-	}
+	const { pointerDown, startResize, startRotate, pointerMove, pointerUp, pointerDownContainer } = createEditorInteractions(
+		() => images,
+		(newImages) => { images = newImages; },
+		() => activeId,
+		(newActiveId) => { activeId = newActiveId; },
+		() => isMobile,
+		() => container
+	);
 
 	function saveLayout() {
 		const exportData = images.map((img) => ({
@@ -486,22 +237,7 @@
 	on:pointermove={pointerMove}
 	on:pointerup={pointerUp}
 	on:pointerleave={pointerUp}
-	on:pointerdown={(e) => {
-		if (editorMode && e.target === container) {
-			if (activeId === 'ALL') {
-				dragMode = 'move_all';
-				startMouse = { x: e.clientX, y: e.clientY };
-				startAllImages = images.map((i) => ({
-					id: i.id,
-					x: isMobile && i.mx !== undefined ? i.mx : i.x,
-					y: isMobile && i.my !== undefined ? i.my : i.y
-				}));
-				if (container) container.setPointerCapture(e.pointerId);
-			} else {
-				activeId = null;
-			}
-		}
-	}}
+	on:pointerdown={(e) => pointerDownContainer(e, editorMode)}
 	on:click={handleHeroClick}
 >
 	{#if editorMode}
@@ -642,93 +378,7 @@
 	{/each}
 
 	{#if editorMode}
-		<!-- EDITOR PANEL -->
-		<div
-			class="absolute top-10 right-10 z-[1000] bg-surface border-2 border-black flex flex-col shadow-[4px_4px_0_0_rgba(0,0,0,1)] w-64 font-body-sm text-black max-h-[80vh] overflow-hidden"
-		>
-			<!-- HEADER / TOGGLE -->
-			<button
-				class="flex justify-between items-center {panelCollapsed
-					? ''
-					: 'border-b-2'} border-black p-2 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer w-full text-left"
-				on:click={() => (panelCollapsed = !panelCollapsed)}
-			>
-				<span class="font-bold font-headline-sm uppercase tracking-wider px-2">Collage Editor</span>
-				<span class="font-bold text-lg px-2 leading-none">{panelCollapsed ? '+' : '−'}</span>
-			</button>
-
-			{#if !panelCollapsed}
-				<div class="p-4 flex flex-col gap-2 overflow-y-auto flex-1">
-					<div class="flex items-center gap-2 mb-1">
-						<span
-							class="font-bold py-1 bg-gray-100 border-l-4 border-primary px-2 flex-grow truncate"
-							>Active: {activeId || 'None'}</span
-						>
-						<button
-							class="px-3 py-1 bg-white border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] active:shadow-none transition-all font-bold"
-							on:click={() => (activeId = 'ALL')}>ALL</button
-						>
-						<button
-							class="px-3 py-1 bg-white border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0_0_rgba(0,0,0,1)] active:shadow-none transition-all font-bold"
-							on:click={flipActive}>FLIP</button
-						>
-					</div>
-
-					<!-- LAYERS PANEL -->
-					<div class="mt-2 border-t-2 border-black pt-2">
-						<p class="font-bold mb-2 text-xs uppercase tracking-widest text-gray-600">
-							Layers (Z-Index)
-						</p>
-						<div class="flex flex-col gap-1 max-h-48 overflow-y-auto pr-1">
-							{#each [...images].sort((a, b) => b.z - a.z) as layer (layer.id)}
-								<div
-									draggable="true"
-									on:dragstart={(e) => handleDragStart(e, layer.id)}
-									on:dragover={handleDragOver}
-									on:drop={(e) => handleDrop(e, layer.id)}
-									class="flex items-center justify-between pl-2 border border-black cursor-grab active:cursor-grabbing shadow-[2px_2px_0_0_rgba(0,0,0,1)] transition-all {draggedLayerId ===
-									layer.id
-										? 'opacity-40'
-										: ''} {activeId === layer.id
-										? 'bg-[#005baa] text-white font-bold'
-										: 'bg-white hover:bg-gray-100 text-black'}"
-									on:click={() => (activeId = layer.id)}
-								>
-									<span class="text-xs uppercase truncate pr-2 pointer-events-none"
-										>{layer.id} <span class="opacity-60 text-[10px]">({layer.z})</span></span
-									>
-									<div class="flex">
-										<button
-											class="w-7 h-7 flex items-center justify-center border-l border-black hover:bg-white/20 {activeId ===
-											layer.id
-												? 'text-white'
-												: 'text-black'}"
-											on:click|stopPropagation={() => moveLayerZ(layer.id, 1)}
-											title="Bring Forward">▲</button
-										>
-										<button
-											class="w-7 h-7 flex items-center justify-center border-l border-black hover:bg-white/20 {activeId ===
-											layer.id
-												? 'text-white'
-												: 'text-black'}"
-											on:click|stopPropagation={() => moveLayerZ(layer.id, -1)}
-											title="Send Backward">▼</button
-										>
-									</div>
-								</div>
-							{/each}
-						</div>
-					</div>
-
-					<button
-						class="mt-4 w-full py-2 bg-[#005baa] text-white border-2 border-black font-bold uppercase tracking-widest shadow-[4px_4px_0_0_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] active:translate-x-[4px] transition-all"
-						on:click={saveLayout}
-					>
-						SAVE LAYOUT
-					</button>
-				</div>
-			{/if}
-		</div>
+		<BlogHeroEditorPanel bind:images bind:activeId {saveLayout} />
 	{/if}
 </section>
 
@@ -737,18 +387,6 @@
 	img {
 		-webkit-user-drag: none;
 		user-select: none;
-	}
-
-	/* Custom scrollbar for layers panel */
-	.overflow-y-auto::-webkit-scrollbar {
-		width: 6px;
-	}
-	.overflow-y-auto::-webkit-scrollbar-track {
-		background: #f1f1f1;
-		border-left: 1px solid black;
-	}
-	.overflow-y-auto::-webkit-scrollbar-thumb {
-		background: #000;
 	}
 
 	@keyframes fly {
