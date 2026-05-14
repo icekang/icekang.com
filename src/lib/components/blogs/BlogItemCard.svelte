@@ -15,7 +15,7 @@
 			<h3 class="font-headline-lg text-[24px] md:text-[32px] leading-tight uppercase break-words hyphens-auto mb-4 group-hover:underline decoration-2 underline-offset-4">
 				{title}
 			</h3>
-			<p class="font-body-md text-on-surface-variant mb-4">
+			<p class="font-body-md text-on-surface-variant mb-4 line-clamp-2 md:line-clamp-none">
 				{description}
 			</p>
 			<p class="font-nav-lg text-on-surface-variant opacity-60 uppercase text-[12px] font-bold mt-auto">{date}</p>
@@ -27,6 +27,7 @@
 				src={imageUrl} 
 				alt={imageAlt} 
 				class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter grayscale group-hover:grayscale-0" 
+				loading="lazy"
 			/>
 		</div>
 	</div>
