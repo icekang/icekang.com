@@ -104,7 +104,7 @@ export const blogItems: BlogItem[] = [
 				type: 'quote',
 				text: "...if you look back through history [...] since the loom was invented, putting the weavers out of business [...] in all cases, it has wound up raising productivity and raising living standards as long as the society keeps producing people who have the skills and aptitudes to benefit from that technology.",
 				author: "Jerome Powell, Federal Reserve Chair",
-				size: 'lg',
+				size: 'md',
 				weight: 'normal',
 				uppercase: false,
 				leading: 'normal',
