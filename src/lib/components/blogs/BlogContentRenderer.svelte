@@ -27,7 +27,7 @@
 			<div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 border-y-2 border-black/10">
 				<div class="md:col-start-4 md:col-span-9">
 					<blockquote class="relative">
-						<p class="font-headline-lg text-5xl md:text-7xl uppercase leading-[0.85] tracking-[ -0.05em] mb-8">
+						<p class="font-headline-lg mb-8 {block.size === 'sm' ? 'text-xl md:text-2xl' : block.size === 'md' ? 'text-2xl md:text-3.5xl' : 'text-3.5xl md:text-5xl'} {block.weight === 'light' ? 'font-light' : block.weight === 'normal' ? 'font-normal' : block.weight === 'medium' ? 'font-medium' : block.weight === 'bold' ? 'font-bold' : 'font-light'} {block.uppercase ? 'uppercase' : ''} {block.leading === 'ultra-tight' ? 'leading-[0.85]' : block.leading === 'tight' ? 'leading-[1.1]' : block.leading === 'relaxed' ? 'leading-relaxed' : 'leading-[1.3]'} {block.tracking === 'ultra-tight' ? 'tracking-[-0.05em]' : block.tracking === 'tight' ? 'tracking-tight' : 'tracking-normal'}">
 							"{block.text}"
 						</p>
 						{#if block.author}
@@ -53,6 +53,29 @@
 					<figure class="flex flex-col gap-4">
 						<div class="bg-surface-variant overflow-hidden">
 							<img src={block.url} alt={block.caption || 'Archive Image'} class="w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out" />
+						</div>
+						{#if block.caption}
+							<figcaption class="font-nav-lg text-sm uppercase font-bold tracking-[0.2em] opacity-40 text-right">
+								// {block.caption}
+							</figcaption>
+						{/if}
+					</figure>
+				</div>
+			</div>
+
+		{:else if block.type === 'youtube'}
+			<div class="grid grid-cols-1 md:grid-cols-12 gap-8 my-12">
+				<div class="md:col-start-2 md:col-span-10">
+					<figure class="flex flex-col gap-4">
+						<div class="aspect-video w-full border-2 border-black overflow-hidden bg-black relative">
+							<iframe
+								class="absolute inset-0 w-full h-full"
+								src="https://www.youtube.com/embed/{block.videoId}{block.start ? `?start=${block.start}` : ''}"
+								title={block.caption || "YouTube video player"}
+								frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowfullscreen
+							></iframe>
 						</div>
 						{#if block.caption}
 							<figcaption class="font-nav-lg text-sm uppercase font-bold tracking-[0.2em] opacity-40 text-right">
